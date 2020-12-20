@@ -3,7 +3,7 @@
 
 ### FrontEnd
 - Material UI
-- css flex-bokx 
+- css flex-box 
 - REACT
 
 
