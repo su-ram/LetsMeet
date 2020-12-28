@@ -1,0 +1,19 @@
+.header {
+  padding: 2%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 50px;
+  background-color: beige; /* pc화면으로 전환 -> 시각적으로 보기 위해 넣은 코드. 추후 삭제 예정*/
+}
+
+img {
+  width: 79px;
+  height: 42px;
+}
+
+@media screen and (min-width: 800px) {
+  .header {
+    background-color: lightgreen; /* pc화면으로 전환 -> 시각적으로 보기 위해 넣은 코드. 추후 삭제 예정 */
+  }
+}
