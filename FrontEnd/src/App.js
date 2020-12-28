@@ -1,8 +1,8 @@
 import "./App.css";
-import CreatPlan from "./pages/CreatPlan";
+import CreatePlan from "./pages/CreatePlan";
 
 function App() {
-  return <CreatPlan></CreatPlan>;
+  return <CreatePlan></CreatePlan>;
 }
 
 export default App;
