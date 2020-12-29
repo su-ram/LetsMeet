@@ -1,7 +1,10 @@
 import { Main } from "./pages";
+import { BrowserRouter } from 'react-router-dom';
 
-function App() {
-  return <Main/>;
-}
+const App = () => (
+	<BrowserRouter>
+		<Main/>
+	</BrowserRouter>
+)
 
 export default App;

@@ -1,9 +1,9 @@
 import React from "react";
 
-const ManagePlan = () => {
+const ManagePlan = ({match}) => {
   return (
     <div>
-      <h1>ManagePlan</h1>
+      <h1>ManagePlan {match.url}</h1>
     </div>
   );
 };
