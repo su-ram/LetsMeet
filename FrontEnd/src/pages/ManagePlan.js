@@ -1,5 +1,5 @@
 import React, {useState } from "react";
-import { Header, TimeTable } from "../components";
+import { Header, TimeTable, Comment, Yookha, Top3 } from "../components";
 import { Grid } from '@material-ui/core'
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 
@@ -28,7 +28,8 @@ const ManagePlan = ({match}) => {
 	const [data, setData] = useState(getData(match.url));
 
 	return (
-		<Grid className="Manage-page-con">
+		<Grid container
+		direction="row" className="Manage-page-con">
 			<Header />
 			{data?
 				<Grid className="Manage-contents-con">
@@ -37,6 +38,11 @@ const ManagePlan = ({match}) => {
 				</Grid>
 				:undefined
 			}
+			<Grid justify="center" alignItems="flex-start">
+				<Top3></Top3>
+				<Yookha></Yookha>
+				<Comment></Comment>
+			</Grid>
 		</Grid>
 	);
 };

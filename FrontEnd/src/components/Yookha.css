@@ -1,0 +1,19 @@
+.flex-container {
+  display: flex;
+  flex-direction: column;
+}
+.inputbox {
+}
+.input {
+  border: none;
+  float: right;
+}
+.title {
+  font-size: 30px;
+  font-weight: bold;
+}
+.subtitle {
+  font-size: 18px;
+  color: #2699fb;
+  font-weight: bold;
+}

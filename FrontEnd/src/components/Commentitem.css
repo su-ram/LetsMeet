@@ -1,0 +1,13 @@
+.tr {
+  border: 2px solid #dddddd;
+  text-align: left;
+}
+.t1 {
+  width: 30%;
+  font-weight: bold;
+}
+.t2 {
+  height: 40px;
+  width: 20%;
+  font-weight: bold;
+}
