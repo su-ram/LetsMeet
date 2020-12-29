@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {useState } from "react";
 import { Header, TimeTable } from "../components";
 import { Grid } from '@material-ui/core'
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
@@ -13,6 +13,10 @@ const getData = (url) => {
 			new Date("2020/12/16"),
 			new Date("2020/12/17"),
 			new Date("2020/12/18"),
+			new Date("2020/12/19"),
+			new Date("2020/12/20"),
+			new Date("2020/12/21"),
+			new Date("2020/12/22"),
 		],
 		"gap" : 30,
 		"start" : "10:00",

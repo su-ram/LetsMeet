@@ -36,7 +36,7 @@ export const getTimeString = (start, end, gap) => {
 const isTimeBefore = (h1, m1, h2, m2) => {
 	if(h1<h2)
 		return true;
-	else if(h1==h2){
+	else if(h1===h2){
 		if(m1<m2)
 			return true;
 		else
