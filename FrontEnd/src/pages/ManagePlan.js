@@ -1,10 +1,12 @@
 import React from "react";
+import { Grid } from '@material-ui/core'
+import { Header } from "../components";
 
 const ManagePlan = ({match}) => {
   return (
-    <div>
-      <h1>ManagePlan {match.url}</h1>
-    </div>
+	  <Grid className="Manage-page-con">
+		  <Header />
+	  </Grid>
   );
 };
 
