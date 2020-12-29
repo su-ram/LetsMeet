@@ -7,5 +7,3 @@ const App = () => (
 		<Main/>
 	</BrowserRouter>
 )
-
-export default App;
