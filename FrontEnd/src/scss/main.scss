@@ -1,9 +1,11 @@
 // base
 @import './base/variable';
 @import './base/reset';
+@import './base/material';
 
 // components
 @import './components/Header';
+@import './components/TimeTable';
 
 // pages
 @import './pages/CreatePlan';

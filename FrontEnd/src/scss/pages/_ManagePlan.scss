@@ -1,0 +1,30 @@
+.Manage-page-con{
+    margin: 30px 0;
+	.Manage-contents-con{
+		margin: 30px 0;
+		@media screen and (min-width: 768px){
+			margin: 60px 0;
+		}
+		.Manage-plan-title{
+			display: flex;
+			align-items: center;
+			h2{
+				font-size: 20px;
+			}
+			svg{
+				font-size: 2rem;
+				color: $main-color;
+				margin-right: 8px;
+			}
+			@media screen and (min-width: 768px){
+				h2{
+					font-size: 50px;
+				}
+				svg{
+					font-size: 4.2rem!important;
+					margin-right: 12px;
+				}
+			}
+		}
+	}
+}
