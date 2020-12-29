@@ -1,8 +1,11 @@
-import "./App.css";
-import CreatPlan from "./pages/CreatPlan";
+import { Main } from "./pages";
+import { BrowserRouter } from 'react-router-dom';
+import './scss/main.scss';
 
-function App() {
-  return <CreatPlan></CreatPlan>;
-}
+const App = () => (
+	<BrowserRouter>
+		<Main/>
+	</BrowserRouter>
+)
 
 export default App;

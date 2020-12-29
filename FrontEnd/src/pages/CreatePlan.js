@@ -1,6 +1,6 @@
 import React from "react";
 
-const CreatPlan = () => {
+const CreatePlan = () => {
   return (
     <div>
       <h1>hello Seohyun</h1>
@@ -8,4 +8,4 @@ const CreatPlan = () => {
   );
 };
 
-export default CreatPlan;
+export default CreatePlan;
