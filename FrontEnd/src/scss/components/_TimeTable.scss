@@ -1,0 +1,19 @@
+.timetable{
+	.timetable-table{
+		tr{
+			height: 50px;
+
+		}
+		.timetable-time{
+			.timetable-time-string{
+				&>div{
+					position: absolute;
+					top:-12px;
+					left: 0;
+					background-color: white;
+					padding-right: 12px;
+				}
+			}
+		}
+	}
+}
