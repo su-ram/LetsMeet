@@ -1,15 +1,9 @@
 import * as React from "react";
-import Paper from "@material-ui/core/Paper";
 import { Grid } from "@material-ui/core";
 import { Header } from "../components";
-import { ViewState } from "@devexpress/dx-react-scheduler";
-import {
-  Scheduler,
-  MonthView,
-  Toolbar,
-  DateNavigator,
-  TodayButton,
-} from "@devexpress/dx-react-scheduler-material-ui";
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
+import { DateRange } from 'react-date-range';
 
 export default class CreatePlan extends React.PureComponent {
   constructor(props) {
@@ -17,7 +11,19 @@ export default class CreatePlan extends React.PureComponent {
 
     this.state = {
       planName: "",
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
     };
+  }
+
+  onRangeChange = (ranges) => {
+    console.log(ranges);
+    this.setState({
+      startDate:ranges['selection'].startDate,
+      endDate:ranges['selection'].endDate,
+      key:ranges['selection'].key,
+    });
   }
 
   render() {
@@ -29,15 +35,12 @@ export default class CreatePlan extends React.PureComponent {
         <Grid className="create-cont-title">
           <h2>언제가 좋을까요?🤔</h2>
         </Grid>
-        <Paper className="create-paper">
-          <Scheduler data={data}>
-            <ViewState defaultCurrentDate="2020-12-30" />
-            <MonthView />
-            <Toolbar />
-            <DateNavigator />
-            <TodayButton />
-          </Scheduler>
-        </Paper>
+        <DateRange
+          editableDateInputs={true}
+          onChange={this.onRangeChange}
+          moveRangeOnFirstSelection={false}
+          ranges={[this.state]}
+        />
         <input
           className="create-name"
           type="text"
