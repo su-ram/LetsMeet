@@ -1679,3 +1679,68 @@ org.eclipse.core.runtime.CoreException: Launch configuration BackEnd1Application
 2020-12-30 01:01:57,841 [Worker-179: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
 2020-12-30 01:01:57,841 [Worker-179: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
 2020-12-30 01:01:57,841 [Worker-179: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd\src\test\resources
+2020-12-30 10:20:16,395 [Worker-2: Loading available Gradle versions] INFO  o.e.b.c.i.u.g.PublishedGradleVersions - Gradle version information cache is out-of-date. Trying to update.
+2020-12-30 10:22:29,280 [main] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd
+2020-12-30 10:22:29,287 [main] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -Ppom.xml -B package
+2020-12-30 10:35:34,324 [main] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd
+2020-12-30 10:35:34,324 [main] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -Ppom.xml -B package
+2020-12-30 12:02:29,702 [main] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd
+2020-12-30 12:02:29,702 [main] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -Ppom.xml -B package
+2020-12-30 12:06:27,097 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-12-30 12:06:27,097 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2020-12-30 12:06:27,101 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-12-30 12:06:27,138 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-12-30 12:06:27,138 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - The encoding used to copy filtered properties files have not been set. This means that the same encoding will be used to copy filtered properties files as when copying other filtered resources. This might not be what you want! Run your build with --debug to see which files might be affected. Read more at https://maven.apache.org/plugins/maven-resources-plugin/examples/filtering-properties-files.html
+2020-12-30 12:06:27,141 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-12-30 12:06:27,141 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2020-12-30 12:06:27,141 [Worker-62: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd\src\test\resources
+2020-12-30 12:14:42,121 [Worker-68: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-12-30 12:14:42,121 [Worker-68: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2020-12-30 12:14:42,123 [Worker-68: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-12-30 12:14:42,136 [Worker-68: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-12-30 12:14:42,136 [Worker-68: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - The encoding used to copy filtered properties files have not been set. This means that the same encoding will be used to copy filtered properties files as when copying other filtered resources. This might not be what you want! Run your build with --debug to see which files might be affected. Read more at https://maven.apache.org/plugins/maven-resources-plugin/examples/filtering-properties-files.html
+2020-12-30 12:14:42,139 [Worker-68: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-12-30 12:14:42,139 [Worker-68: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2020-12-30 12:14:42,139 [Worker-68: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd\src\test\resources
+2020-12-30 12:15:18,679 [main] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd
+2020-12-30 12:15:18,680 [main] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -Ppom.xml -B package
+2020-12-30 12:35:01,875 [Worker-73: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-12-30 12:35:01,876 [Worker-73: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2020-12-30 12:35:01,876 [Worker-73: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-12-30 12:35:01,892 [Worker-73: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-12-30 12:35:01,892 [Worker-73: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - The encoding used to copy filtered properties files have not been set. This means that the same encoding will be used to copy filtered properties files as when copying other filtered resources. This might not be what you want! Run your build with --debug to see which files might be affected. Read more at https://maven.apache.org/plugins/maven-resources-plugin/examples/filtering-properties-files.html
+2020-12-30 12:35:01,895 [Worker-73: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-12-30 12:35:01,895 [Worker-73: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2020-12-30 12:35:01,896 [Worker-73: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd\src\test\resources
+2020-12-30 12:40:37,228 [main] INFO  o.e.m2e.actions.ExecutePomAction - Creating new launch configuration
+2020-12-30 12:40:44,246 [Worker-75: Launching BackEnd (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd
+2020-12-30 12:40:44,246 [Worker-75: Launching BackEnd (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -Ppom.xml -B package
+2020-12-30 12:41:04,370 [main] INFO  o.e.m2e.actions.ExecutePomAction - Using existing launch configuration
+2020-12-30 12:41:04,478 [Worker-80: Launching BackEnd (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd
+2020-12-30 12:41:04,478 [Worker-80: Launching BackEnd (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -Ppom.xml -B package
+2020-12-30 12:44:58,565 [Worker-85: Building] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.example:BackEnd:0.0.1-SNAPSHOT @ C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd\pom.xml.
+2020-12-30 12:44:59,277 [Worker-85: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-12-30 12:44:59,277 [Worker-85: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2020-12-30 12:44:59,280 [Worker-85: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-12-30 12:44:59,280 [Worker-85: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 0 resource
+2020-12-30 12:44:59,282 [Worker-85: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-12-30 12:44:59,282 [Worker-85: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2020-12-30 12:44:59,282 [Worker-85: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd\src\test\resources
+2020-12-30 12:46:14,036 [Worker-85: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update started
+2020-12-30 12:46:14,592 [Worker-85: Updating Maven Project] INFO  o.e.m.c.i.l.LifecycleMappingFactory - Using org.eclipse.m2e.jdt.JarLifecycleMapping lifecycle mapping for MavenProject: com.example:BackEnd:0.0.1-SNAPSHOT @ C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd\pom.xml.
+2020-12-30 12:46:15,218 [Worker-85: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /BackEnd/src/main/java
+2020-12-30 12:46:15,218 [Worker-85: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /BackEnd/src/main/resources
+2020-12-30 12:46:15,219 [Worker-85: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding resource folder /BackEnd/src/main/resources
+2020-12-30 12:46:15,220 [Worker-85: Updating Maven Project] INFO  o.e.m.j.i.AbstractJavaProjectConfigurator - Adding source folder /BackEnd/src/test/java
+2020-12-30 12:46:15,598 [Worker-85: Updating Maven Project] INFO  o.e.m.c.i.p.ProjectConfigurationManager - Update completed: 1 sec
+2020-12-30 12:46:16,865 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-12-30 12:46:16,866 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2020-12-30 12:46:16,866 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-12-30 12:46:16,877 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Copying 1 resource
+2020-12-30 12:46:16,881 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - The encoding used to copy filtered properties files have not been set. This means that the same encoding will be used to copy filtered properties files as when copying other filtered resources. This might not be what you want! Run your build with --debug to see which files might be affected. Read more at https://maven.apache.org/plugins/maven-resources-plugin/examples/filtering-properties-files.html
+2020-12-30 12:46:16,884 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered resources.
+2020-12-30 12:46:16,884 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - Using 'UTF-8' encoding to copy filtered properties files.
+2020-12-30 12:46:16,884 [Worker-82: Building] INFO  o.e.m.c.i.embedder.EclipseLogger - skip non existing resourceDirectory C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd\src\test\resources
+2020-12-30 12:46:31,183 [main] INFO  o.e.m2e.actions.ExecutePomAction - Using existing launch configuration
+2020-12-30 12:46:31,194 [Worker-84: Launching BackEnd (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate - C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd
+2020-12-30 12:46:31,194 [Worker-84: Launching BackEnd (1)] INFO  o.e.m.i.launch.MavenLaunchDelegate -  mvn -Ppom.xml -B package
