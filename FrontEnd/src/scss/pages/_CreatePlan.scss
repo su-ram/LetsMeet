@@ -60,6 +60,49 @@
     font-size: 19px;
     text-align: center;
   }
+  .create-time {
+    display: flex;
+    justify-content: center;
+    margin: 0 0 25px 0;
+    align-items: baseline;
+    .create-time-start {
+      margin: 0 10px;
+      #startTime {
+        width: 122px;
+        padding: 25px 0 0 0;
+        height: 20px;
+        text-align: center;
+      }
+    }
+    .create-time-finish {
+      margin: 0 10px;
+      #finishTime {
+        width: 122px;
+        padding: 25px 0 0 0;
+        height: 20px;
+      }
+    }
+  }
+
+  .create-interval {
+    display: flex;
+    justify-content: center;
+    margin: 25px 0;
+    align-items: baseline;
+    #timeInterval {
+      width: 94px;
+      padding: 25px 0 0 0;
+      height: 20px;
+    }
+  }
+  .timeText {
+    top: 15px;
+  }
+
+  .create-plan-btn {
+    width: 123px;
+    height: 31px;
+    margin: 25px auto;
   .create-name {
     width: 15.9em;
     height: 2em;
@@ -77,5 +120,12 @@
     border: none;
     font-size: 13px;
     color: white;
+  }
+  .create-plan-btn:hover {
+    cursor: pointer;
+  }
+  .create-plan-btn:focus {
+    border: none;
+    outline: none;
   }
 }
