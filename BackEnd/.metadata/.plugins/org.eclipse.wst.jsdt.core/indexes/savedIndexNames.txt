@@ -1,5 +1,0 @@
-INDEX VERSION 1.4+C:\Users\swamy\dev_project\DoubleSlash\LetsMeet\BackEnd\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
-3518858773.index
-601607629.index
-3401068544.index
-1713278476.index

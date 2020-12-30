@@ -1,18 +1,12 @@
 import * as React from "react";
-import Paper from "@material-ui/core/Paper";
 import { Grid } from "@material-ui/core";
 import { Header } from "../components";
-import { ViewState } from "@devexpress/dx-react-scheduler";
-import {
-  Scheduler,
-  MonthView,
-  Toolbar,
-  DateNavigator,
-  TodayButton,
-} from "@devexpress/dx-react-scheduler-material-ui";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
+import 'react-date-range/dist/styles.css';
+import 'react-date-range/dist/theme/default.css';
+import { DateRange } from 'react-date-range';
 
 export default class CreatePlan extends React.PureComponent {
   constructor(props) {
@@ -21,7 +15,19 @@ export default class CreatePlan extends React.PureComponent {
     this.state = {
       planName: "",
       startTime: "",
+      startDate: new Date(),
+      endDate: new Date(),
+      key: 'selection'
     };
+  }
+
+  onRangeChange = (ranges) => {
+    console.log(ranges);
+    this.setState({
+      startDate:ranges['selection'].startDate,
+      endDate:ranges['selection'].endDate,
+      key:ranges['selection'].key,
+    });
   }
 
   render() {
@@ -51,15 +57,12 @@ export default class CreatePlan extends React.PureComponent {
           <h2>언제가 좋을까요?🤔</h2>
         </Grid>
         {/* 캘린더 */}
-        <Paper className="create-paper">
-          <Scheduler data={data}>
-            <ViewState defaultCurrentDate="2020-12-30" />
-            <MonthView />
-            <Toolbar />
-            <DateNavigator />
-            <TodayButton />
-          </Scheduler>
-        </Paper>
+        <DateRange
+          editableDateInputs={true}
+          onChange={this.onRangeChange}
+          moveRangeOnFirstSelection={false}
+          ranges={[this.state]}
+        />
         {/* 일정이름 */}
         <input
           className="create-name"
