@@ -4,9 +4,9 @@ import { Header } from "../components";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
-import 'react-date-range/dist/styles.css';
-import 'react-date-range/dist/theme/default.css';
-import { DateRange } from 'react-date-range';
+import "react-date-range/dist/styles.css";
+import "react-date-range/dist/theme/default.css";
+import { DateRange } from "react-date-range";
 
 export default class CreatePlan extends React.PureComponent {
   constructor(props) {
@@ -15,39 +15,41 @@ export default class CreatePlan extends React.PureComponent {
     this.state = {
       planName: "",
       startTime: "",
+      finishTime: "",
+      timeInterval: "",
       startDate: new Date(),
       endDate: new Date(),
-      key: 'selection'
+      key: "selection",
     };
   }
 
   onRangeChange = (ranges) => {
     console.log(ranges);
     this.setState({
-      startDate:ranges['selection'].startDate,
-      endDate:ranges['selection'].endDate,
-      key:ranges['selection'].key,
+      startDate: ranges["selection"].startDate,
+      endDate: ranges["selection"].endDate,
+      key: ranges["selection"].key,
     });
-  }
+  };
 
   render() {
     const { data, planName, startTime, finishTime, timeInterval } = this.state;
     //시작시간 배열
     const amTimes = new Array();
-    for (let i = 0; i < 12; i++) {
+    for (let i = 1; i < 12; i++) {
       amTimes.push(i);
     }
     const amTimeList = amTimes.map((amTime) => (
-      <option value={amTime}>오전{amTime}시</option>
+      <option value="{amTime}:00">오전{amTime}시</option>
     ));
     //종료시간 배열
     const pmTimes = new Array();
     for (let i = 1; i < 12; i++) {
       pmTimes.push(i);
     }
-    pmTimes.unshift(12);
+    // pmTimes.unshift(12);
     const pmTimeList = pmTimes.map((pmTime) => (
-      <option value={pmTime}>오후{pmTime}시</option>
+      <option value="{pmTime + 12}:00">오후{pmTime}시</option>
     ));
 
     return (
@@ -58,6 +60,7 @@ export default class CreatePlan extends React.PureComponent {
         </Grid>
         {/* 캘린더 */}
         <DateRange
+          className="create-calendar"
           editableDateInputs={true}
           onChange={this.onRangeChange}
           moveRangeOnFirstSelection={false}
@@ -85,6 +88,7 @@ export default class CreatePlan extends React.PureComponent {
               }}
             >
               <option aria-label="None" value="" />
+              <option value={"00:00"}>오전0시</option>
               {amTimeList}
             </NativeSelect>
           </FormControl>
@@ -99,6 +103,7 @@ export default class CreatePlan extends React.PureComponent {
               }}
             >
               <option aria-label="None" value="" />
+              <option value={"12:00"}>오후12시</option>
               {pmTimeList}
             </NativeSelect>
           </FormControl>
@@ -110,7 +115,7 @@ export default class CreatePlan extends React.PureComponent {
               id="timeInterval"
               value={timeInterval}
               onChange={(e) => {
-                this.setState({ timdInterval: e.target.value });
+                this.setState({ timeInterval: e.target.value });
               }}
             >
               <option aria-label="None" value="" />
@@ -122,9 +127,11 @@ export default class CreatePlan extends React.PureComponent {
           <Grid>단위</Grid>
         </Grid>
         {/* 일정생성 버튼 */}
-        <button type="button" className="create-plan-btn">
-          일정 생성하기
-        </button>
+        <Grid className="create-plan-btn">
+          <a href="#" className="create-plan-text">
+            일정 생성하기
+          </a>
+        </Grid>
       </Grid>
     );
   }
