@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import "./Yookha.css";
+
 const Yookha=()=> {
     const [yookha, setyookha] = useState({
         who: '',

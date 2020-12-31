@@ -28,21 +28,27 @@ const ManagePlan = ({match}) => {
 	const [data, setData] = useState(getData(match.url));
 
 	return (
-		<Grid container
-		direction="row" className="Manage-page-con">
+		<Grid container direction="column" className="Manage-page-con">
 			<Header />
+			<Grid className="Manage-plan-title"><AccessAlarmIcon fontSize="large"/><h2>{data.title}</h2></Grid>	
 			{data?
-				<Grid className="Manage-contents-con">
-					<Grid className="Manage-plan-title"><AccessAlarmIcon fontSize="large"/><h2>{data.title}</h2></Grid>	
-					<TimeTable data = {data}/>
+				<Grid container direction="row" className="Manage-contents-con">
+					<TimeTable 
+						data = {data}
+						type = "mine"
+					/>
+					<TimeTable 
+						data = {data}
+						type = "team"
+					/>
+					<Grid justify="center" alignItems="flex-start">
+						<Top3></Top3>
+						<Yookha></Yookha>
+						<Comment></Comment>
+					</Grid>
 				</Grid>
 				:undefined
 			}
-			<Grid justify="center" alignItems="flex-start">
-				<Top3></Top3>
-				<Yookha></Yookha>
-				<Comment></Comment>
-			</Grid>
 		</Grid>
 	);
 };

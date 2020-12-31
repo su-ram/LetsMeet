@@ -1,6 +1,6 @@
 import React from 'react';
-import "./Commentitem.css";
-function Commentitem({ name, description}) {
+
+const Commentitem = ({ name, description}) => {
 return (
     <tr className="tr">
         <td className="t1"></td>

@@ -1,6 +1,6 @@
 import React from 'react';
-import "./Top3.css";
-function Top3() {
+
+const Top3 = () => {
     //나중에 timedata 맵으로 바꿔야함
     const timedata = [
         {
