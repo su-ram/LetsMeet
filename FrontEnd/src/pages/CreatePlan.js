@@ -1,7 +1,6 @@
 import * as React from "react";
 import { Grid } from "@material-ui/core";
 import { Header } from "../components";
-import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import "react-date-range/dist/styles.css";
@@ -75,7 +74,7 @@ export default class CreatePlan extends React.PureComponent {
             {/* 시간 정하기 */}
             <Grid className="create-time">
               <FormControl className="create-time-start">
-                <InputLabel className="timeText">Start Time</InputLabel>
+                {/* <InputLabel className="timeText">Start Time</InputLabel> */}
                 <NativeSelect
                   id="startTime"
                   value={startTime}
@@ -83,7 +82,9 @@ export default class CreatePlan extends React.PureComponent {
                     this.setState({ startTime: e.target.value });
                   }}
                 >
-                  <option aria-label="None" value="" />
+                  <option aria-label="None" value="">
+                    시작시간
+                  </option>
                   <option value="0">오전0시</option>
                   {amTimeList}
                   {pmTimeList}
@@ -91,7 +92,7 @@ export default class CreatePlan extends React.PureComponent {
               </FormControl>
               <Grid>~</Grid>
               <FormControl className="create-time-finish">
-                <InputLabel className="timeText">Finish Time</InputLabel>
+                {/* <InputLabel className="timeText">Finish Time</InputLabel> */}
                 <NativeSelect
                   id="finishTime"
                   value={finishTime}
@@ -99,7 +100,9 @@ export default class CreatePlan extends React.PureComponent {
                     this.setState({ finishTime: e.target.value });
                   }}
                 >
-                  <option aria-label="None" value="" />
+                  <option aria-label="None" value="">
+                    끝시간
+                  </option>
                   {amTimeList}
                   <option value="12">오후12시</option>
                   {pmTimeList}
@@ -108,7 +111,7 @@ export default class CreatePlan extends React.PureComponent {
             </Grid>
             <Grid className="create-interval">
               <FormControl>
-                <InputLabel className="timeText">Interval</InputLabel>
+                {/* <InputLabel className="timeText">Interval</InputLabel> */}
                 <NativeSelect
                   id="timeInterval"
                   value={timeInterval}
@@ -116,13 +119,15 @@ export default class CreatePlan extends React.PureComponent {
                     this.setState({ timeInterval: e.target.value });
                   }}
                 >
-                  <option aria-label="None" value="" />
+                  <option aria-label="None" value="">
+                    단위
+                  </option>
                   <option value={15}>15분</option>
                   <option value={30}>30분</option>
                   <option value={60}>1시간</option>
                 </NativeSelect>
               </FormControl>
-              <Grid>단위</Grid>
+              <Grid>&nbsp;&nbsp;단위</Grid>
             </Grid>
             {/* 일정생성 버튼 */}
             <Grid className="create-plan-btn">
