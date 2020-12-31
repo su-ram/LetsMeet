@@ -5,7 +5,37 @@
   <link rel="self" href="https://spring.io/blog.atom" />
   <id>http://spring.io/blog.atom</id>
   <icon>https://spring.io/favicon.ico</icon>
-  <updated>2020-12-24T11:18:54Z</updated>
+  <updated>2020-12-29T18:06:20Z</updated>
+  <entry>
+    <title>This Week in Spring - December 29th, 2020</title>
+    <link rel="alternate" href="https://spring.io/blog/2020/12/29/this-week-in-spring-december-29th-2020" />
+    <category term="engineering" label="Engineering" />
+    <author>
+      <name>Josh Long</name>
+    </author>
+    <id>tag:spring.io,2020-12-29:4314</id>
+    <updated>2020-12-29T18:06:20Z</updated>
+    <content type="html">&lt;p&gt;Hi, Spring fans! Welcome to another installment of &lt;em&gt;This Week in Spring&lt;/em&gt;!&lt;/p&gt;
+&lt;p&gt;How are you? How&amp;rsquo;re things? I spent this morning on a fun two-hour panel hosted by the Barcelona JUG (who run the JBCN conference, among other things) talking about all sorts of things including GraalVM native images, new features in the Java language, cloud-native applications, and so much more. Thanks for having me! &lt;/p&gt;
+&lt;p&gt;I am so happy about this week&amp;rsquo;s roundup and we&amp;rsquo;ve got a lot to cover so let&amp;rsquo;s get to it!&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2020/12/24/a-bootiful-podcast-alibaba-s-san-hong-li-on-tuning-openjdk-for-alibaba-scale"&gt;A Bootiful Podcast: Alibaba&amp;rsquo;s San-Hong Li on tuning OpenJDK for Alibaba Scale&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2020/12/23/cloud-events-and-spring-part-2"&gt;Cloud Events and Spring - part 2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://github.com/Cosium/spring-data-jpa-entity-graph"&gt;Cosium/spring-data-jpa-entity-graph: Spring Data JPA extension allowing full dynamic usage of EntityGraph on repositories&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Hah! This is so interesting! &lt;a href="https://github.com/SolarEdgeTech/pyctuator"&gt;Give Python applications Spring Boot Actuator endpoints&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://github.com/arttom/cqs-spring-boot-starter"&gt;Interesting! A third party library to allow people to easily follow CQS principles in Spring Boot.&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://github.com/qaware/openapi-generator-for-spring"&gt;Interesting: Open API v3 Generator for Spring Boot applications&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.mitchellbosecke.com/post/java-proxies-from-dog-to-transactionaldog"&gt;Java Proxies: From Dog to TransactionalDog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://sizovs.net/2020/11/24/java-libraries-i-like/"&gt;Java libraries I like ? Eduards Sizovs&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.javaadvent.com/2020/12/resilient-applications-spring-resilience4j.html"&gt;Resilient applications with Spring and Resilience4J - JVM Advent&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://piotrminkowski.com/2019/12/06/spring-boot-best-practices-for-microservices/"&gt;Spring Boot Best Practices for Microservices - Piotr&amp;rsquo;s TechBlog&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://spring.io/blog/2020/12/22/spring-cloud-2020-0-0-aka-ilford-is-available"&gt;Spring Cloud 2020.0.0 (aka Ilford) Is Available&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://twitter.com/jonatan_ivanov/status/1341477187455655936?s=12"&gt;Spring cloud sleuth OpenTelemetry support has been released&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.infoq.com/minibooks/java-innovations/"&gt;The InfoQ eMag - Java Innovations That Are on Their Way&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href="https://www.reddit.com/r/java/comments/khflbg/what_courses_both_free_and_paid_on_spring_boot/"&gt;What courses (both free and paid) on Spring Boot would you recommend? : java&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
+  </entry>
   <entry>
     <title>A Bootiful Podcast: Alibaba's San-Hong Li on tuning OpenJDK for Alibaba Scale</title>
     <link rel="alternate" href="https://spring.io/blog/2020/12/24/a-bootiful-podcast-alibaba-s-san-hong-li-on-tuning-openjdk-for-alibaba-scale" />
@@ -2665,45 +2695,6 @@ public static class SampleApplication&#xD;
 &lt;p&gt;Message is at the center of this enablement, the one canonical structure that all moving parts in Spring understand. It is one structure that can clearly communicate intentions and expectations. &lt;em&gt;Where did it arrive from? Where will it go? Who sent it? What are the contents? Does it represent a Cloud Event? If so, is it in binary-mode or structured?&lt;/em&gt; The list is endless, but the one constant is that Message as a structure and as a concept is well positioned to answer these questions.&lt;br/&gt;With that in mind, Cloud Event becomes another kind of Message. The Spring Framework can handle it as it would any other Message and free you to think about your business logic rather than the details of the plumbing. &lt;/p&gt;&lt;h4&gt;&lt;a href="#summary" class="anchor" name="summary"&gt;&lt;/a&gt;Summary&lt;/h4&gt;
 &lt;p&gt;So, &lt;strong&gt;&lt;em&gt;&lt;a href="https://www.enterpriseintegrationpatterns.com/patterns/messaging/Message.html"&gt;Message&lt;/a&gt; &lt;em&gt;is&lt;/em&gt; not only an adequate structure to represent a Cloud Event, it is also the right abstraction to handle Cloud Event use cases in Spring&lt;/em&gt;&lt;/strong&gt;. I hope that is clear, and with the upcoming Cloud Event support for Message, we are on the path of providing Cloud Events support for any application that relies on Spring Messaging.&lt;/p&gt;
 &lt;p&gt;In the &lt;a href="https://spring.io/blog/2020/12/23/cloud-events-and-spring-part-2"&gt;follow-up post&lt;/a&gt;, we will cover the technical details of the upcoming Cloud Event support within several Spring frameworks as well Cloud Event integration with Spring using &lt;a href="https://github.com/cloudevents/sdk-java"&gt;Cloud Event Java SDK&lt;/a&gt;.&lt;br/&gt;You can also start looking at some of the samples now:&lt;br/&gt;- &lt;a href="https://github.com/spring-cloud/spring-cloud-function/tree/master/spring-cloud-function-samples/function-sample-cloudevent"&gt;Spring Cloud Function/Spring Cloud Stream&lt;/a&gt;&lt;br/&gt;- &lt;a href="https://github.com/dsyer/knative-docs/tree/cloudevents-spring/docs/serving/samples/cloudevents/cloudevents-spring"&gt;KNative&lt;/a&gt;&lt;br/&gt;- &lt;a href="https://github.com/cloudevents/sdk-java/tree/master/examples/spring-reactive"&gt;Spring reactive via Java SDK&lt;/a&gt;&lt;/p&gt;
-&lt;!-- rendered by Sagan Renderer Service --&gt;</content>
-  </entry>
-  <entry>
-    <title>Spring Vault 2.3.0 RC1 available</title>
-    <link rel="alternate" href="https://spring.io/blog/2020/12/10/spring-vault-2-3-0-rc1-available" />
-    <category term="releases" label="Releases" />
-    <author>
-      <name>Mark Paluch</name>
-    </author>
-    <id>tag:spring.io,2020-12-10:4294</id>
-    <updated>2020-12-10T13:15:35Z</updated>
-    <content type="html">&lt;div class="paragraph"&gt;
-&lt;p&gt;On behalf of the community, I&amp;#8217;d like to announce the availability of the first Spring Vault release candidate &lt;code&gt;2.3.0-RC1&lt;/code&gt;.&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;This release contains a series of changes:&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="ulist"&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;Updated &lt;code&gt;SecretLeaseContainer&lt;/code&gt; endpoints using now &lt;code&gt;/sys/leases&lt;/code&gt; instead of &lt;code&gt;/sys/revoke&lt;/code&gt; and &lt;code&gt;/sys/renew&lt;/code&gt;.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Introduction of &lt;code&gt;AuthenticationStepsOperator&lt;/code&gt; which allows non-blocking access to &lt;code&gt;Resource&lt;/code&gt;. This change also introduces a reloading capability for authentication mechanisms for PCF and Kubernetes authentication to obtain the latest credentials when attempting a Vault login.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Support for KV Patch in &lt;code&gt;VaultTemplate&lt;/code&gt;&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Upgrade to Spring Framework 5.3, Spring Data 2020.0, and Project Reactor 2020.0&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;For a complete list of changes, see the &lt;a href="https://github.com/spring-projects/spring-vault/releases/tag/2.3.0-RC1"&gt;&lt;code&gt;2.3.0-RC1&lt;/code&gt; changelog&lt;/a&gt;. We are working towards a GA release&lt;/p&gt;
-&lt;/div&gt;
-&lt;div class="paragraph"&gt;
-&lt;p&gt;&lt;a href="http://projects.spring.io/spring-vault/"&gt;Project Page&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-vault"&gt;GitHub&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-vault/issues"&gt;Issues&lt;/a&gt; | &lt;a href="https://github.com/spring-projects/spring-vault/releases/tag/2.3.0-RC1"&gt;Release &lt;code&gt;2.3.0-RC1&lt;/code&gt; on GitHub&lt;/a&gt; | &lt;a href="http://docs.spring.io/spring-vault/docs/2.3.0-RC1/reference/html/"&gt;Documentation for &lt;code&gt;2.3.0-RC1&lt;/code&gt;&lt;/a&gt; | &lt;a href="http://stackoverflow.com/questions/tagged/spring-vault"&gt;Stack Overflow&lt;/a&gt;&lt;/p&gt;
-&lt;/div&gt;
 &lt;!-- rendered by Sagan Renderer Service --&gt;</content>
   </entry>
 </feed>
