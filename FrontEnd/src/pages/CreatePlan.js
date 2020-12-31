@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Grid } from "@material-ui/core";
+import { Grid, Input } from "@material-ui/core";
 import { Header } from "../components";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
@@ -67,7 +67,7 @@ export default class CreatePlan extends React.PureComponent {
           ranges={[this.state]}
         />
         {/* 일정이름 */}
-        <input
+        <Input
           className="create-name"
           type="text"
           value={planName}
@@ -90,6 +90,7 @@ export default class CreatePlan extends React.PureComponent {
               <option aria-label="None" value="" />
               <option value={"00:00"}>오전0시</option>
               {amTimeList}
+              {pmTimeList}
             </NativeSelect>
           </FormControl>
           <Grid>~</Grid>
@@ -103,6 +104,7 @@ export default class CreatePlan extends React.PureComponent {
               }}
             >
               <option aria-label="None" value="" />
+              {amTimeList}
               <option value={"12:00"}>오후12시</option>
               {pmTimeList}
             </NativeSelect>
