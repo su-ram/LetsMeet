@@ -88,11 +88,15 @@
     .rdrDays {
       button {
         border: 1.2px solid #cecaca;
+        height: 5em;
       }
     }
     .create-cont-setting2 {
       @media screen and (min-width: 768px) {
         width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
       }
 
       //일정 이름 작성 input
@@ -156,7 +160,9 @@
       //일정 생성하기 btn
       .create-plan-btn {
         @media screen and (min-width: 768px) {
-          margin-right: 0px;
+          margin-right: 0;
+          width: 200px;
+          height: 50px;
         }
         display: flex;
         margin: 40px auto;
