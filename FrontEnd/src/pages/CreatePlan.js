@@ -34,22 +34,16 @@ export default class CreatePlan extends React.PureComponent {
 
   render() {
     const { data, planName, startTime, finishTime, timeInterval } = this.state;
-    //시작시간 배열
-    const amTimes = new Array();
+    //시간 배열
+    const Times = new Array();
     for (let i = 1; i < 12; i++) {
-      amTimes.push(i);
+      Times.push(i);
     }
-    const amTimeList = amTimes.map((amTime) => (
-      <option value="{amTime}:00">오전{amTime}시</option>
+    const amTimeList = Times.map((amTime) => (
+      <option value={amTime}>오전{amTime}시</option>
     ));
-    //종료시간 배열
-    const pmTimes = new Array();
-    for (let i = 1; i < 12; i++) {
-      pmTimes.push(i);
-    }
-    // pmTimes.unshift(12);
-    const pmTimeList = pmTimes.map((pmTime) => (
-      <option value="{pmTime + 12}:00">오후{pmTime}시</option>
+    const pmTimeList = Times.map((pmTime) => (
+      <option value={pmTime + 12}>오후{pmTime}시</option>
     ));
 
     return (
@@ -90,7 +84,7 @@ export default class CreatePlan extends React.PureComponent {
                   }}
                 >
                   <option aria-label="None" value="" />
-                  <option value={"00:00"}>오전0시</option>
+                  <option value="0">오전0시</option>
                   {amTimeList}
                   {pmTimeList}
                 </NativeSelect>
@@ -107,7 +101,7 @@ export default class CreatePlan extends React.PureComponent {
                 >
                   <option aria-label="None" value="" />
                   {amTimeList}
-                  <option value={"12:00"}>오후12시</option>
+                  <option value="12">오후12시</option>
                   {pmTimeList}
                 </NativeSelect>
               </FormControl>
