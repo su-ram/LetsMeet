@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import Commentitem from './Commentitem';
-import "./Comment.css";
-const Comment=()=> {
+
+const Comment = () => {
     const users = [
         {
         'id': 1,
