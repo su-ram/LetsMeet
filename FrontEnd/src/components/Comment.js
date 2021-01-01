@@ -26,7 +26,7 @@ const Comment = () => {
         ]
     return(
         <div>
-    <text className="title">댓글</text>
+    <text className="title">댓글 <img className="img" src="/img/comment.png"></img></text>
     <div className="commentbox">
     <br/>
     <table className="table">
@@ -40,6 +40,10 @@ const Comment = () => {
     <input className="commentinput" placeholder="로그인 후 댓글을 적어주세요">
     </input>
     </div>
+    <br></br>
+    <button className="sharebtn">링크 복사하기</button>
+    <button className="sharebtn">카카오톡 공유하기</button>
+    
     </div>
     );
 }

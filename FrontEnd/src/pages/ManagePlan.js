@@ -1,5 +1,5 @@
 import React, {useState } from "react";
-import { Header, TimeTable, Comment, Yookha, Top3 } from "../components";
+import { Header, TimeTable, Comment, Yookha, Top3, Login } from "../components";
 import { Grid } from '@material-ui/core'
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 
@@ -26,7 +26,6 @@ const getData = (url) => {
 
 const ManagePlan = ({match}) => {
 	const [data, setData] = useState(getData(match.url));
-
 	return (
 		<Grid container direction="column" className="Manage-page-con">
 			<Header />
@@ -53,4 +52,9 @@ const ManagePlan = ({match}) => {
 	);
 };
 
+/*
+<Grid container direction="row" justify="center" alignItems="center">
+						<Login />
+					</Grid>
+*/
 export default ManagePlan;
