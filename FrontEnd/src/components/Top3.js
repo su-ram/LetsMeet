@@ -1,5 +1,5 @@
 import React from 'react';
-
+import { Grid } from '@material-ui/core'
 const Top3 = () => {
     //나중에 timedata 맵으로 바꿔야함
     const timedata = [
@@ -18,17 +18,37 @@ const Top3 = () => {
         ]
 return (
     <div>
-        <div className="title">TOP 3</div>
-        <div className="top3box">
+         <div className="title">TOP 3 <img className="img" src="/img/Top3.png"></img></div>
+        <Grid
+        container
+        direction="row"
+        justify="space-evenly"
+        alignItems="center">
+        <Grid>
         <text className="first">1위 </text>
-        <div className="rankbox">
-        <text className="desc">{timedata[0].date} {timedata[0].time} </text>
-        </div>
+        </Grid>
+        <Grid>
+        <text className="desc">{timedata[0].date} </text>
+        <br/>
+        <text className="desc">{timedata[0].time} </text>
+        </Grid>
+        <Grid>
         <text className="second">2위 </text>
-        <text className="desc">{`${timedata[0].date} \n ${timedata[0].time} `}</text>
+        </Grid>
+        <Grid>
+        <text className="desc">{timedata[1].date} </text>
+        <br/>
+        <text className="desc">{timedata[1].time} </text>
+        </Grid>
+        <Grid>
         <text className="third">3위 </text>
-        <text className="desc">{`${timedata[0].date} \n ${timedata[0].time} `}</text>
-        </div>
+        </Grid>
+        <Grid>
+        <text className="desc">{timedata[1].date} </text>
+        <br/>
+        <text className="desc">{timedata[1].time} </text>
+        </Grid>
+        </Grid>
         <br />
     </div>
 )

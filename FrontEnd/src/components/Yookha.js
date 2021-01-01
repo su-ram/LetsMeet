@@ -20,7 +20,7 @@ const Yookha=()=> {
       };
   return (
     <div>
-    <text className="title">육하원칙</text>
+    <text className="title">육하원칙 <img className="img" src="/img/hand.png"></img> </text>
     <br/>
     <br/>
     <div className="flex-container">
@@ -31,7 +31,6 @@ const Yookha=()=> {
     <hr color="lightblue" size="3px" align="left"></hr>
     </div>
     
-
     <div className="inputbox">
     <text className="subtitle">언제?</text>
     <input className="input" name="when" placeholder="?언제" dir="rtl" onChange={onChange} value={when} />
@@ -63,8 +62,10 @@ const Yookha=()=> {
     <hr color="lightblue" size="3px" align="left"></hr>
     </div>
     </div>
-      <button>저장</button>
+    <button className="btn">저장</button>
+    <br></br>
     </div>
+    
   );
 }
 

@@ -1,5 +1,5 @@
 import React, {useState } from "react";
-import { Header, TimeTable, Comment, Yookha, Top3 } from "../components";
+import { Header, TimeTable, Comment, Yookha, Top3, Login } from "../components";
 import { Grid } from '@material-ui/core'
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 
@@ -26,17 +26,19 @@ const getData = (url) => {
 
 const ManagePlan = ({match}) => {
 	const [data, setData] = useState(getData(match.url));
-
+	const [isloggedin, setloggedin] = useState(true);
 	return (
 		<Grid container direction="column" className="Manage-page-con">
 			<Header />
 			<Grid className="Manage-plan-title"><AccessAlarmIcon fontSize="large"/><h2>{data.title}</h2></Grid>	
 			{data?
 				<Grid container direction="row" className="Manage-contents-con">
-					<TimeTable 
+					{isloggedin ? <TimeTable 
 						data = {data}
 						type = "mine"
-					/>
+					/>: <Grid container direction="row" justify="center" alignItems="center">
+						<Login />
+					</Grid>}
 					<TimeTable 
 						data = {data}
 						type = "team"
@@ -53,4 +55,7 @@ const ManagePlan = ({match}) => {
 	);
 };
 
+/*
+
+*/
 export default ManagePlan;
