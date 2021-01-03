@@ -7,5 +7,6 @@ public class User {
 	
 	private String userId;
 	private String userPass;
+	private String meetId;
 
 }
