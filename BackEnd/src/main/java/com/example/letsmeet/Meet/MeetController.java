@@ -35,7 +35,6 @@ public class MeetController {
 		meet.setMeetId(newUrl);
 		mongoTemplate.insert(meet, "meet");
 		
-		
 		return new ResponseEntity<>(newUrl,HttpStatus.OK);
 	}
 }
