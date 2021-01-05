@@ -17,14 +17,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.letsmeet.Meet.Meet;
-import com.example.letsmeet.Time.UserTime;
+import com.example.letsmeet.Time.UserInfo;
 
 @RestController
 @RequestMapping(value="/user")
 public class UserController {
 
 	@Resource
-	private UserTime userTime;
+	private UserInfo userTime;
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;
@@ -41,8 +41,16 @@ public class UserController {
 		switch(checkUser(newbie)) {
 			case 0 :
 				
-				return new ResponseEntity<>("해당 링크가 존재하지 않습니다.", HttpStatus.BAD_REQUEST);
+				message = "해당 링크가 존재하지 않습니다.";
+				status = HttpStatus.UNAUTHORIZED;
+				//return new ResponseEntity<>("해당 링크가 존재하지 않습니다.", HttpStatus.BAD_REQUEST);
 		
+			case 2 :
+				
+				message = "비밀번호가 일치하지 않습니다.";
+				status = HttpStatus.UNAUTHORIZED;
+				return new ResponseEntity<String>(message, status);
+				
 			case 1 :
 				
 				mongoTemplate.insert(newbie,"user");
@@ -50,11 +58,7 @@ public class UserController {
 				status = HttpStatus.CREATED;
 				break;
 			
-			case 2 :
-				
-				message = "비밀번호가 일치하지 않습니다.";
-				status = HttpStatus.UNAUTHORIZED;
-				break;
+			
 				
 			case 3 :
 				
@@ -64,7 +68,7 @@ public class UserController {
 		}
 		
 		
-		
+		userTime.setUser(newbie);
 		userTime.setMeetId(queryMeet.getMeetId());
 		userTime.setGap(queryMeet.getGap());
 		userTime.setDates(queryMeet.getDates());

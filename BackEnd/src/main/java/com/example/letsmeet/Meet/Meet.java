@@ -22,7 +22,7 @@ public class Meet {
 	*/
 	@JsonFormat(pattern="HH:mm")
 	private String start, end;
-	private LocalDateTime atTime;
+	private LocalDateTime created;
 	
 	private int gap;
 	private ArrayList<LocalDate> dates;
