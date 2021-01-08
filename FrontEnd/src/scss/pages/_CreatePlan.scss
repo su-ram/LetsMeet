@@ -9,161 +9,242 @@
     margin: 30px 0;
     @media screen and (min-width: 768px) {
       h2 {
-        font-size: 50px;
+        font-size: 40px;
       }
     }
   }
-  .rdrDateDisplay {
-    margin: 0 auto;
-    width: 27.5em;
-  }
-  .rdrDateDisplayWrapper {
-    background-color: white;
-  }
-  .rdrDateInput {
-    position: relative;
-  }
-  .rdrNextPrevButton {
-    display: block;
-    width: 30px;
-    height: 30px;
-    margin: 30px;
-    background: white;
-    border: 1px solid #c5c5c5;
-    border-radius: 4px;
-    border-width: 1.4px;
-    box-shadow: 0px 2px 3px #0000000d;
-  }
-  .rdrMonthPicker {
-    select {
-      color: #2699fb;
-      font-weight: bold;
+  .setting {
+    @media screen and (min-width: 768px) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
     }
-  }
-  .rdrYearPicker {
-    select {
-      color: #2699fb;
-      font-weight: bold;
-    }
-  }
-  .rdrMonthAndYearPickers select:hover {
-    background-color: white;
-  }
-  .rdrMonthAndYearPickers select {
-    -moz-appearance: none;
-    appearance: none;
-    -webkit-appearance: none;
-    border: 0;
-    background: none;
-    padding: 8px;
-    border-radius: 4px;
-    outline: 0;
-    background-position: right 8px center;
-    cursor: pointer;
-    text-align: center;
-  }
-  .rdrMonth {
-    width: auto;
-    margin: 0 20px;
-  }
-  .rdrWeekDays {
-    display: flex;
-    border: 1.3px solid #cecaca;
-    background-color: #e4f3ff;
-  }
-  .rdrDays {
-    button {
-      border: 1.2px solid #cecaca;
-    }
-  }
-  //일정 이름 작성 input
-  /*height: 3em;
-    border-color: #85c2ff;
-    margin: 9px 0;
-    text-align: center;
-    font-size: 1.3em;*/
-    
-  .create-name {
-    height: 3em;
-    border-color: #85c2ff;
-    margin: 30px auto;
-    text-align: center;
-    font-size: 1.3em;
-    width: 85%;
-    /* width, margin 변경
-    height: 3em;
-    border-color: #85c2ff;
-    margin: 9px 0;
-    text-align: center;
-    font-size: 1.3em;*/
-  }
-  input::placeholder {
-    color: #c5c5c5;
-    font-size: 19px;
-    text-align: center;
-  }
-  //시간 설정
-  .create-time {
-    display: flex;
-    justify-content: center;
-    margin: 0 0 25px 0;
-    align-items: baseline;
-    .create-time-start {
-      margin: 0 10px;
-      #startTime {
-        width: 122px;
-        padding: 25px 0 0 0;
-        height: 20px;
-        text-align: center;
+    .rdrCalendarWrapper {
+      color: #000000;
+      font-size: 12px;
+      width: 100%;
+      @media screen and (min-width: 768px) {
+        width: 50%;
       }
     }
-    .create-time-finish {
-      margin: 0 10px;
-      #finishTime {
-        width: 122px;
-        padding: 25px 0 0 0;
-        height: 20px;
+    .rdrDateDisplay {
+      margin: 0 auto;
+      width: 27.5em;
+    }
+    .rdrDateDisplayWrapper {
+      background-color: white;
+    }
+    .rdrDateInput {
+      position: relative;
+    }
+    .rdrNextPrevButton {
+      display: block;
+      width: 30px;
+      height: 30px;
+      margin: 30px;
+      background: white;
+      border: 1px solid #c5c5c5;
+      border-radius: 4px;
+      border-width: 1.4px;
+      box-shadow: 0px 2px 3px #0000000d;
+    }
+    .rdrMonthPicker {
+      select {
+        color: #2699fb;
+        font-weight: bold;
+        font-size: 1.3rem;
+      }
+      @media screen and (min-width: 768px) {
+        height: 50px;
       }
     }
-  }
+    .rdrYearPicker {
+      select {
+        color: #2699fb;
+        font-weight: bold;
+        font-size: 1.3rem;
+      }
+      @media screen and (min-width: 768px) {
+        height: 50px;
+      }
+    }
+    .rdrMonthAndYearPickers select:hover {
+      background-color: white;
+    }
+    .rdrMonthAndYearPickers select {
+      -moz-appearance: none;
+      appearance: none;
+      -webkit-appearance: none;
+      border: 0;
+      background: none;
+      padding: 8px;
+      border-radius: 4px;
+      outline: 0;
+      background-position: right 8px center;
+      cursor: pointer;
+      text-align: center;
+    }
+    .rdrMonth {
+      width: auto;
+      margin: 10px 20px;
+    }
+    .rdrWeekDays {
+      display: flex;
+      border: 1.3px solid #cecaca;
+      background-color: #e4f3ff;
+    }
+    .rdrDays {
+      button {
+        border: 1.2px solid #cecaca;
+        height: 5em;
+      }
+    }
+    .create-cont-setting2 {
+      @media screen and (min-width: 768px) {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
 
-  .create-interval {
-    display: flex;
-    justify-content: center;
-    margin: 25px 0;
-    align-items: baseline;
-    #timeInterval {
-      width: 94px;
-      padding: 25px 0 0 0;
-      height: 20px;
+      //일정 이름 작성 input
+      .create-name {
+        height: 4.2em;
+        border: solid;
+        border-color: #85c2ff;
+        margin: 20px 30px;
+        text-align: center;
+        width: 85%;
+        @media screen and (min-width: 768px) {
+          height: 5em;
+          margin: 15px 30px;
+        }
+      }
+
+      input::placeholder {
+        color: #c5c5c5;
+        font-size: 22px;
+        text-align: center;
+        font-weight: bold;
+      }
+      input:focus {
+        outline: #85c2ff;
+      }
+      //시간 설정
+      .create-time {
+        display: flex;
+        justify-content: center;
+        margin: 0 0 25px 0;
+        align-items: baseline;
+        margin-left: 2.5px;
+        .create-time-start {
+          margin: 25px 15px;
+          @media screen and (min-width: 768px) {
+            margin: 0px 20px;
+          }
+          #startTime {
+            width: 121px;
+            height: 20px;
+            padding: 10px;
+            border: 1.7px solid #737373;
+            font-size: 15px;
+            font-weight: 750;
+            @media screen and (min-width: 768px) {
+              height: 22px;
+            }
+          }
+        }
+        .create-time-finish {
+          margin: 25px 15px;
+          @media screen and (min-width: 768px) {
+            margin: 0px 20px;
+          }
+          #finishTime {
+            width: 120px;
+            height: 20px;
+            padding: 10px;
+            border: 1.7px solid #737373;
+            font-size: 15px;
+            font-weight: 750;
+            @media screen and (min-width: 768px) {
+              height: 22px;
+            }
+          }
+        }
+        .MuiInput-underline:after {
+          left: 0;
+          right: 0;
+          bottom: 0;
+          content: "";
+          position: absolute;
+          transform: scaleX(0);
+          transition: transform 200ms cubic-bezier(0.0, 0, 0.2, 1) 0ms;
+          border-bottom: 2px solid #737373;
+          pointer-events: none;
+        }
+      }
+      .MuiSvgIcon-root {
+        width: 42px;
+        height: 42px;
+        margin-top: -9px;
+        background-color: #2699FB;
+        color: white;
+        @media screen and (min-width: 768px) {
+          height: 44px;
+          margin-top: -10px;
+        }
+      }
+      .create-interval {
+        display: flex;
+        justify-content: center;
+        margin-top: -18px;
+        align-items: baseline;
+        #timeInterval {
+          width: 100px;
+          height: 20px;
+          padding: 10px;
+          border: 1.7px solid #737373;
+          font-size: 15px;
+          font-weight: 750;
+          @media screen and (min-width: 768px) {
+            height: 22px;
+          }
+        }
+      }
+      //시간 설정 placeholder text
+      .timeText {
+        top: 15px;
+      }
+      //일정 생성하기 btn
+      .create-plan-btn {
+        @media screen and (min-width: 768px) {
+          margin-right: 0;
+          width: 180px;
+          height: 47px;
+          font-size: 20px;
+        }
+        display: flex;
+        margin: 50px auto;
+        width: 126px;
+        height: 42px;
+        background-color: #2699fb;
+        opacity: 1;
+        border: none;
+        font-size: 15px;
+        justify-content: center;
+        align-items: center;
+        .create-plan-text {
+          color: white;
+          text-decoration-line: none;
+        }
+      }
+      .create-plan-btn:hover {
+        cursor: pointer;
+      }
+      .create-plan-btn:focus {
+        border: none;
+        outline: none;
+      }
     }
-  }
-  //시간 설정 placeholder text
-  .timeText {
-    top: 15px;
-  }
-  //일정 생성하기 btn
-  .create-plan-btn {
-    display: flex;
-    margin: 40px auto;
-    width: 123px;
-    height: 31px;
-    background-color: #2699fb;
-    opacity: 1;
-    border: none;
-    font-size: 13px;
-    justify-content: center;
-    align-items: center;
-    .create-plan-text {
-      color: white;
-      text-decoration-line: none;
-    }
-  }
-  .create-plan-btn:hover {
-    cursor: pointer;
-  }
-  .create-plan-btn:focus {
-    border: none;
-    outline: none;
   }
 }
