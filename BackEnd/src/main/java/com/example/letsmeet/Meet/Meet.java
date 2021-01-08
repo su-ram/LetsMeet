@@ -27,5 +27,6 @@ public class Meet {
 	private int gap;
 	private ArrayList<LocalDate> dates;
 	private boolean done;
+	private MeetSub meetSubInfo;
 
 }
