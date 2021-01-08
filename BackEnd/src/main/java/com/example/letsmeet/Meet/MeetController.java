@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.letsmeet.Time.UserInfo;
+import com.example.letsmeet.User.User;
 import com.google.common.hash.Hashing;
 
 @RestController
@@ -25,10 +26,12 @@ import com.google.common.hash.Hashing;
 public class MeetController {
 
 	@Resource
-	private UserInfo userTime;
+	private UserInfo userInfo;
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;
+	
+	Query query; 
 	
 	@PostMapping
 	public ResponseEntity<String> newMeet(@RequestBody Meet meet) {
@@ -48,16 +51,43 @@ public class MeetController {
 	@GetMapping
 	public ResponseEntity<?> getMyMeet(){
 		
-		if(userTime.getUser() == null) {
+		if(userInfo.getUser() == null) {
 			return new ResponseEntity<String>("로그인 해주세요.", HttpStatus.UNAUTHORIZED);
 		}
-		String meetId = userTime.getMeetId();
-		Query query = new Query();
+		String meetId = userInfo.getMeetId();
+		query = new Query();
 		query.addCriteria(Criteria.where("meetId").is(meetId));
 		
 		return new ResponseEntity<Meet>(mongoTemplate.findOne(query, Meet.class, "meet"), HttpStatus.OK);
 		
 		
+	}
+	
+	@PostMapping("/meetsub")
+	public ResponseEntity<?> updateMeetSub(@RequestBody MeetSub meetSubInfo){
+		
+		if(!User.checkUser(userInfo)) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		}
+		
+		String meetId = userInfo.getMeetId();
+		query = new Query();
+		query.addCriteria(Criteria.where("meetId").is(meetId));
+		Meet meet = mongoTemplate.findOne(query, Meet.class, "meet");
+		meet.setMeetSubInfo(meetSubInfo);
+		mongoTemplate.save(meet, "meet");
+		
+		return ResponseEntity.status(HttpStatus.OK).build();
+		
+		
+		
+		
+		
 		
 	}
+	
+	
+	
+	
+	
 }
