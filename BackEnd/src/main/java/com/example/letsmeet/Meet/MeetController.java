@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -73,9 +74,10 @@ public class MeetController {
 		String meetId = userInfo.getMeetId();
 		query = new Query();
 		query.addCriteria(Criteria.where("meetId").is(meetId));
-		Meet meet = mongoTemplate.findOne(query, Meet.class, "meet");
-		meet.setMeetSubInfo(meetSubInfo);
-		mongoTemplate.save(meet, "meet");
+		
+		Update update = new Update();
+		update.set("meetsub", meetSubInfo);
+		mongoTemplate.updateFirst(query, update, "meet");
 		
 		return ResponseEntity.status(HttpStatus.OK).build();
 		
