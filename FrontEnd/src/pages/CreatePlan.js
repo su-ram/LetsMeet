@@ -62,8 +62,6 @@ export default class CreatePlan extends React.PureComponent {
 
   render() {
     const { data, planName, start, end, gap } = this.state;
-    // console.log(typeof gap);
-    console.log(typeof gap);
 
     //시간 배열
     const Times = new Array();
