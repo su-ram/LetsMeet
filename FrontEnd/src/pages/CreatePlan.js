@@ -1,4 +1,5 @@
 import * as React from "react";
+import axios from 'axios';
 import { Grid } from "@material-ui/core";
 import { Header } from "../components";
 import FormControl from "@material-ui/core/FormControl";
@@ -21,6 +22,22 @@ export default class CreatePlan extends React.PureComponent {
       key: "selection",
     };
   }
+  /*
+  axios.post('url', {
+    변수명: planName,
+    변수명: startTime,
+    변수명: finishTime,
+    변수명: timeInterval,
+    변수명: startDate,
+    변수명: endDate,
+    변수명: key    
+  })
+  .then(function (res) {
+    console.log(res);
+  })
+  .catch(function (err) {
+    console.log(err);
+  });*/
 
   onRangeChange = (ranges) => {
     console.log(ranges);

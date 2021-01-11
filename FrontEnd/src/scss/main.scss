@@ -1,15 +1,19 @@
 // base
-@import './base/variable';
-@import './base/reset';
-@import './base/material';
+@import "./base/variable";
+@import "./base/reset";
+@import "./base/material";
 
 // components
-@import './components/Header';
-@import './components/TimeTable';
+@import "./components/Header";
+@import "./components/TimeTable";
+@import "./components/Comment";
+@import "./components/Top3";
+@import "./components/Yookha";
+@import "./components/Login";
 
 // pages
-@import './pages/CreatePlan';
-@import './pages/ManagePlan';
+@import "./pages/CreatePlan";
+@import "./pages/ManagePlan";
 
 // layout
-@import './layout/grid';
+@import "./layout/grid";
