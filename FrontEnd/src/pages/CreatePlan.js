@@ -1,5 +1,6 @@
 import * as React from "react";
-import { Grid } from "@material-ui/core";
+import axios from 'axios';
+import { Grid, Button } from "@material-ui/core";
 import { Header } from "../components";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
@@ -13,9 +14,9 @@ export default class CreatePlan extends React.PureComponent {
 
     this.state = {
       planName: "",
-      startTime: "",
-      finishTime: "",
-      timeInterval: "",
+      start: "",
+      end: "",
+      gap: "",
       startDate: new Date(),
       endDate: new Date(),
       key: "selection",
@@ -31,22 +32,52 @@ export default class CreatePlan extends React.PureComponent {
     });
   };
 
+  changeHandler = e => {
+    this.setState({ [e.target.name]: e.target.value })
+  } 
+
+  submitHandler = e => {
+    e.preventDefault()
+    console.log(this.state)
+    axios.post(`https://letsmeeet.azurewebsites.net`, this.state)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+        const status = error?.response?.status;
+        if (status === undefined) {
+          console.dir("데이터를 불러오던 중 예기치 못한 예외가 발생하였습니다.\n" + JSON.stringify(error));
+        }
+        else if (status === 400) {
+          console.dir("400에러");
+        }
+        else if (status === 500) {
+          console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
+        }
+      });
+  }
+
   render() {
-    const { data, planName, startTime, finishTime, timeInterval } = this.state;
+    const { data, planName, start, end, gap } = this.state;
+    // console.log(typeof gap);
+    console.log(typeof gap);
+
     //시간 배열
     const Times = new Array();
     for (let i = 1; i < 12; i++) {
       Times.push(i);
     }
     const amTimeList = Times.map((amTime) => (
-      <option value={amTime}>오전{amTime}시</option>
+      <option value={`"${amTime}:00"`}>오전{amTime}시</option>
     ));
     const pmTimeList = Times.map((pmTime) => (
-      <option value={pmTime + 12}>오후{pmTime}시</option>
+      <option value={`"${pmTime + 12}:00"`}>오후{pmTime}시</option>
     ));
 
     return (
       <Grid className="create-cont">
+        <form onSubmit={this.submitHandler}>
         <Header />
         <Grid className="create-cont-title">
           <h2>언제가 좋을까요?🤔</h2>
@@ -65,9 +96,10 @@ export default class CreatePlan extends React.PureComponent {
             <input
               className="create-name"
               type="text"
+              name="planName"
               value={planName}
               onChange={(e) => {
-                this.setState({ planName: e.target.value });
+                this.setState({ [e.target.name]: e.target.value });
               }}
               placeholder="일정 이름을 작성해주세요."
             />
@@ -77,15 +109,14 @@ export default class CreatePlan extends React.PureComponent {
                 {/* <InputLabel className="timeText">Start Time</InputLabel> */}
                 <NativeSelect
                   id="startTime"
-                  value={startTime}
-                  onChange={(e) => {
-                    this.setState({ startTime: e.target.value });
-                  }}
+                  name="start"
+                  value={start}
+                  onChange={this.changeHandler}
                 >
                   <option aria-label="None" value="">
                     시작시간
                   </option>
-                  <option value="0">오전0시</option>
+                  <option value='"00:00"'>오전0시</option>
                   {amTimeList}
                   {pmTimeList}
                 </NativeSelect>
@@ -95,29 +126,27 @@ export default class CreatePlan extends React.PureComponent {
                 {/* <InputLabel className="timeText">Finish Time</InputLabel> */}
                 <NativeSelect
                   id="finishTime"
-                  value={finishTime}
-                  onChange={(e) => {
-                    this.setState({ finishTime: e.target.value });
-                  }}
+                  name="end"
+                  value={end}
+                  onChange={this.changeHandler}
                 >
                   <option aria-label="None" value="">
                     끝시간
                   </option>
                   {amTimeList}
-                  <option value="12">오후12시</option>
+                  <option value='"12:00"'>오후12시</option>
                   {pmTimeList}
                 </NativeSelect>
               </FormControl>
             </Grid>
-            <Grid className="create-interval">
+            <Grid className="create-gap">
               <FormControl>
                 {/* <InputLabel className="timeText">Interval</InputLabel> */}
                 <NativeSelect
                   id="timeInterval"
-                  value={timeInterval}
-                  onChange={(e) => {
-                    this.setState({ timeInterval: e.target.value });
-                  }}
+                  name="gap"
+                  value={gap}
+                  onChange={this.changeHandler}
                 >
                   <option aria-label="None" value="">
                     단위
@@ -131,12 +160,14 @@ export default class CreatePlan extends React.PureComponent {
             </Grid>
             {/* 일정생성 버튼 */}
             <Grid className="create-plan-btn">
-              <a href="#" className="create-plan-text">
+              {/*<a href="#" className="create-plan-text" type="submit">
                 일정 생성하기
-              </a>
+              </a>*/}
+              <Button type="submit" className="">일정 생성하기</Button>
             </Grid>
           </Grid>
         </Grid>
+        </form>
       </Grid>
     );
   }

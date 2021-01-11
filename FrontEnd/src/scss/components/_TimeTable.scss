@@ -1,18 +1,38 @@
 .timetable{
+	display: flex;
+	flex-direction: column;
+	margin-bottom: 30px;
+	@media screen and (min-width: 768px){
+		margin-right: 5%;
+		margin-bottom: 0;
+	}
+	&>div{
+		width: 100%;	
+	}
+	.timetable-title{
+		margin-left: 2px;
+		h2{
+			font-size: 16px;
+			font-weight: 600;
+			@media screen and (min-width: 768px){
+				font-size: 30px;
+			}
+		}
+	}
 	.timetable-table{
 		width: 100%;
 		tr{
 			height: 20px;
 			@media screen and (min-width: 768px){
-				height: 50px;
+				height: 30px;
 			}
 		}
 		.day, .date, .table-body, .timetable-time-string{
 			padding: 2px;
 			font-size: 0.5rem;
 			@media screen and (min-width: 768px){
-				padding: inherit;
-				font-size: inherit;
+				padding: 10px;
+				font-size: 1rem;
 			}
 		}
 		.day{
@@ -20,51 +40,56 @@
 			border:1px solid $gray;
 		}
 		.blank{
+			position: sticky;
+			left: 0;
+			z-index: 1;
+			background-color: white;
 			color: transparent;
-			background-color: transparent;
-			border: 0;
+			border : 0;
 		}
 		.timetable-time{
 			.timetable-time-string{
+				position: sticky;
+				left: 0;
+				z-index: 1;
+				background-color: white;
 				&>div{
 					position: absolute;
 					top:-12px;
 					left: 0;
-					background-color: white;
 					font-size: 0.6rem;
+					background-color: white;
 					@media screen and (min-width: 768px){
 						padding-right: 12px;
 						font-size: 1rem;
 					}
 				}
 			}
-			.table-body{
+			.table-body-mine, .table-body-team{
 				border:1px solid $gray;
 				&.not-selected{
 					background-color: $light-pink;
+				}
+				&.midterm{
+					border-bottom: 2px dotted $gray;
+				}
+				&.fullterm{
+					border-top: none;
+				}
+			}
+			.table-body-team{
+				&.not-selected{
+					background-color: white;
 				}
 			}
 		}
 	}
 }
 
+/* grid with arrow */
 .timetable{
-	display: flex;
-	.prev-btn{
-		position: fixed;
-		top: 240px;
-		right: 10px;
-		@media screen and (min-width: 768px){
-			display: none;
-		}
-	}
-	.next-btn{
-		position: fixed;
-		top: 280px;
-		right: 10px;
-		@media screen and (min-width: 768px){
-			display: none;
-		}
+	.timetable-with-arrow{
+		display: flex;
 	}
 	.timetable-table-con{
 		width: 90%;
@@ -80,5 +105,11 @@
 	}
 	.visible{
 		display: table-cell;
+	}
+	.prev-btn, .next-btn{
+		margin-top: 30px;
+		@media screen and (min-width: 768px){
+			display: none;
+		}
 	}
 }

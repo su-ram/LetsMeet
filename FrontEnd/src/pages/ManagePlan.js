@@ -1,5 +1,5 @@
 import React, {useState } from "react";
-import { Header, TimeTable } from "../components";
+import { Header, TimeTable, Comment, Yookha, Top3, Login } from "../components";
 import { Grid } from '@material-ui/core'
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 
@@ -26,14 +26,28 @@ const getData = (url) => {
 
 const ManagePlan = ({match}) => {
 	const [data, setData] = useState(getData(match.url));
-
+	const [isloggedin, setloggedin] = useState(true);
 	return (
-		<Grid className="Manage-page-con">
+		<Grid container direction="column" className="Manage-page-con">
 			<Header />
+			<Grid className="Manage-plan-title"><AccessAlarmIcon fontSize="large"/><h2>{data.title}</h2></Grid>	
 			{data?
-				<Grid className="Manage-contents-con">
-					<Grid className="Manage-plan-title"><AccessAlarmIcon fontSize="large"/><h2>{data.title}</h2></Grid>	
-					<TimeTable data = {data}/>
+				<Grid container direction="row" className="Manage-contents-con">
+					{isloggedin ? <TimeTable 
+						data = {data}
+						type = "mine"
+					/>: <Grid container direction="row" justify="center" alignItems="center">
+						<Login />
+					</Grid>}
+					<TimeTable 
+						data = {data}
+						type = "team"
+					/>
+					<Grid justify="center" alignItems="flex-start">
+						<Top3></Top3>
+						<Yookha></Yookha>
+						<Comment></Comment>
+					</Grid>
 				</Grid>
 				:undefined
 			}
@@ -41,4 +55,7 @@ const ManagePlan = ({match}) => {
 	);
 };
 
+/*
+
+*/
 export default ManagePlan;
