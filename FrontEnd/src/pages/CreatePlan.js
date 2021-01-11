@@ -1,6 +1,6 @@
 import * as React from "react";
 import axios from 'axios';
-import { Grid } from "@material-ui/core";
+import { Grid, Button } from "@material-ui/core";
 import { Header } from "../components";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
@@ -22,22 +22,6 @@ export default class CreatePlan extends React.PureComponent {
       key: "selection",
     };
   }
-  /*
-  axios.post('url', {
-    변수명: planName,
-    변수명: startTime,
-    변수명: finishTime,
-    변수명: timeInterval,
-    변수명: startDate,
-    변수명: endDate,
-    변수명: key    
-  })
-  .then(function (res) {
-    console.log(res);
-  })
-  .catch(function (err) {
-    console.log(err);
-  });*/
 
   onRangeChange = (ranges) => {
     console.log(ranges);
@@ -47,6 +31,32 @@ export default class CreatePlan extends React.PureComponent {
       key: ranges["selection"].key,
     });
   };
+
+  changeHandler = e => {
+    this.setState({ [e.target.name]: e.target.value })
+  } 
+
+  submitHandler = e => {
+    e.preventDefault()
+    console.log(this.state)
+    axios.post(`https://letsmeeet.azurewebsites.net`, this.state)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+        const status = error?.response?.status;
+        if (status === undefined) {
+          console.dir("데이터를 불러오던 중 예기치 못한 예외가 발생하였습니다.\n" + JSON.stringify(error));
+        }
+        else if (status === 400) {
+          console.dir("400에러");
+        }
+        else if (status === 500) {
+          console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
+        }
+      });
+  }
 
   render() {
     const { data, planName, startTime, finishTime, timeInterval } = this.state;
@@ -64,6 +74,7 @@ export default class CreatePlan extends React.PureComponent {
 
     return (
       <Grid className="create-cont">
+        <form onSubmit={this.submitHandler}>
         <Header />
         <Grid className="create-cont-title">
           <h2>언제가 좋을까요?🤔</h2>
@@ -82,9 +93,10 @@ export default class CreatePlan extends React.PureComponent {
             <input
               className="create-name"
               type="text"
+              name="planName"
               value={planName}
               onChange={(e) => {
-                this.setState({ planName: e.target.value });
+                this.setState({ [e.target.name]: e.target.value });
               }}
               placeholder="일정 이름을 작성해주세요."
             />
@@ -94,10 +106,9 @@ export default class CreatePlan extends React.PureComponent {
                 {/* <InputLabel className="timeText">Start Time</InputLabel> */}
                 <NativeSelect
                   id="startTime"
+                  name="startTime"
                   value={startTime}
-                  onChange={(e) => {
-                    this.setState({ startTime: e.target.value });
-                  }}
+                  onChange={this.changeHandler}
                 >
                   <option aria-label="None" value="">
                     시작시간
@@ -112,10 +123,9 @@ export default class CreatePlan extends React.PureComponent {
                 {/* <InputLabel className="timeText">Finish Time</InputLabel> */}
                 <NativeSelect
                   id="finishTime"
+                  name="finishTime"
                   value={finishTime}
-                  onChange={(e) => {
-                    this.setState({ finishTime: e.target.value });
-                  }}
+                  onChange={this.changeHandler}
                 >
                   <option aria-label="None" value="">
                     끝시간
@@ -131,10 +141,9 @@ export default class CreatePlan extends React.PureComponent {
                 {/* <InputLabel className="timeText">Interval</InputLabel> */}
                 <NativeSelect
                   id="timeInterval"
+                  name="timeInterval"
                   value={timeInterval}
-                  onChange={(e) => {
-                    this.setState({ timeInterval: e.target.value });
-                  }}
+                  onChange={this.changeHandler}
                 >
                   <option aria-label="None" value="">
                     단위
@@ -148,12 +157,14 @@ export default class CreatePlan extends React.PureComponent {
             </Grid>
             {/* 일정생성 버튼 */}
             <Grid className="create-plan-btn">
-              <a href="#" className="create-plan-text">
+              {/*<a href="#" className="create-plan-text" type="submit">
                 일정 생성하기
-              </a>
+              </a>*/}
+              <Button type="submit" className="">일정 생성하기</Button>
             </Grid>
           </Grid>
         </Grid>
+        </form>
       </Grid>
     );
   }
