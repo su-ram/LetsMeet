@@ -1,13 +1,12 @@
 package com.example.letsmeet.User;
 
-import java.util.List;
-
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
+import org.springframework.data.mongodb.core.query.Update;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -24,7 +23,7 @@ import com.example.letsmeet.Time.UserInfo;
 public class UserController {
 
 	@Resource
-	private UserInfo userTime;
+	private UserInfo userInfo;
 	
 	@Autowired
 	private MongoTemplate mongoTemplate;
@@ -32,6 +31,8 @@ public class UserController {
 	private Meet queryMeet;
 	private String message;
 	private HttpStatus status;
+	private Meet resultMeet;
+	private User queryUser;
 	
 	@PostMapping("signin")
 	public ResponseEntity<?> newUser(@RequestBody User newbie) {
@@ -53,7 +54,18 @@ public class UserController {
 				
 			case 1 :
 				
-				mongoTemplate.insert(newbie,"user");
+				newbie.setUserKey(Math.abs(newbie.hashCode()));
+				mongoTemplate.insert(newbie,"user").hashCode();
+				
+				Query query = new Query();
+				query.addCriteria(Criteria.where("meetId").is(newbie.getMeetId()));
+				
+				Update update = new Update();
+				update.inc("num", 1);
+				update.push("users",newbie.getUserKey());
+				
+				mongoTemplate.updateFirst(query, update, "meet");
+				
 				message = "아이디 생성 완료.";
 				status = HttpStatus.CREATED;
 				break;
@@ -62,16 +74,19 @@ public class UserController {
 				
 			case 3 :
 				
-				message = "로그인 성공.";
+				Meet meet = newbie.getMeet(mongoTemplate, newbie.getMeetId());
+				message = "로그인 성공";
 				status = HttpStatus.OK;
+				userInfo.setUser(queryUser);
+				
 				break;
 		}
 		
 		
-		userTime.setUser(newbie);
-		userTime.setMeetId(queryMeet.getMeetId());
-		userTime.setGap(queryMeet.getGap());
-		userTime.setDates(queryMeet.getDates());
+		
+		userInfo.setMeetId(queryMeet.getMeetId());
+		userInfo.setGap(queryMeet.getGap());
+		userInfo.setDates(queryMeet.getDates());
 		
 		
 				
@@ -91,7 +106,7 @@ public class UserController {
 		
 		query.addCriteria(Criteria.where("userId").is(user.getUserId()));
 
-		User queryUser = mongoTemplate.findOne(query, User.class, "user");
+		queryUser = mongoTemplate.findOne(query, User.class, "user");
 		
 		if(queryUser == null ) return 1;
 		
@@ -101,13 +116,14 @@ public class UserController {
 		
 		if(queryUser == null) return 2;
 		
+		
 		return 3;
 		
 	}
 	
 	@GetMapping("session")
 	public String get() {
-		return userTime.toString();
+		return userInfo.toString();
 	}
 	
 	

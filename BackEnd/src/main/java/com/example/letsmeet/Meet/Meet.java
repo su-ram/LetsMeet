@@ -28,5 +28,8 @@ public class Meet {
 	private ArrayList<LocalDate> dates;
 	private boolean done;
 	private MeetSub meetSubInfo;
+	
+	private int num =0;
+	private ArrayList<Integer> users = new ArrayList<Integer>();
 
 }
