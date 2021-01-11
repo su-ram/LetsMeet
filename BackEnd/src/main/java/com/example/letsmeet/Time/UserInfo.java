@@ -6,9 +6,13 @@ import java.util.ArrayList;
 
 import org.springframework.context.annotation.Scope;
 import org.springframework.context.annotation.ScopedProxyMode;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Component;
 import org.springframework.web.context.WebApplicationContext;
 
+import com.example.letsmeet.Meet.Meet;
 import com.example.letsmeet.User.User;
 
 import lombok.Data;
@@ -23,6 +27,15 @@ public class UserInfo implements Serializable{
 	private int gap; 
 	private ArrayList<LocalDate> dates;
 	private ArrayList<Integer> timetables;
+	
+	public Meet getUserMeet(MongoTemplate mongoTemplate) {
+		
+		Query query = new Query();
+		query.addCriteria(Criteria.where("meetId").is(meetId));
+		
+		return mongoTemplate.findOne(query, Meet.class);
+	}
+	
 	
 
 }

@@ -36,6 +36,8 @@ public class MeetController {
 	
 	@PostMapping
 	public ResponseEntity<String> newMeet(@RequestBody Meet meet) {
+		//일정 생성. 
+		
 		
 		meet.setCreated(LocalDateTime.now());
 		
@@ -64,7 +66,7 @@ public class MeetController {
 		
 	}
 	
-	@PostMapping("/meetsub")
+	@PostMapping("/sub")
 	public ResponseEntity<?> updateMeetSub(@RequestBody MeetSub meetSubInfo){
 		
 		if(!User.checkUser(userInfo)) {
@@ -77,7 +79,10 @@ public class MeetController {
 		
 		Update update = new Update();
 		update.set("meetsub", meetSubInfo);
+		
 		mongoTemplate.updateFirst(query, update, "meet");
+		
+		
 		
 		return ResponseEntity.status(HttpStatus.OK).build();
 		

@@ -108,28 +108,29 @@
       }
 
       //일정 이름 작성 input
-      .create-name {
+      input {
         height: 4.2em;
         border: solid;
         border-color: #85c2ff;
         margin: 20px 30px;
         text-align: center;
         width: 85%;
+        font-size: 17px;
         @media screen and (min-width: 768px) {
           height: 5em;
           margin: 15px 30px;
         }
+        &::placeholder {
+          color: #c5c5c5;
+          font-size: 22px;
+          text-align: center;
+          font-weight: bold;
+        }
+        &:focus {
+          outline: #85c2ff;
+        }
       }
 
-      input::placeholder {
-        color: #c5c5c5;
-        font-size: 22px;
-        text-align: center;
-        font-weight: bold;
-      }
-      input:focus {
-        outline: #85c2ff;
-      }
       //시간 설정
       .create-time {
         display: flex;
@@ -237,13 +238,13 @@
           color: white;
           text-decoration-line: none;
         }
-      }
-      .create-plan-btn:hover {
-        cursor: pointer;
-      }
-      .create-plan-btn:focus {
-        border: none;
-        outline: none;
+        &:hover {
+          cursor: pointer;
+        }
+        &:focus {
+          border: none;
+          outline: none;
+        }
       }
     }
   }
