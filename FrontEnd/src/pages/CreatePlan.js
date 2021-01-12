@@ -1,6 +1,6 @@
 import * as React from "react";
 import axios from "axios";
-import { Grid } from "@material-ui/core";
+import { Grid,Button } from "@material-ui/core";
 import { Header } from "../components";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
@@ -25,7 +25,7 @@ export default class CreatePlan extends React.PureComponent {
   }
 
   onRangeChange = (ranges) => {
-    //console.log(ranges);
+    console.log(ranges);
     this.setState({
       startDate: ranges["selection"].startDate,
       endDate: ranges["selection"].endDate,
@@ -42,14 +42,22 @@ export default class CreatePlan extends React.PureComponent {
     e.preventDefault();
     console.log(this.state);
     
+    const headers = {
+      'Access-Control-Allow-Origin': '*',        
+      'Accept': 'application/json',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+
+    const data = {
+      "planName": this.planName,
+      "start": this.start,
+      "end": this.end,
+      "gap": this.gap,
+      "dates": this.dates
+    }
+
     axios
-      .post(`https://letsmeeet.azurewebsites.net/Create`, {
-        planName: this.planName,
-        start: this.start,
-        end: this.end,
-        gap: this.gap,
-        dates: this.dates
-      })
+      .post('https://letsmeeet.azurewebsites.net/meet', data, headers, { withCredentials: true })
       .then(function (response) {
         console.log(response);
       })
@@ -70,18 +78,19 @@ export default class CreatePlan extends React.PureComponent {
   };
 
   render() {
-    const { data, planName, start, end, gap } = this.state;
+    const { planName, start, end, gap } = this.state;
 
     //시간 배열
     const Times = new Array();
     for (let i = 1; i < 12; i++) {
       Times.push(i);
     }
+    //수정 전 -> {`"${amTime}:00"`}, {`"${pmTime + 12}:00"`}
     const amTimeList = Times.map((amTime) => (
-      <option value={`"${amTime}:00"`}>오전{amTime}시</option>
+      <option value={`${amTime}:00`}>오전{amTime}시</option>
     ));
     const pmTimeList = Times.map((pmTime) => (
-      <option value={`"${pmTime + 12}:00"`}>오후{pmTime}시</option>
+      <option value={`${pmTime + 12}:00`}>오후{pmTime}시</option>
     ));
 
     return (
@@ -107,9 +116,7 @@ export default class CreatePlan extends React.PureComponent {
                 type="text"
                 name="planName"
                 value={planName}
-                onChange={(e) => {
-                  this.setState({ [e.target.name]: e.target.value });
-                }}
+                onChange={this.changeHandler}
                 placeholder="일정 이름을 작성해주세요."
               />
               {/* 시간 정하기 */}
@@ -125,7 +132,8 @@ export default class CreatePlan extends React.PureComponent {
                     <option aria-label="None" value="">
                       시작시간
                     </option>
-                    <option value='"00:00"'>오전0시</option>
+                    {/*수정 전 -> value='"00:00"'*/}
+                    <option value='00:00'>오전0시</option>
                     {amTimeList}
                     {pmTimeList}
                   </NativeSelect>
@@ -143,7 +151,8 @@ export default class CreatePlan extends React.PureComponent {
                       끝시간
                     </option>
                     {amTimeList}
-                    <option value='"12:00"'>오후12시</option>
+                    {/*수정 전 -> value='"12:00"'*/}
+                    <option value='12:00'>오후12시</option>
                     {pmTimeList}
                   </NativeSelect>
                 </FormControl>
@@ -168,13 +177,14 @@ export default class CreatePlan extends React.PureComponent {
                 <Grid>&nbsp;&nbsp;단위</Grid>
               </Grid>
               {/* 일정생성 버튼 */}
-              <Grid className="create-plan-btn">
+              <Grid className="create-plan">
+                {/* 소정님, a태그 사용하면 submit 처리가 안돼서 button 사용할게요!
                 <a href="#" className="create-plan-text" type="submit">
                   일정 생성하기
-                </a>
-                {/* <Button type="submit" className="">
+                </a>*/}
+                <Button type="submit" className="create-plan-btn">
                   일정 생성하기
-                </Button> */}
+                </Button>
               </Grid>
             </Grid>
           </Grid>

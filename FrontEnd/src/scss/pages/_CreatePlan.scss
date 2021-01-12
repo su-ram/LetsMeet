@@ -217,6 +217,7 @@
         top: 15px;
       }
       //일정 생성하기 btn
+      
       .create-plan-btn {
         @media screen and (min-width: 768px) {
           margin-right: 0;
@@ -234,7 +235,7 @@
         font-size: 15px;
         justify-content: center;
         align-items: center;
-        .create-plan-text {
+        /*.create-plan-btn {
           color: white;
           text-decoration-line: none;
         }
@@ -244,7 +245,20 @@
         &:focus {
           border: none;
           outline: none;
-        }
+        }*/
+      }
+      .MuiButton-root {
+        color: white;
+        padding: 6px 16px;
+        min-width: 64px;
+        box-sizing: border-box;
+        transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        font-weight: 500;
+        line-height: 1.75;
+        border-radius: 0px;
+        letter-spacing: 0.02857em;
+        text-transform: uppercase;
       }
     }
   }
