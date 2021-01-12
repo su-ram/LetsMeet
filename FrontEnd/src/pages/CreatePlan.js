@@ -25,7 +25,7 @@ export default class CreatePlan extends React.PureComponent {
   }
 
   onRangeChange = (ranges) => {
-    console.log(ranges);
+    //console.log(ranges);
     this.setState({
       startDate: ranges["selection"].startDate,
       endDate: ranges["selection"].endDate,
