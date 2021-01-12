@@ -1,6 +1,6 @@
 import * as React from "react";
 import axios from "axios";
-import { Grid, Button } from "@material-ui/core";
+import { Grid } from "@material-ui/core";
 import { Header } from "../components";
 import FormControl from "@material-ui/core/FormControl";
 import NativeSelect from "@material-ui/core/NativeSelect";
@@ -19,17 +19,19 @@ export default class CreatePlan extends React.PureComponent {
       gap: "",
       startDate: new Date(),
       endDate: new Date(),
+      dates: [],
       key: "selection",
     };
   }
 
   onRangeChange = (ranges) => {
-    console.log(ranges);
+    //console.log(ranges);
     this.setState({
       startDate: ranges["selection"].startDate,
       endDate: ranges["selection"].endDate,
       key: ranges["selection"].key,
-    });
+      dates: [ranges["selection"].startDate, ranges["selection"].endDate]
+    })
   };
 
   changeHandler = (e) => {
@@ -39,8 +41,15 @@ export default class CreatePlan extends React.PureComponent {
   submitHandler = (e) => {
     e.preventDefault();
     console.log(this.state);
+    
     axios
-      .post(`https://letsmeeet.azurewebsites.net`, this.state)
+      .post(`https://letsmeeet.azurewebsites.net/Create`, {
+        planName: this.planName,
+        start: this.start,
+        end: this.end,
+        gap: this.gap,
+        dates: this.dates
+      })
       .then(function (response) {
         console.log(response);
       })
