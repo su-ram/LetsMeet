@@ -1,7 +1,9 @@
 package com.example.letsmeet.Meet;
 
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import javax.annotation.Resource;
 
@@ -38,8 +40,24 @@ public class MeetController {
 	public ResponseEntity<String> newMeet(@RequestBody Meet meet) {
 		//일정 생성. 
 		
+		ArrayList<LocalDate> dates = meet.getDates();
+		
+		if(dates.size() > 1) {
+		LocalDate startDate = dates.get(0);
+		LocalDate endDate = dates.get(1);
+		dates = new ArrayList<LocalDate>();
+		LocalDate curDate = startDate;
+		
+		while (!curDate.equals(endDate.plusDays(2))) {
+			dates.add(curDate);
+			curDate=curDate.plusDays(1);
+		}
+		meet.setDates(dates);
+		}
+		
 		
 		meet.setCreated(LocalDateTime.now());
+
 		
 		String newUrl = Hashing.sha256()
 				  .hashString(meet.toString(), StandardCharsets.UTF_8)
