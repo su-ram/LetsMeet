@@ -48,14 +48,21 @@ public class MeetController {
 		dates = new ArrayList<LocalDate>();
 		LocalDate curDate = startDate;
 		
-		while (!curDate.equals(endDate.plusDays(2))) {
+		System.out.println(startDate.toString()+" "+endDate.toString());
+		
+		while (!curDate.equals(endDate.plusDays(1))) {
 			dates.add(curDate);
 			curDate=curDate.plusDays(1);
+			//System.out.println(curDate);
 		}
 		meet.setDates(dates);
 		}
 		
+		int col = meet.getEnd() - meet.getStart();
+		col = (int)(60 / meet.getGap()) * col;
+		int[] checkArray = new int[col];
 		
+		meet.setCheckArray(checkArray);
 		meet.setCreated(LocalDateTime.now());
 
 		

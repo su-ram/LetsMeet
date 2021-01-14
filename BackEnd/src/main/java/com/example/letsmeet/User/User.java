@@ -17,6 +17,7 @@ public class User {
 	private String userId;
 	private String userPass;
 	private String meetId;
+	private int[][] userTimes;
 	
 	public static boolean checkUser(UserInfo userInfo) {
 		
