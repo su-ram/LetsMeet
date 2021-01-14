@@ -12,8 +12,8 @@ export const getBool = (str) => {
 }
 
 const setStartAhead = (start, end) => {
-	let s = [start[0], start[1]];
-	let e = [end[0], end[1]];
+	let s = [Number(start[0]), Number(start[1])];
+	let e = [Number(end[0]), Number(end[1])];
 
 	if(s[0] > e[0]){
 		let tmp = s[0];
@@ -61,7 +61,7 @@ export const showDragResult = async (bool, type, start, end) => {
 	if(type)
 		table_type = "rc";
 
-	await console.log("showDragResult: "+ table_type + " " + bool+"("+start[0]+","+start[1]+")~("+end[0]+","+end[1]+")");
+	await console.log("showDragResult: "+ table_type + " " + bool+"("+startPos[0]+","+startPos[1]+")~("+endPos[0]+","+endPos[1]+")");
 
 	for(let i=startPos[0]; i<=endPos[0]; i++){
 		for(let j=startPos[1]; j<=endPos[1]; j++){
@@ -118,19 +118,21 @@ export const stillDragging = async (bool, start, prev, now) => {
 		if(Math.abs(distcol1)>Math.abs(distcol2)){
 			// 열이 더 작아졌으면
 			if(distcol1<0)
-				makeOrignal([Number(start[0]), Number(now[1])-1], prev);
+				await makeOrignal([Number(start[0]), Number(now[1])-1], prev);
 			else
-				makeOrignal([Number(start[0]), Number(now[1])+1], prev);
+				await makeOrignal([Number(start[0]), Number(now[1])+1], prev);
 		}
 	}else{ 
 		// 행이 더 작아졌으면
-		await showDragResult(bool, false, start, now);
-		makeOrignal([Number(now[0])+1, Number(start[1])], prev);
+		if(distrow1<0)
+			await makeOrignal([Number(now[0])-1, Number(start[1])], prev);
+		else
+			await makeOrignal([Number(now[0])+1, Number(start[1])], prev);
 		if(Math.abs(distcol1)>Math.abs(distcol2)){	// 둘다 작으면
 			if(distrow1<0)
-				makeOrignal([Number(now[0])-1, Number(start[1])], prev);
+				await makeOrignal(prev, [Number(now[0])-1, Number(now[1])-1]);
 			else
-				makeOrignal([Number(now[0])+1, Number(start[1])], prev);
+				await makeOrignal(prev, [Number(now[0])+1, Number(now[1])+1]);
 		}
 	}
 }

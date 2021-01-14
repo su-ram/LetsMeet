@@ -130,14 +130,13 @@
 	z-index: 1;
 	color: transparent!important;
 	background-color: transparent!important;
-	border : 0!important;
 	left: 0;
 	position: absolute;
 	top: 0;
 	& *{
 		color: transparent!important;
 		background-color: transparent!important;
-		border : 0;
+		border-color: transparent!important;
 	}
 	.still-body-mine{
 		&.selected{
