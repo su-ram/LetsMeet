@@ -1,0 +1,194 @@
+.create-cont {
+  display: flex;
+  flex-direction: column;
+  @media screen and (min-width: 768px) {
+    margin: 60px 0;
+  }
+  .create-cont-title {
+    font-size: 20px;
+    margin: 30px 0;
+    @media screen and (min-width: 768px) {
+      h2 {
+        font-size: 50px;
+      }
+    }
+  }
+  .setting {
+    @media screen and (min-width: 768px) {
+      display: flex;
+      flex-direction: row;
+      justify-content: space-between;
+    }
+    .rdrCalendarWrapper {
+      color: #000000;
+      font-size: 12px;
+      width: 100%;
+      @media screen and (min-width: 768px) {
+        width: 50%;
+      }
+    }
+    .rdrDateDisplay {
+      margin: 0 auto;
+      width: 27.5em;
+    }
+    .rdrDateDisplayWrapper {
+      background-color: white;
+    }
+    .rdrDateInput {
+      position: relative;
+    }
+    .rdrNextPrevButton {
+      display: block;
+      width: 30px;
+      height: 30px;
+      margin: 30px;
+      background: white;
+      border: 1px solid #c5c5c5;
+      border-radius: 4px;
+      border-width: 1.4px;
+      box-shadow: 0px 2px 3px #0000000d;
+    }
+    .rdrMonthPicker {
+      select {
+        color: #2699fb;
+        font-weight: bold;
+      }
+    }
+    .rdrYearPicker {
+      select {
+        color: #2699fb;
+        font-weight: bold;
+      }
+    }
+    .rdrMonthAndYearPickers select:hover {
+      background-color: white;
+    }
+    .rdrMonthAndYearPickers select {
+      -moz-appearance: none;
+      appearance: none;
+      -webkit-appearance: none;
+      border: 0;
+      background: none;
+      padding: 8px;
+      border-radius: 4px;
+      outline: 0;
+      background-position: right 8px center;
+      cursor: pointer;
+      text-align: center;
+    }
+    .rdrMonth {
+      width: auto;
+      margin: 0 20px;
+    }
+    .rdrWeekDays {
+      display: flex;
+      border: 1.3px solid #cecaca;
+      background-color: #e4f3ff;
+    }
+    .rdrDays {
+      button {
+        border: 1.2px solid #cecaca;
+        height: 5em;
+      }
+    }
+    .create-cont-setting2 {
+      @media screen and (min-width: 768px) {
+        width: 40%;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+      }
+
+      //일정 이름 작성 input
+      .create-name {
+        height: 3em;
+        border: solid;
+        border-color: #85c2ff;
+        margin: 30px auto;
+        text-align: center;
+        font-size: 1.3em;
+        width: 100%;
+      }
+
+      input::placeholder {
+        color: #c5c5c5;
+        font-size: 19px;
+        text-align: center;
+      }
+      input:focus {
+        outline: #85c2ff;
+      }
+      //시간 설정
+      .create-time {
+        display: flex;
+        justify-content: center;
+        margin: 0 0 25px 0;
+        align-items: baseline;
+        .create-time-start {
+          margin: 0 10px;
+          #startTime {
+            width: 100px;
+            height: 30px;
+            padding: 10px;
+            border: solid #737373 1px;
+          }
+        }
+        .create-time-finish {
+          margin: 0 10px;
+          #finishTime {
+            width: 100px;
+            height: 30px;
+            padding: 10px;
+            border: solid #737373 1px;
+          }
+        }
+      }
+      .create-interval {
+        display: flex;
+        justify-content: center;
+        margin: 25px;
+        align-items: baseline;
+        #timeInterval {
+          width: 80px;
+          height: 30px;
+          padding: 10px;
+          border: solid #737373 1px;
+        }
+      }
+      //시간 설정 placeholder text
+      .timeText {
+        top: 15px;
+      }
+      //일정 생성하기 btn
+      .create-plan-btn {
+        @media screen and (min-width: 768px) {
+          margin-right: 0;
+          width: 200px;
+          height: 50px;
+          font-size: 18px;
+        }
+        display: flex;
+        margin: 40px auto;
+        width: 123px;
+        height: 31px;
+        background-color: #2699fb;
+        opacity: 1;
+        border: none;
+        font-size: 13px;
+        justify-content: center;
+        align-items: center;
+        .create-plan-text {
+          color: white;
+          text-decoration-line: none;
+        }
+      }
+      .create-plan-btn:hover {
+        cursor: pointer;
+      }
+      .create-plan-btn:focus {
+        border: none;
+        outline: none;
+      }
+    }
+  }
+}
