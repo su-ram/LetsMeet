@@ -34,11 +34,5 @@ public class User {
 		return mongoTemplate.findOne(query, Meet.class);
 	}
 	
-public static Meet getUser(MongoTemplate mongoTemplate, String Id) {
-		
-		Query query = new Query();
-		query.addCriteria(Criteria.where("meetId").is(meetId));
-		return mongoTemplate.findOne(query, Meet.class);
-	}
 
 }
