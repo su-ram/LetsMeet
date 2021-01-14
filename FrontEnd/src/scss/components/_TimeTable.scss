@@ -67,7 +67,6 @@
 			}
 			.table-body-mine, .table-body-team, .still-body-mine{
 				border:1px solid $gray;
-				cursor: pointer;
 				-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
 				&.midterm{
 					border-bottom: 2px dotted $gray;
@@ -91,6 +90,9 @@
 				&.not-selected{
 					background-color: white;
 				}
+			}
+			.table-body-mine, .still-body-mine{
+				cursor: pointer;
 			}
 		}
 	}

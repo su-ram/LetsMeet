@@ -156,12 +156,12 @@ const TimeTable = (props) => {
 						<Table className="still-table">
 							<TableHead>
 								<TableRow className="timetable-date">
-									<TableCell className="blank date timetable-time-string"><Grid>____</Grid></TableCell>
+									<TableCell className="blank date timetable-time-string"><Grid>&nbsp;&nbsp;&nbsp;</Grid></TableCell>
 									{
 										props.data.dates.map((date, index) => {
 											let clsName = index<cellNum?"visible":"unvisible";
 											return (
-												<TableCell className={clsx("date","cell"+index,clsName)} align="center" key={index}>{getMonthDate(date)}</TableCell>
+												<TableCell className={clsx("date","cell"+index,clsName)} align="center" key={index}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TableCell>
 											);
 										})
 									}
@@ -172,7 +172,7 @@ const TimeTable = (props) => {
 										props.data.dates.map((date, index) => {
 											let clsName = index<cellNum?"visible":"unvisible";
 											return (
-												<TableCell className={clsx("day","cell"+index,clsName)} align="center" key={index}>{getDay(date)}</TableCell>
+												<TableCell className={clsx("day","cell"+index,clsName)} align="center" key={index}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</TableCell>
 											);
 										})
 									}
@@ -196,7 +196,7 @@ const TimeTable = (props) => {
 													let clsName = "still-body-mine";
 													clsName += index2<cellNum?" visible":" unvisible";
 													return (
-														<TableCell key={""+index+index2} id={"stillrc/"+index+"/"+index2} onMouseDown={startDrag} onMouseUp={endDrag} onMouseOver={stillDrag} className={clsx("not-selected","cell"+index2, clsName)}></TableCell>
+														<TableCell key={""+index+index2} id={"stillrc/"+index+"/"+index2} onMouseDown={startDrag} onMouseUp={endDrag} onMouseOver={stillDrag} className={clsx("cell"+index2, clsName)}></TableCell>
 													);
 												})
 											}
