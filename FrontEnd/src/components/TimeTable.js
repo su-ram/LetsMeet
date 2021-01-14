@@ -97,7 +97,7 @@ const TimeTable = (props) => {
 			<Grid className="timetable-with-arrow">
 				{nowCell>4?<ArrowBackIosIcon onClick={prevCell} className="prev-btn"/>:undefined}
 				<TableContainer className="timetable-table-con">
-					<Table className="timetable-table">
+					<Table id={props.type+'table'} className="timetable-table">
 						<TableHead>
 							<TableRow className="timetable-date">
 								<TableCell className="blank date timetable-time-string"><Grid>____</Grid></TableCell>
