@@ -1,5 +1,8 @@
 package com.example.letsmeet.Time;
 
+import java.util.ArrayList;
+import java.util.Stack;
+
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -47,16 +50,132 @@ public class TimeController {
 			
 		}
 		
-		myTime.setTimes(times);
+		
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(user.getUserKey()));
 		
+		
 		Update update = new Update();
-		update.set("times", times);
+		update.set("userTimes", times);
 		
 		mongoTemplate.updateFirst(query, update, "user");
+		
+		updateTotalTable(meet);
+		
+		
+	}
+	
+	public void updateTotalTable(Meet meet) {
+		//한 약속에 참여한 사용자들의 공동 시간표를 업데이트 하는 메소드. 
+		
+		ArrayList<User> users = new ArrayList<User>();
+		int col = meet.getEnd()-meet.getStart();
+		col = (int)(60 / meet.getGap()) * col;
+		int row = meet.getDates().size();
+		int[] totalTable = meet.getCheckArray();
+		int num = meet.getNum();
+		
+		
+		//checkArray : 단순히 해당 시간대에 몇 명이 가능한지 표현함. 1차원 배열
+		//1. 사용자들의 timetable 정보를 불러온다. 
+		Query query = new Query();
+		query.addCriteria(Criteria.where("meetId").is(meet.getMeetId()));
+		users = (ArrayList<User>)mongoTemplate.find(query, User.class);
+		
+		
+		//2. 2차원 배열을 돌면서 계산한다. 
+		
+			
+		for(int i=0; i<col; i++) {
+			
+			int[] value = transferToN(totalTable[i], num, row);
+			
+			
+			
+			for(int j=0; j<row; j++) {
+				
+				for(User user : users) {
+					int[][] userTime = user.getUserTimes();
+					int timeValue = userTime[i][j];
+					
+					if (timeValue != 0) {
+						value[j] += timeValue;
+					}
+				}
+			}
+			
+			//한줄 계산 다 끝남. 
+		
+			int updated = 0;
+			
+			
+			for(int j=0; j<num; j++) {
+				System.out.print(value[j]);
+				updated += Math.pow(num, num-j-1)*(value[j]);
+			}
+			
+			totalTable[i] = updated;
+			
+			
+			
+			
+		}
+		
+		
+		Update update = new Update();
+		update.set("checkArray", totalTable);
+		
+		mongoTemplate.updateFirst(query, update, "meet");
+		
+		
+		//3. N진법으로 표현한다. 여기서 N은 멤버수. 
+		
+		
+		
+		//checUser : 어떤 시간대에 어떤 유저들이 가능한지 표현함. 2차원 배열. 
 		
 		
 		
 	}
+	
+	public int[] transferToN(int value, int n, int row) {
+		
+		
+		int quota = value;
+		int rem = 0; 
+		
+		Stack<Integer> stack = new Stack<>();
+		int[] result = new int[row];
+		
+		while (quota != 0) {
+			
+			rem = quota % n;
+			quota = (int)quota / n;
+			
+			stack.add(rem);
+			
+		}
+		
+		
+			
+			
+		for(int i=0; i<n; i++) {
+			
+			if(!stack.empty()) {
+				
+				result[i] = stack.pop();
+			}else {
+				result[i]= 0;
+			}
+			
+		}
+		
+		
+		
+		
+		
+		
+		return result;
+	}
+	
 }

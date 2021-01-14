@@ -31,7 +31,7 @@ public class JacksonConfig {
         module.addDeserializer(LocalTime.class, new JsonDeserializer<LocalTime>() {
             @Override
             public LocalTime deserialize(JsonParser jsonParser, DeserializationContext deserializationContext) throws IOException {
-                return LocalTime.parse(jsonParser.getValueAsString(), DateTimeFormatter.ofPattern("kk:mm:ss"));
+                return LocalTime.parse(jsonParser.getValueAsString(), DateTimeFormatter.ofPattern("HH:mm"));
             }
         });
 

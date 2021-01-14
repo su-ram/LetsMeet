@@ -31,7 +31,6 @@ public class UserController {
 	private Meet queryMeet;
 	private String message;
 	private HttpStatus status;
-	private Meet resultMeet;
 	private User queryUser;
 	
 	@PostMapping("signin")
@@ -54,6 +53,14 @@ public class UserController {
 				
 			case 1 :
 				
+				//새로운 유저. 
+				int col = (queryMeet.getEnd()-queryMeet.getStart());
+				col = (int)(60 / queryMeet.getGap()) * col;
+				int row = queryMeet.getDates().size();
+				
+				
+				int[][] userTime = new int[col][row];
+				newbie.setUserTimes(userTime);
 				newbie.setUserKey(Math.abs(newbie.hashCode()));
 				mongoTemplate.insert(newbie,"user").hashCode();
 				
@@ -66,6 +73,7 @@ public class UserController {
 				
 				mongoTemplate.updateFirst(query, update, "meet");
 				
+				userInfo.setUser(newbie);
 				message = "아이디 생성 완료.";
 				status = HttpStatus.CREATED;
 				break;
