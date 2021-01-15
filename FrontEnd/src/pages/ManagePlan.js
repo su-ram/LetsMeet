@@ -27,7 +27,7 @@ const getData = (url) => {
 
 const ManagePlan = ({match}) => {
 	const [data, setData] = useState(getData(match.url));
-	const [isloggedin, setloggedin] = useState(true);
+	const [isloggedin, setloggedin] = useState(false);
 	const [logininput, setlogininput] = useState({
 		id: '',
 		pw: '',
@@ -40,6 +40,32 @@ const ManagePlan = ({match}) => {
 	  [name]: value
 	});
 	  };
+	const onLogin = (e) => {
+		if(id==='' || pw===''){
+			alert('닉네임과 패스워드를 입력해주세요');
+		}
+		else{
+			/*axios.post(`${match.url}/user/signin`, logininput)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+            const status = err?.response?.status;
+            console.log(err);
+            if (status === undefined) {
+                console.dir("데이터를 불러오던 중 예기치 못한 예외가 발생하였습니다.\n" + JSON.stringify(err));
+            }
+            else if (status === 400) {
+                alert("");
+                console.dir("400에러");
+            }
+            else if (status === 500) {
+                console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
+            }
+            });*/
+			setloggedin(true);
+		}
+	};
 	return (
 		<Grid container direction="column" className="Manage-page-con">
 			<Header />
@@ -65,14 +91,14 @@ const ManagePlan = ({match}) => {
 									<br></br>
 									<text className="notice">*닉네임과 비밀번호는 현재 일정에만 사용됩니다.</text>
 									<br></br>
-									<button className="btn">로그인</button>
+									<button onClick={onLogin} className="btn">로그인</button>
 							</div>
 					</Grid>}
 					<TimeTable 
 						data = {data}
 						type = "team"
 					/>
-					<Grid container direction="column" justify="flex-start" alignItems="stretch">
+					<Grid container direction="column" justify="flex-start" alignItems="stretch">						
 						<Top3></Top3>
 						<Yookha></Yookha>
 						<Comment></Comment>

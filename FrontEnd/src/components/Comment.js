@@ -1,7 +1,34 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Commentitem from './Commentitem';
 
+
 const Comment = () => {
+    /*const [data, setdata] = useState([]);
+    useEffect(({url}) => {
+        console.log(url);
+        const fetchComments = async () => {
+          const res = await axios(
+            `${match.url}/comment`
+          ).then((res)=>{
+            console.dir(res);
+            setdata(res.data);
+          })
+          .catch((err)=>{ 
+            console.dir(err);
+            const status = err?.response?.status;
+            if (status === undefined) {
+              console.dir("데이터를 불러오던 중 예기치 못한 예외가 발생하였습니다.\n" + JSON.stringify(err));
+            }
+            else if (status === 400) {
+              console.dir("400에러");
+            }
+            else if (status === 500) {
+              console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
+            }
+          });
+        };
+        fetchComments();
+      }, []);*/
     const users = [
         {
         'id': 1,
