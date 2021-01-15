@@ -18,7 +18,7 @@ const Top3 = () => {
         ]
 return (
     <div>
-         <div className="title">TOP 3 <img className="img" src="/img/Top3.png"></img></div>
+         <div className="title">TOP 3 <img className="img" src="/img/Top3.png" alt="top3"></img></div>
         <Grid
         container
         direction="row"

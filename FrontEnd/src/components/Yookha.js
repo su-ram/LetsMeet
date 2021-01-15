@@ -20,7 +20,7 @@ const Yookha=()=> {
       };
   return (
     <div>
-    <text className="title">육하원칙 <img className="img" src="/img/hand.png"></img> </text>
+    <text className="title">육하원칙 <img className="img" src="/img/hand.png" alt="yookha"></img> </text>
     <br/>
     <br/>
     <div className="flex-container">

@@ -26,7 +26,7 @@ const Comment = () => {
         ]
     return(
         <div>
-    <text className="title">댓글 <img className="img" src="/img/comment.png"></img></text>
+    <text className="title">댓글 <img className="img" src="/img/comment.png" alt="comment"></img></text>
     <div className="commentbox">
     <br/>
     <table className="table">
