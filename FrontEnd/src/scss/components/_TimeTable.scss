@@ -19,12 +19,12 @@
 			}
 		}
 	}
-	.timetable-table{
+	.timetable-table, .still-table{
 		width: 100%;
 		tr{
-			height: 20px;
+			height: 30px;
 			@media screen and (min-width: 768px){
-				height: 30px;
+				height: 35px;
 			}
 		}
 		.day, .date, .table-body, .timetable-time-string{
@@ -65,11 +65,9 @@
 					}
 				}
 			}
-			.table-body-mine, .table-body-team{
+			.table-body-mine, .table-body-team, .still-body-mine{
 				border:1px solid $gray;
-				&.not-selected{
-					background-color: $light-pink;
-				}
+				-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
 				&.midterm{
 					border-bottom: 2px dotted $gray;
 				}
@@ -77,10 +75,24 @@
 					border-top: none;
 				}
 			}
+			.table-body-mine{
+				&.selected{
+					background-color: $mid-color;
+				}
+				&.not-selected{
+					background-color: $light-pink;
+				}
+			}
 			.table-body-team{
+				&.selected{
+					background-color: blue;
+				}
 				&.not-selected{
 					background-color: white;
 				}
+			}
+			.table-body-mine, .still-body-mine{
+				cursor: pointer;
 			}
 		}
 	}
@@ -110,6 +122,30 @@
 		margin-top: 30px;
 		@media screen and (min-width: 768px){
 			display: none;
+		}
+	}
+}
+
+/* still table */
+
+.still-table{
+	z-index: 1;
+	color: transparent!important;
+	background-color: transparent!important;
+	left: 0;
+	position: absolute;
+	top: 0;
+	& *{
+		color: transparent!important;
+		background-color: transparent!important;
+		border-color: transparent!important;
+	}
+	.still-body-mine{
+		&.selected{
+			background-color: $mid-color!important;
+		}
+		&.not-selected{
+			background-color: $light-pink!important;
 		}
 	}
 }
