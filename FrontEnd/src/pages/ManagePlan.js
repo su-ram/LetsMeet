@@ -2,6 +2,7 @@ import React, {useState } from "react";
 import { Header, TimeTable, Comment, Yookha, Top3, Login } from "../components";
 import { Grid } from '@material-ui/core'
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
+import axios from 'axios';
 
 const getData = (url) => {
 	// 원래 url을 이용해서 해당 정보 받아오기
@@ -43,7 +44,7 @@ const ManagePlan = ({match}) => {
 						data = {data}
 						type = "team"
 					/>
-					<Grid justify="center" alignItems="flex-start">
+					<Grid container direction="column" justify="flex-start" alignItems="stretch">
 						<Top3></Top3>
 						<Yookha></Yookha>
 						<Comment></Comment>
