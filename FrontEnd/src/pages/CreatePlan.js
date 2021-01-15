@@ -30,7 +30,24 @@ export default class CreatePlan extends React.PureComponent {
       startDate: ranges["selection"].startDate,
       endDate: ranges["selection"].endDate,
       key: ranges["selection"].key,
-      dates: [ranges["selection"].startDate, ranges["selection"].endDate]
+    })
+    //getMonth
+    let startGetMonth = ranges["selection"].startDate.getMonth();
+    startGetMonth = startGetMonth<9?'0'+(startGetMonth+1):startGetMonth+1;
+    let endGetMonth = ranges["selection"].endDate.getMonth();
+    endGetMonth = endGetMonth<9?'0'+(endGetMonth+1):endGetMonth+1;
+    //getDate
+    let startGetDate = ranges["selection"].startDate.getDate();
+    startGetDate = startGetDate<10?'0'+startGetDate:startGetDate;
+    let endGetDate = ranges["selection"].endDate.getDate();
+    endGetDate = endGetDate<10?'0'+endGetDate:endGetDate;
+    //getYear
+    let startGetYear = ranges["selection"].startDate.getFullYear();
+    let s_startGetYear = startGetYear.toString();
+    let endGetYear = ranges["selection"].endDate.getFullYear();
+    let s_endGetYear = endGetYear.toString();
+    this.setState({
+      dates: [s_startGetYear+startGetMonth+startGetDate, s_endGetYear+startGetMonth+endGetDate]
     })
   };
 
