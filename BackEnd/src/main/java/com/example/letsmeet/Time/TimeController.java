@@ -74,13 +74,14 @@ public class TimeController {
 		int row = meet.getDates().size();
 		int[] totalTable = meet.getCheckArray();
 		int num = meet.getNum();
+		int[][] checkUsers = new int[col][row];
 		
 		
 		//checkArray : 단순히 해당 시간대에 몇 명이 가능한지 표현함. 1차원 배열
 		//1. 사용자들의 timetable 정보를 불러온다. 
 		Query query = new Query();
 		query.addCriteria(Criteria.where("meetId").is(meet.getMeetId()));
-		users = (ArrayList<User>)mongoTemplate.find(query, User.class);
+		users = (ArrayList<User>)mongoTemplate.find(query, User.class); //순서 중요. 
 		
 		
 		//2. 2차원 배열을 돌면서 계산한다. 
@@ -94,14 +95,29 @@ public class TimeController {
 			
 			for(int j=0; j<row; j++) {
 				
+				String check = new String();
+				
 				for(User user : users) {
 					int[][] userTime = user.getUserTimes();
 					int timeValue = userTime[i][j];
 					
 					if (timeValue != 0) {
 						value[j] += timeValue;
+						check += '1';
+					}else {
+						check += '0';
 					}
+					
+					
 				}
+				
+				
+				int checkUser = Integer.parseInt(check, 2);
+				checkUsers[i][j] = checkUser;
+				
+				
+				
+				
 			}
 			
 			//한줄 계산 다 끝남. 
@@ -110,7 +126,7 @@ public class TimeController {
 			
 			
 			for(int j=0; j<num; j++) {
-				System.out.print(value[j]);
+				
 				updated += Math.pow(num, num-j-1)*(value[j]);
 			}
 			
@@ -124,6 +140,7 @@ public class TimeController {
 		
 		Update update = new Update();
 		update.set("checkArray", totalTable);
+		update.set("checkUser", checkUsers);
 		
 		mongoTemplate.updateFirst(query, update, "meet");
 		
@@ -139,7 +156,7 @@ public class TimeController {
 	}
 	
 	public int[] transferToN(int value, int n, int row) {
-		
+		//자연수를 n진수로 변환하는 메소드.
 		
 		int quota = value;
 		int rem = 0; 
