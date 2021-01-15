@@ -30,11 +30,11 @@ const Comment = () => {
     <div className="commentbox">
     <br/>
     <table className="table">
-        <tr>
+        <tbody>
         {users.map(user => {
         return <Commentitem key={user.id} id={user.id} name={user.name} description={user.description} />
         })}
-        </tr>
+        </tbody>
     </table>
     <br/>
     <input className="commentinput" placeholder="로그인 후 댓글을 적어주세요">
