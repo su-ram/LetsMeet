@@ -40,12 +40,12 @@ public class MeetController {
 	public ResponseEntity<String> newMeet(@RequestBody Meet meet) {
 		//일정 생성. 
 		
-		ArrayList<LocalDate> dates = meet.getDates();
 		
-		if(dates.size() > 1) {
-		LocalDate startDate = dates.get(0);
-		LocalDate endDate = dates.get(1);
-		dates = new ArrayList<LocalDate>();
+		
+			
+		LocalDate startDate = meet.getDates().get(0);
+		LocalDate endDate = meet.getDates().get(1);
+		ArrayList<LocalDate> dates = new ArrayList<LocalDate>();
 		LocalDate curDate = startDate;
 		
 		System.out.println(startDate.toString()+" "+endDate.toString());
@@ -53,17 +53,19 @@ public class MeetController {
 		while (!curDate.equals(endDate.plusDays(1))) {
 			dates.add(curDate);
 			curDate=curDate.plusDays(1);
-			//System.out.println(curDate);
+			
 		}
 		meet.setDates(dates);
-		}
+		
+		
+		
 		
 		int col = meet.getEnd() - meet.getStart();
 		col = (int)(60 / meet.getGap()) * col;
 		int[] checkArray = new int[col];
 		
 		meet.setCheckArray(checkArray);
-		meet.setCreated(LocalDateTime.now());
+		meet.setCreated(LocalDateTime.now().plusHours(9));
 
 		
 		String newUrl = Hashing.sha256()

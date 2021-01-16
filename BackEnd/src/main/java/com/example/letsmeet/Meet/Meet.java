@@ -29,6 +29,6 @@ public class Meet {
 	private ArrayList<Integer> users = new ArrayList<Integer>();
 	
 	private int[] checkArray;
-	private int[][] checkUsers;
+	private int[][] checkUser;
 
 }
