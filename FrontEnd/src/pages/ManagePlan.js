@@ -1,10 +1,13 @@
 import React, {useState } from "react";
 import html2canvas from 'html2canvas';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {CLIENT_ID} from '../config';
+import axios from 'axios';
+
 import { Header, TimeTable, Comment, Yookha, Top3, Login, ShareModal } from "../components";
+
 import { Grid, Button } from '@material-ui/core';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
-import axios from 'axios';
 
 const getData = (url) => {
 	// 원래 url을 이용해서 해당 정보 받아오기
@@ -93,7 +96,9 @@ const ManagePlan = ({match}) => {
 						<Comment></Comment>
 						<Grid className="btn-con">
 							<Button variant="contained" color="primary" onClick={copyDOM}>카카오톡 공유하기</Button>
-							<Button variant="contained" color="primary" onClick={copyURL}>링크 복사하기</Button>
+							<CopyToClipboard text={window.location.href} onCopy={() => window.alert("링크가 복사되었습니다.")}>
+								<Button variant="contained" color="primary" onClick={copyURL}>링크 복사하기</Button>
+							</CopyToClipboard>
 						</Grid>
 					</Grid>
 					<ShareModal 
