@@ -1,6 +1,7 @@
 package com.example.letsmeet.User;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -34,7 +35,7 @@ public class UserController {
 	private User queryUser;
 	
 	@PostMapping("signin")
-	public ResponseEntity<?> newUser(@RequestBody User newbie) {
+	public ResponseEntity<?> newUser(HttpSession session, @RequestBody User newbie) {
 		
 		//유저 검증. 
 		
@@ -83,7 +84,8 @@ public class UserController {
 			case 3 :
 				
 				Meet meet = newbie.getMeet(mongoTemplate, newbie.getMeetId());
-				message = "로그인 성공";
+				message = session.getId();
+				session.setAttribute("yours", queryUser);
 				status = HttpStatus.OK;
 				userInfo.setUser(queryUser);
 				
