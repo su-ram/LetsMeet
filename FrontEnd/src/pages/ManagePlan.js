@@ -4,7 +4,7 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {CLIENT_ID} from '../config';
 import axios from 'axios';
 
-import { Header, TimeTable, Comment, Yookha, Top3, Login, ShareModal } from "../components";
+import { Header, TimeTable, Comment, Yookha, Top3, ShareModal } from "../components";
 
 import { Grid, Button } from '@material-ui/core';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
@@ -35,7 +35,45 @@ const ManagePlan = ({match}) => {
 	const [isloggedin, setloggedin] = useState(true);
 	const [shareImg, setShareImg] = useState("");
 	const [open, setOpen] = useState(false);
+	const [logininput, setlogininput] = useState({
+		id: '',
+		pw: '',
+	  });
+	const { id, pw } = logininput;
+	const onChange = (e) => {
+		const { value, name } = e.target;
+		setlogininput({
+	  ...logininput,
+	  [name]: value
+	});
+	  };
 
+	  const onLogin = (e) => {
+		if(id==='' || pw===''){
+			alert('닉네임과 패스워드를 입력해주세요');
+		}
+		else{
+			/*axios.post(`${match.url}/user/signin`, logininput)
+            .then((res) => {
+                console.log(res);
+            })
+            .catch((err) => {
+            const status = err?.response?.status;
+            console.log(err);
+            if (status === undefined) {
+                console.dir("데이터를 불러오던 중 예기치 못한 예외가 발생하였습니다.\n" + JSON.stringify(err));
+            }
+            else if (status === 400) {
+                alert("");
+                console.dir("400에러");
+            }
+            else if (status === 500) {
+                console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
+            }
+            });*/
+			setloggedin(true);
+		}
+	};
 	const copyDOM = async () => {
 		window.scrollTo(0,0);
 
@@ -84,7 +122,23 @@ const ManagePlan = ({match}) => {
 						data = {data}
 						type = "mine"
 					/>: <Grid container direction="row" justify="center" alignItems="center">
-						<Login />
+							<div className="login-flex-container">
+								<text className="title"><img className="img" src="/img/alarm.png"></img>    비주얼팀 디자인 회의</text>
+									<br/><br/>
+									<div>
+									<text className="nickname">닉네임 : </text>
+									<input className="logininput" name="id" onChange={onChange} value={id} />
+									</div>
+									<br></br>
+									<div>
+									<text className="nickname">비밀번호 : </text>
+									<input className="logininput" name="pw" onChange={onChange} value={pw} />
+									</div>
+									<br></br>
+									<text className="notice">*닉네임과 비밀번호는 현재 일정에만 사용됩니다.</text>
+									<br></br>
+									<button onClick={onLogin} className="btn">로그인</button>
+							</div>
 					</Grid>}
 					<TimeTable 
 						data = {data}
