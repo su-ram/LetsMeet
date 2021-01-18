@@ -91,8 +91,10 @@ const ManagePlan = ({match}) => {
 						<Top3></Top3>
 						<Yookha></Yookha>
 						<Comment></Comment>
-						<Button onClick={copyDOM}>카카오톡 공유하기</Button>
-						<Button onClick={copyURL}>링크 복사하기</Button>
+						<Grid className="btn-con">
+							<Button variant="contained" color="primary" onClick={copyDOM}>카카오톡 공유하기</Button>
+							<Button variant="contained" color="primary" onClick={copyURL}>링크 복사하기</Button>
+						</Grid>
 					</Grid>
 					<ShareModal 
 						shareImg = {shareImg}

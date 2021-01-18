@@ -31,5 +31,25 @@
 				width: 30%;
 			}
 		}
+		.btn-con{
+			margin-top: 22px;
+			display: flex;
+			width: 100%;
+			justify-content: space-around;
+		}
+	}
+}
+
+.share-modal{
+	.share-img-con{
+		display: flex;
+		flex-direction: column;
+		align-items: flex-end;
+		button{
+			margin-right: 5px;
+		}
+	}
+	.share-des{
+		margin-top: 15px;
 	}
 }
