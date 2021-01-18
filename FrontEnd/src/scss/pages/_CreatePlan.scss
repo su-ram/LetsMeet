@@ -9,7 +9,7 @@
     margin: 30px 0;
     @media screen and (min-width: 768px) {
       h2 {
-        font-size: 50px;
+        font-size: 40px;
       }
     }
   }
@@ -52,12 +52,20 @@
       select {
         color: #2699fb;
         font-weight: bold;
+        font-size: 1.3rem;
+      }
+      @media screen and (min-width: 768px) {
+        height: 50px;
       }
     }
     .rdrYearPicker {
       select {
         color: #2699fb;
         font-weight: bold;
+        font-size: 1.3rem;
+      }
+      @media screen and (min-width: 768px) {
+        height: 50px;
       }
     }
     .rdrMonthAndYearPickers select:hover {
@@ -78,7 +86,7 @@
     }
     .rdrMonth {
       width: auto;
-      margin: 0 20px;
+      margin: 10px 20px;
     }
     .rdrWeekDays {
       display: flex;
@@ -100,59 +108,108 @@
       }
 
       //일정 이름 작성 input
-      .create-name {
-        height: 3em;
+      input {
+        height: 4.2em;
         border: solid;
         border-color: #85c2ff;
-        margin: 30px auto;
+        margin: 20px 30px;
         text-align: center;
-        font-size: 1.3em;
-        width: 100%;
+        width: 85%;
+        font-size: 17px;
+        @media screen and (min-width: 768px) {
+          height: 5em;
+          margin: 15px 30px;
+        }
+        &::placeholder {
+          color: #c5c5c5;
+          font-size: 22px;
+          text-align: center;
+          font-weight: bold;
+        }
+        &:focus {
+          outline: #85c2ff;
+        }
       }
 
-      input::placeholder {
-        color: #c5c5c5;
-        font-size: 19px;
-        text-align: center;
-      }
-      input:focus {
-        outline: #85c2ff;
-      }
       //시간 설정
       .create-time {
         display: flex;
         justify-content: center;
         margin: 0 0 25px 0;
         align-items: baseline;
+        margin-left: 2.5px;
         .create-time-start {
-          margin: 0 10px;
-          #startTime {
-            width: 100px;
-            height: 30px;
+          margin: 25px 15px;
+          @media screen and (min-width: 768px) {
+            margin: 0px 20px;
+          }
+          #start {
+            width: 121px;
+            height: 20px;
             padding: 10px;
-            border: solid #737373 1px;
+            border: 1.7px solid #737373;
+            font-size: 15px;
+            font-weight: 750;
+            @media screen and (min-width: 768px) {
+              height: 22px;
+            }
           }
         }
         .create-time-finish {
-          margin: 0 10px;
-          #finishTime {
-            width: 100px;
-            height: 30px;
+          margin: 25px 15px;
+          @media screen and (min-width: 768px) {
+            margin: 0px 20px;
+          }
+          #end {
+            width: 120px;
+            height: 20px;
             padding: 10px;
-            border: solid #737373 1px;
+            border: 1.7px solid #737373;
+            font-size: 15px;
+            font-weight: 750;
+            @media screen and (min-width: 768px) {
+              height: 22px;
+            }
           }
         }
+        .MuiInput-underline:after {
+          left: 0;
+          right: 0;
+          bottom: 0;
+          content: "";
+          position: absolute;
+          transform: scaleX(0);
+          transition: transform 200ms cubic-bezier(0, 0, 0.2, 1) 0ms;
+          border-bottom: 2px solid #737373;
+          pointer-events: none;
+        }
       }
-      .create-interval {
+      .MuiSvgIcon-root {
+        width: 42px;
+        height: 42px;
+        margin-top: -9px;
+        background-color: #2699fb;
+        color: white;
+        @media screen and (min-width: 768px) {
+          height: 44px;
+          margin-top: -10px;
+        }
+      }
+      .create-gap {
         display: flex;
         justify-content: center;
-        margin: 25px;
+        margin-top: -18px;
         align-items: baseline;
-        #timeInterval {
-          width: 80px;
-          height: 30px;
+        #gap {
+          width: 100px;
+          height: 20px;
           padding: 10px;
-          border: solid #737373 1px;
+          border: 1.7px solid #737373;
+          font-size: 15px;
+          font-weight: 750;
+          @media screen and (min-width: 768px) {
+            height: 22px;
+          }
         }
       }
       //시간 설정 placeholder text
@@ -160,34 +217,48 @@
         top: 15px;
       }
       //일정 생성하기 btn
+      
       .create-plan-btn {
         @media screen and (min-width: 768px) {
           margin-right: 0;
-          width: 200px;
-          height: 50px;
-          font-size: 18px;
+          width: 180px;
+          height: 47px;
+          font-size: 20px;
         }
         display: flex;
-        margin: 40px auto;
-        width: 123px;
-        height: 31px;
+        margin: 50px auto;
+        width: 126px;
+        height: 42px;
         background-color: #2699fb;
         opacity: 1;
         border: none;
-        font-size: 13px;
+        font-size: 15px;
         justify-content: center;
         align-items: center;
-        .create-plan-text {
+        /*.create-plan-btn {
           color: white;
           text-decoration-line: none;
         }
+        &:hover {
+          cursor: pointer;
+        }
+        &:focus {
+          border: none;
+          outline: none;
+        }*/
       }
-      .create-plan-btn:hover {
-        cursor: pointer;
-      }
-      .create-plan-btn:focus {
-        border: none;
-        outline: none;
+      .MuiButton-root {
+        color: white;
+        padding: 6px 16px;
+        min-width: 64px;
+        box-sizing: border-box;
+        transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        font-weight: 500;
+        line-height: 1.75;
+        border-radius: 0px;
+        letter-spacing: 0.02857em;
+        text-transform: uppercase;
       }
     }
   }
