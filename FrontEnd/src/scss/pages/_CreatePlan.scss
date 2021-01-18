@@ -108,28 +108,29 @@
       }
 
       //일정 이름 작성 input
-      .create-name {
+      input {
         height: 4.2em;
         border: solid;
         border-color: #85c2ff;
         margin: 20px 30px;
         text-align: center;
         width: 85%;
+        font-size: 17px;
         @media screen and (min-width: 768px) {
           height: 5em;
           margin: 15px 30px;
         }
+        &::placeholder {
+          color: #c5c5c5;
+          font-size: 22px;
+          text-align: center;
+          font-weight: bold;
+        }
+        &:focus {
+          outline: #85c2ff;
+        }
       }
 
-      input::placeholder {
-        color: #c5c5c5;
-        font-size: 22px;
-        text-align: center;
-        font-weight: bold;
-      }
-      input:focus {
-        outline: #85c2ff;
-      }
       //시간 설정
       .create-time {
         display: flex;
@@ -216,6 +217,7 @@
         top: 15px;
       }
       //일정 생성하기 btn
+      
       .create-plan-btn {
         @media screen and (min-width: 768px) {
           margin-right: 0;
@@ -233,17 +235,30 @@
         font-size: 15px;
         justify-content: center;
         align-items: center;
-        .create-plan-text {
+        /*.create-plan-btn {
           color: white;
           text-decoration-line: none;
         }
+        &:hover {
+          cursor: pointer;
+        }
+        &:focus {
+          border: none;
+          outline: none;
+        }*/
       }
-      .create-plan-btn:hover {
-        cursor: pointer;
-      }
-      .create-plan-btn:focus {
-        border: none;
-        outline: none;
+      .MuiButton-root {
+        color: white;
+        padding: 6px 16px;
+        min-width: 64px;
+        box-sizing: border-box;
+        transition: background-color 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,box-shadow 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,border 250ms cubic-bezier(0.4, 0, 0.2, 1) 0ms;
+        font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+        font-weight: 500;
+        line-height: 1.75;
+        border-radius: 0px;
+        letter-spacing: 0.02857em;
+        text-transform: uppercase;
       }
     }
   }
