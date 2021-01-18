@@ -9,8 +9,6 @@ import {
   TextField,
 } from "@material-ui/core";
 
-const { kakao } = window;
-
 const UserInsert = ({ onInsert, users }) => {
   const [dialogOpen, setdialogOpen] = useState(false);
   const [name, setName] = useState("");
@@ -30,7 +28,8 @@ const UserInsert = ({ onInsert, users }) => {
     setName(e.target.value);
   };
 
-  //----------------------내 위치 받아오기
+  //----------------------내 위치 받아오기----------------------
+
   const handleMyPosition = () => {
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition((position) => {
@@ -55,7 +54,8 @@ const UserInsert = ({ onInsert, users }) => {
     }
   };
 
-  //----------------------검색하기 위한 버튼
+  //----------------------검색하기 위한 버튼----------------------
+
   const handleSubmit = () => {
     console.log("검색기능");
   };

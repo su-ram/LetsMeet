@@ -12,7 +12,8 @@ const PlaceMain = () => {
     }, // sample
   ]); // map()을 이용하려면 배열로 적어주기
 
-  //----------------------user을 UserList에 삽입
+  //----------------------user을 UserList에 삽입----------------------
+
   const nextId = useRef(1);
   const onInsert = useCallback(
     (name, address, ipCoords) => {
