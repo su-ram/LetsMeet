@@ -4,22 +4,22 @@ import { Grid, Button, Modal, Fade } from '@material-ui/core';
 
 const ShareModal = (props) => {
 	const kakaoShare = () => {
+		props &&
 		window.Kakao.Link.sendDefault({
 			objectType: 'feed',
 			content: {
 			  title: "Let's Meet(렛츠 밋)",
 			  description: "팀 일정 결정 및 공유 사이트",
-			  imageUrl:	'https://i.ibb.co/PzQGXjD/shareImg.png',
-				//https://i.ibb.co/bPb0PQy/letsmeet.png
+			  imageUrl:	props.shareImg,
 			  link: {
-				webUrl: 'http://localhost:3000/2',
+				webUrl: window.location.href,
 			  },
 			},
 			buttons: [
 			  {
 				title: '일정 보러 가기',
 				link: {
-				  webUrl: 'http://localhost:3000/2',
+				  webUrl: window.location.href,
 				},
 			  },
 			]
@@ -38,8 +38,14 @@ const ShareModal = (props) => {
 						<h2>이미지 공유</h2>
 						<Button onClick={props.handleClose}>X</Button>
 					</Grid>
-					<img src={props.shareImg} alt="share img"/>
-					<Button className="share-btn" onClick={kakaoShare}>Share</Button>
+					{props.shareImg?
+						<>
+							<img src={props.shareImg} alt="share img"/>
+							<Button className="share-btn" onClick={kakaoShare}>Share</Button>
+						</>
+						:<Grid>이미지를 불러오는 중입니다. 잠시만 기다려주세요!</Grid>
+						}
+					
 				</Grid>
 			</Fade>
 		</Modal>

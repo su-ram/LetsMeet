@@ -1,8 +1,10 @@
 import React, {useState } from "react";
 import html2canvas from 'html2canvas';
+import {CLIENT_ID} from '../config';
 import { Header, TimeTable, Comment, Yookha, Top3, Login, ShareModal } from "../components";
 import { Grid, Button } from '@material-ui/core';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
+import axios from 'axios';
 
 const getData = (url) => {
 	// 원래 url을 이용해서 해당 정보 받아오기
@@ -28,26 +30,45 @@ const getData = (url) => {
 const ManagePlan = ({match}) => {
 	const [data, setData] = useState(getData(match.url));
 	const [isloggedin, setloggedin] = useState(true);
-	const [shareImg, setShareImg] = useState(""); 
+	const [shareImg, setShareImg] = useState("");
 	const [open, setOpen] = useState(false);
 
-	const copyDOM = () => {
+	const copyDOM = async () => {
 		window.scrollTo(0,0);
-		html2canvas(document.getElementById("teamtable")).then( async (canvas) => {
-			await setShareImg(canvas.toDataURL("image/jpg"));
-			setOpen(true);
-			localStorage.setItem("imgCanvas", shareImg);
-		});
-	}
-	const copyURL = () => {
-	};
 
-	const handleOpen = () => {
-	  setOpen(true);
-	};
+		let url = "";
+		await html2canvas(document.getElementById("teamtable")).then( async (canvas) => {
+			url = await canvas.toDataURL("image/jpg").split(',')[1];
+			setOpen(true);
+		});
+
+		await uploadImgur(url);
+	}
+
+	const copyURL = () => {
+	}
+
+	const uploadImgur = (url) => {
+		const apiBase = 'https://api.imgur.com/3/image';
+		axios.post(apiBase, {
+			image : url,
+			type : 'base64'
+		}, {
+			headers: {
+				Authorization: 'Client-ID ' + CLIENT_ID
+			}
+		})
+		.then(res => {
+			setShareImg(res.data.data.link);
+		})
+		.catch(e => {
+			console.log(e);
+		})
+	}
   
 	const handleClose = () => {
-	  setOpen(false);
+		setOpen(false);
+		setShareImg("");
 	};
 
 	return (
@@ -76,7 +97,6 @@ const ManagePlan = ({match}) => {
 					<ShareModal 
 						shareImg = {shareImg}
 						open = {open}
-						handleOpen = {handleOpen}
 						handleClose = {handleClose}
 					/>
 				</Grid>
