@@ -33,11 +33,15 @@ const ManagePlan = ({match}) => {
 
 	const copyDOM = () => {
 		window.scrollTo(0,0);
-		html2canvas(document.getElementById("teamtable")).then(canvas => {
-			setShareImg(canvas.toDataURL("image/jpg"));
+		html2canvas(document.getElementById("teamtable")).then( async (canvas) => {
+			await setShareImg(canvas.toDataURL("image/jpg"));
 			setOpen(true);
+			localStorage.setItem("imgCanvas", shareImg);
 		});
 	}
+	const copyURL = () => {
+	};
+
 	const handleOpen = () => {
 	  setOpen(true);
 	};
@@ -67,6 +71,7 @@ const ManagePlan = ({match}) => {
 						<Yookha></Yookha>
 						<Comment></Comment>
 						<Button onClick={copyDOM}>카카오톡 공유하기</Button>
+						<Button onClick={copyURL}>링크 복사하기</Button>
 					</Grid>
 					<ShareModal 
 						shareImg = {shareImg}
