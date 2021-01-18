@@ -53,7 +53,7 @@ const PlaceMain = ({ history }) => {
       }
       let longCenter = longSum / users.length;
       let latCenter = latSum / users.length;
-      history.push(`/searchSpot/${longCenter}/${latCenter}`); //경도, 위도 -> queryString으로 데이터 넘겨주기
+      history.push(`/SearchPlace/${longCenter}/${latCenter}`); //경도, 위도 -> queryString으로 데이터 넘겨주기
     } else {
       alert("두 명 이상의 친구가 필요해요!");
     }
