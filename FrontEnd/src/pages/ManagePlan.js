@@ -1,6 +1,12 @@
 import React, {useState } from "react";
-import { Header, TimeTable, Comment, Yookha, Top3, Login } from "../components";
-import { Grid } from '@material-ui/core'
+import html2canvas from 'html2canvas';
+import {CopyToClipboard} from 'react-copy-to-clipboard';
+import {CLIENT_ID} from '../config';
+import axios from 'axios';
+
+import { Header, TimeTable, Comment, Yookha, Top3, Login, ShareModal } from "../components";
+
+import { Grid, Button } from '@material-ui/core';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 
 const getData = (url) => {
@@ -27,6 +33,47 @@ const getData = (url) => {
 const ManagePlan = ({match}) => {
 	const [data, setData] = useState(getData(match.url));
 	const [isloggedin, setloggedin] = useState(true);
+	const [shareImg, setShareImg] = useState("");
+	const [open, setOpen] = useState(false);
+
+	const copyDOM = async () => {
+		window.scrollTo(0,0);
+
+		let url = "";
+		await html2canvas(document.getElementById("teamtable")).then( async (canvas) => {
+			url = await canvas.toDataURL("image/jpg").split(',')[1];
+			setOpen(true);
+		});
+
+		await uploadImgur(url);
+	}
+
+	const copyURL = () => {
+	}
+
+	const uploadImgur = (url) => {
+		const apiBase = 'https://api.imgur.com/3/image';
+		axios.post(apiBase, {
+			image : url,
+			type : 'base64'
+		}, {
+			headers: {
+				Authorization: 'Client-ID ' + CLIENT_ID
+			}
+		})
+		.then(res => {
+			setShareImg(res.data.data.link);
+		})
+		.catch(e => {
+			console.log(e);
+		})
+	}
+  
+	const handleClose = () => {
+		setOpen(false);
+		setShareImg("");
+	};
+
 	return (
 		<Grid container direction="column" className="Manage-page-con">
 			<Header />
@@ -47,7 +94,18 @@ const ManagePlan = ({match}) => {
 						<Top3></Top3>
 						<Yookha></Yookha>
 						<Comment></Comment>
+						<Grid className="btn-con">
+							<Button variant="contained" color="primary" onClick={copyDOM}>카카오톡 공유하기</Button>
+							<CopyToClipboard text={window.location.href} onCopy={() => window.alert("링크가 복사되었습니다.")}>
+								<Button variant="contained" color="primary" onClick={copyURL}>링크 복사하기</Button>
+							</CopyToClipboard>
+						</Grid>
 					</Grid>
+					<ShareModal 
+						shareImg = {shareImg}
+						open = {open}
+						handleClose = {handleClose}
+					/>
 				</Grid>
 				:undefined
 			}

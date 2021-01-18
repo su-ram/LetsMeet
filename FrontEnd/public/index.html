@@ -24,8 +24,13 @@
       work correctly both with client-side routing and a non-root public URL.
       Learn how to configure a non-root public URL by running `npm run build`.
     -->
-    <title>React App</title>
-  </head>
+	<title>React App</title>
+	<script src="https://developers.kakao.com/sdk/js/kakao.js?appkey=ac840cde3dd820d526d4ce50e78ab872&autoload=false"></script>
+	<script>
+        // SDK를 초기화 합니다. 사용할 앱의 JavaScript 키를 설정해 주세요.
+        Kakao.init('ac840cde3dd820d526d4ce50e78ab872');
+    </script>
+</head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
     <div id="root"></div>
