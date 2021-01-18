@@ -5,11 +5,12 @@ import UserInsert from "../components/UserInsert";
 
 const PlaceMain = () => {
   const [users, setUsers] = useState([
-    {
-      id: 1,
-      name: "소정",
-      address: "동국대",
-    }, // sample
+    // sample
+    // {
+    //   id: 1,
+    //   name: "소정",
+    //   address: "동국대",
+    // },
   ]); // map()을 이용하려면 배열로 적어주기
 
   //----------------------user을 UserList에 삽입----------------------

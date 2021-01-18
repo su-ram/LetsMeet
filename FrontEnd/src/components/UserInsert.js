@@ -18,6 +18,7 @@ const UserInsert = ({ onInsert, users }) => {
   const [dialogOpen, setdialogOpen] = useState(false);
   const [name, setName] = useState("");
   const [results, setResults] = useState([]);
+  const [address, setAddress] = useState([]);
 
   // 장소 추가 버튼 누르면 Dialog open
   const handleClickOpen = () => {
@@ -109,7 +110,26 @@ const UserInsert = ({ onInsert, users }) => {
   //----------------------유저 이름과 검색한 주소를 UserList에 삽입하기----------------------
 
   const handleAddressChange = (address, e) => {
-    console.log("이름, 주소 UserList에 삽입하기");
+    setAddress(address);
+
+    // 주소-좌표 변환 객체를 생성합니다
+    var geocoder = new kakao.maps.services.Geocoder();
+
+    // 주소로 좌표를 검색합니다
+    geocoder.addressSearch(address.address_name, function (result, status) {
+      const coordsArray = [parseFloat(address.x), parseFloat(address.y)]; // 경도, 위도
+      // 정상적으로 검색이 완료됐으면
+      // if (status === kakao.maps.services.Status.OK) {
+      //   var coords = new kakao.maps.LatLng(result[0].y, result[0].x); // 객체이다. 배열로 변환해주자.
+      // } else {
+      //   alert("주소를 정확히 입력해 주세요!");
+      // }
+      // const coordsArray = Object.entries(coords); // 배열로 변환
+      // console.log(coordsArray);
+      onInsert(name, address.place_name, coordsArray);
+    });
+    setdialogOpen(false);
+    setName("");
   };
 
   return (
@@ -145,6 +165,9 @@ const UserInsert = ({ onInsert, users }) => {
               }
             }}
           />
+          <Button variant="outlined" color="primary" onClick={handleSubmit}>
+            장소검색
+          </Button>
           {/* kakao api 주소 나타내는 영역 */}
           <List component="nav" aria-label="contacts">
             {results.map((address, i) => (
