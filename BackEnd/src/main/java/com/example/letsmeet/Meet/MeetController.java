@@ -6,6 +6,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.core.MongoTemplate;
@@ -79,10 +80,10 @@ public class MeetController {
 	}
 	
 	@GetMapping
-	public ResponseEntity<?> getMyMeet(){
+	public ResponseEntity<?> getMyMeet(HttpSession session){
 		
 		if(userInfo.getUser() == null) {
-			return new ResponseEntity<String>("로그인 해주세요.", HttpStatus.UNAUTHORIZED);
+			return new ResponseEntity<String>(session.getId(), HttpStatus.UNAUTHORIZED);
 		}
 		String meetId = userInfo.getMeetId();
 		query = new Query();
