@@ -1,18 +1,25 @@
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700&display=swap");
 
-html, body, #root{
-	width: 100%;
-	margin: 0;
-	padding: 0;
+html,
+body,
+#root {
+  width: 100%;
+  margin: 0;
+  padding: 0;
 }
-*{
-	font-family: 'Noto Sans KR', sans-serif; // font-weight : 400, 500, 700 있음
-	box-sizing: border-box;
-	position: relative;
+* {
+  font-family: "Noto Sans KR", sans-serif; // font-weight : 400, 500, 700 있음
+  box-sizing: border-box;
+  position: relative;
 }
-a{
-	color: black;
+a {
+  color: black;
 }
-h1, h2, h3, h4, h5, h6{
-	margin: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
 }
