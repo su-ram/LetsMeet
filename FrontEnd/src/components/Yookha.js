@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-
-const Yookha=()=> {
+import axios from 'axios';
+const Yookha=({url})=> {
     const [yookha, setyookha] = useState({
         who: '',
         when: '',
@@ -18,9 +18,50 @@ const Yookha=()=> {
       [name]: value
     });
       };
+
+
+
+      const handlesubmit = (e) => {
+        e.preventDefault();
+        //console.log(text);
+        const headers = {
+          'Access-Control-Allow-Origin': '*',        
+          'Accept': 'application/json',
+          'Content-Type': 'application/x-www-form-urlencoded'
+        }
+      
+        const data = {
+          "who": who,
+          "when": when,
+          "where": where,
+          "why": why,
+          "how": how,
+          "what": what,
+        }
+      
+        axios
+          .post('https://letsmeeet.azurewebsites.net/api/meet/submit', data, headers, { withCredentials: true })
+          .then(function (response) {
+          console.log(response);
+          })
+          .catch(function (error) {
+          console.log(error);
+          const status = error?.response?.status;
+          if (status === undefined) {
+            console.dir(
+            "데이터를 불러오던 중 예기치 못한 예외가 발생하였습니다.\n" +
+              JSON.stringify(error)
+            );
+          } else if (status === 400) {
+            console.dir("400에러");
+          } else if (status === 500) {
+            console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
+          }
+          });
+        };
   return (
     <div>
-    <text className="title">육하원칙 <img className="img" src="/img/hand.png"></img> </text>
+    <text className="title">육하원칙 <img className="img" alt='hand' src="/img/hand.png"></img> </text>
     <br/>
     <br/>
     <div className="flex-container">
