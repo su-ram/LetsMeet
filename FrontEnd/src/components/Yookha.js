@@ -60,10 +60,9 @@ const Yookha=({url})=> {
           });
         };
   return (
-    <div>
+    <div className="yook-ha">
     <text className="title">육하원칙 <img className="img" alt='hand' src="/img/hand.png"></img> </text>
-    <br/>
-    <br/>
+    <button className="btn save">저장</button>
     <div className="flex-container">
         
     <div className="inputbox">
@@ -103,7 +102,6 @@ const Yookha=({url})=> {
     <hr color="lightblue" size="3px" align="left"></hr>
     </div>
     </div>
-    <button className="btn">저장</button>
     <br></br>
     </div>
     

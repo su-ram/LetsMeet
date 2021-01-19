@@ -12,21 +12,14 @@ import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
 const getData = (url) => {
 	// 원래 url을 이용해서 해당 정보 받아오기
 	return ({
-		"title" : "비주얼 팀 회의",
-		"dates" : [
-			new Date("2020/12/14"),
-			new Date("2020/12/15"),
-			new Date("2020/12/16"),
-			new Date("2020/12/17"),
-			new Date("2020/12/18"),
-			new Date("2020/12/19"),
-			new Date("2020/12/20"),
-			new Date("2020/12/21"),
-			new Date("2020/12/22"),
-		],
-		"gap" : 30,
-		"start" : "10:00",
-		"end" : "23:50"
+		"title": "2021 신년 모임",
+		"start": "13:00",
+		"end": "21:00",
+		"gap": 30,
+		"dates": [
+		  "2020-12-31",
+		  "2021-01-03"
+		]
 	})
 }
 
@@ -48,22 +41,16 @@ const ManagePlan = ({match}) => {
 	});
 	  };
 
-	  const onLogin = (e) => {
-		e.preventDefault();
+	const onLogin = (e) => {
 		if(id==='' || pw===''){
 			alert('닉네임과 패스워드를 입력해주세요');
 		}
 		else{
-			const headers = {
-				'Access-Control-Allow-Origin': '*',        
-				'Accept': 'application/json',
-				'Content-Type': 'application/x-www-form-urlencoded'
-			  }
-			  const data = {
+			const data = {
 				"userId": logininput.id,
 				"userPass": logininput.pw,
 				"meetId": window.location.href.split('/')[3]
-			  }
+			}
 			axios.post(`https://letsmeeet.azurewebsites.net/api/user/signin`, data)
             .then((res) => {
 				console.log(res);
@@ -137,23 +124,26 @@ const ManagePlan = ({match}) => {
 					{isloggedin ? <TimeTable 
 						data = {data}
 						type = "mine"
-					/>: <Grid container direction="row" justify="center" alignItems="center">
+					/>: <Grid container direction="row" justify="center" alignItems="center" className="login-con">
 							<div className="login-flex-container">
-								<text className="title"><img className="img" src="/img/alarm.png"></img>    비주얼팀 디자인 회의</text>
-									<br/><br/>
+								<div className="title">
+									<img className="img" src="/img/alarm.png"/>
+									<p>{data.title}</p>
+								</div>
+								<div className="form-con">
 									<div>
-									<text className="nickname">닉네임 : </text>
-									<input className="logininput" name="id" onChange={onChange} value={id} />
+										<text className="nickname">닉네임 : </text>
+										<input className="logininput" name="id" onChange={onChange} value={id} />
 									</div>
-									<br></br>
 									<div>
-									<text className="nickname">비밀번호 : </text>
-									<input className="logininput" name="pw" onChange={onChange} value={pw} />
+										<text className="nickname">비밀번호 : </text>
+										<input className="logininput" name="pw" onChange={onChange} value={pw} />
 									</div>
-									<br></br>
+								</div>
+								<div className="extra-con">
 									<text className="notice">*닉네임과 비밀번호는 현재 일정에만 사용됩니다.</text>
-									<br></br>
 									<button onClick={onLogin} className="btn">로그인</button>
+								</div>
 							</div>
 					</Grid>}
 					<TimeTable 

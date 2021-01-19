@@ -25,6 +25,43 @@
 	}
 	.Manage-contents-con{
 		display: flex;
+		margin-bottom: 3rem;
+		.login-con{
+			padding-right: 3rem;
+			.login-flex-container{
+				display: flex;
+				flex-direction: column;
+				&>*{
+					width: 100%;
+					margin-bottom: 1.5rem;
+				}
+				.title{
+					display: flex;
+					align-items: center;
+					.img{
+						margin-right: 10px;
+					}
+					p{
+						margin: 0;
+					}
+				}
+				.form-con{
+					display: flex;
+					flex-direction: column;
+					&>div{
+						margin-bottom: 1rem;
+					}
+				}
+				.extra-con{
+					display: flex;
+					flex-direction: column;
+					align-items: flex-end;
+					.notice{
+						margin-bottom: 1rem;
+					}
+				}
+			}
+		}
 		&>div{
 			width: 100%;
 			@media screen and (min-width: 768px){

@@ -86,7 +86,12 @@ const Comment = ({match}) => {
 	]
 	return (
 		<div>
-			<text className="title">댓글 <img className="img" src="/img/comment.png"></img></text>
+			<text className="title">
+				댓글
+				<img className="img" src="/img/comment.png"/>
+			</text>
+			
+			<button className="btn save" onChange={onChange} onClick={handlesubmit}>저장</button>
 			<div className="commentbox">
 				<br />
 				<table className="table">
@@ -100,7 +105,6 @@ const Comment = ({match}) => {
 				<input className="commentinput" placeholder="로그인 후 댓글을 적어주세요">
 				</input>
 			</div>
-			<button className="btn" onChange={onChange} onClick={handlesubmit}>저장</button>
 		</div>
 	);
 }
