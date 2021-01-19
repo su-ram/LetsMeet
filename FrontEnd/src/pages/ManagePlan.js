@@ -149,7 +149,7 @@ const ManagePlan = ({match}) => {
 									<br></br>
 									<div>
 									<text className="nickname">비밀번호 : </text>
-									<input className="logininput" name="pw" onChange={onChange} value={pw} />
+									<input className="logininput" name="pw" type="password" onChange={onChange} value={pw} />
 									</div>
 									<br></br>
 									<text className="notice">*닉네임과 비밀번호는 현재 일정에만 사용됩니다.</text>
