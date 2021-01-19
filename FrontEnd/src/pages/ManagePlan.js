@@ -131,8 +131,8 @@ const ManagePlan = ({match}) => {
 	return (
 		<Grid container direction="column" className="Manage-page-con">
 			<Header />
-			<Grid className="Manage-plan-title"><AccessAlarmIcon fontSize="large"/><h2>{data.title}</h2></Grid>	
-			{data?
+			{isloggedin && <Grid className="Manage-plan-title"><AccessAlarmIcon fontSize="large"/><h2>{data.title}</h2></Grid> }
+			{data &&
 				<Grid container direction="row" className="Manage-contents-con">
 					{isloggedin ? <TimeTable 
 						data = {data}
@@ -177,7 +177,6 @@ const ManagePlan = ({match}) => {
 						handleClose = {handleClose}
 					/>
 				</Grid>
-				:undefined
 			}
 		</Grid>
 	);
