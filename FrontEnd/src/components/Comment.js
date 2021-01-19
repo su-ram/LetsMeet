@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import Commentitem from './Commentitem';
 import axios from 'axios';
+import { Button } from '@material-ui/core';
+import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 const Comment = ({match}) => {
 	//const [comments, setcomments] = useState(null);
@@ -91,7 +93,9 @@ const Comment = ({match}) => {
 				<img className="img" src="/img/comment.png"/>
 			</text>
 			
-			<button className="btn save" onChange={onChange} onClick={handlesubmit}>저장</button>
+			<span className="midbtn">
+				<Button variant="contained" color="primary" className="btn save" onChange={onChange} onClick={handlesubmit}>저장</Button>
+			</span>
 			<div className="commentbox">
 				<br />
 				<table className="table">
@@ -102,7 +106,7 @@ const Comment = ({match}) => {
 					</tbody>
 				</table>
 				<br />
-				<input className="commentinput" placeholder="로그인 후 댓글을 적어주세요">
+				<input className="commentinput" onChange={onChange} placeholder="로그인 후 댓글을 적어주세요">
 				</input>
 			</div>
 		</div>

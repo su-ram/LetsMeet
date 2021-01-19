@@ -4,7 +4,8 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {CLIENT_ID} from '../config';
 import axios from 'axios';
 
-import { Header, TimeTable, Comment, Yookha, Top3, ShareModal } from "../components";
+
+import { Header, TimeTable, Comment, Yookha, Top3, ShareModal, Findmidplace } from "../components";
 
 import { Grid, Button } from '@material-ui/core';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
@@ -153,6 +154,9 @@ const ManagePlan = ({match}) => {
 					<Grid container direction="column" justify="flex-start" alignItems="stretch">
 						<Top3></Top3>
 						<Yookha></Yookha>
+						<br></br>
+						<Findmidplace></Findmidplace>
+						<br></br>
 						<Comment></Comment>
 						<Grid className="btn-con">
 							<Button variant="contained" color="primary" onClick={copyDOM}>카카오톡 공유하기</Button>
