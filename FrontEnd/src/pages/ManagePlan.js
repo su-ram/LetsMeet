@@ -32,7 +32,7 @@ const getData = (url) => {
 
 const ManagePlan = ({match}) => {
 	const [data, setData] = useState(getData(match.url));
-	const [isloggedin, setloggedin] = useState(true);
+	const [isloggedin, setloggedin] = useState(false);
 	const [shareImg, setShareImg] = useState("");
 	const [open, setOpen] = useState(false);
 	const [logininput, setlogininput] = useState({
@@ -49,13 +49,24 @@ const ManagePlan = ({match}) => {
 	  };
 
 	  const onLogin = (e) => {
+		e.preventDefault();
 		if(id==='' || pw===''){
 			alert('닉네임과 패스워드를 입력해주세요');
 		}
 		else{
-			/*axios.post(`${match.url}/user/signin`, logininput)
+			const headers = {
+				'Access-Control-Allow-Origin': '*',        
+				'Accept': 'application/json',
+				'Content-Type': 'application/x-www-form-urlencoded'
+			  }
+			  const data = {
+				"userId": logininput.id,
+				"userPass": logininput.pw,
+			  }
+			axios.post(`${match.url}/api/user/signin`, data)
             .then((res) => {
-                console.log(res);
+				console.log(res);
+				setloggedin(true);
             })
             .catch((err) => {
             const status = err?.response?.status;
@@ -70,8 +81,8 @@ const ManagePlan = ({match}) => {
             else if (status === 500) {
                 console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
             }
-            });*/
-			setloggedin(true);
+            });
+			
 		}
 	};
 	const copyDOM = async () => {
@@ -144,7 +155,7 @@ const ManagePlan = ({match}) => {
 						data = {data}
 						type = "team"
 					/>
-					<Grid justify="center" alignItems="flex-start">
+					<Grid container direction="column" justify="flex-start" alignItems="stretch">
 						<Top3></Top3>
 						<Yookha></Yookha>
 						<Comment></Comment>
