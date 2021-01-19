@@ -62,8 +62,9 @@ const ManagePlan = ({match}) => {
 			  const data = {
 				"userId": logininput.id,
 				"userPass": logininput.pw,
+				"meetId": window.location.href.split('/')[3]
 			  }
-			axios.post(`${match.url}/api/user/signin`, data)
+			axios.post(`https://letsmeeet.azurewebsites.net/api/user/signin`, data)
             .then((res) => {
 				console.log(res);
 				setloggedin(true);
@@ -77,6 +78,10 @@ const ManagePlan = ({match}) => {
             else if (status === 400) {
                 alert("");
                 console.dir("400에러");
+            }
+            else if (status === 404) {
+                alert("404");
+                console.dir("404에러");
             }
             else if (status === 500) {
                 console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
