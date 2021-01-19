@@ -19,8 +19,6 @@ const Yookha=({url})=> {
     });
       };
 
-
-
       const handlesubmit = (e) => {
         e.preventDefault();
         //console.log(text);
@@ -40,7 +38,7 @@ const Yookha=({url})=> {
         }
       
         axios
-          .post('https://letsmeeet.azurewebsites.net/api/meet/submit', data, headers, { withCredentials: true })
+          .post('https://letsmeeet.azurewebsites.net/api/meet/sub', data, headers, { withCredentials: true })
           .then(function (response) {
           console.log(response);
           })
@@ -103,7 +101,7 @@ const Yookha=({url})=> {
     <hr color="lightblue" size="3px" align="left"></hr>
     </div>
     </div>
-    <button className="btn">저장</button>
+    <button className="btn" onClick={handlesubmit}>저장</button>
     <br></br>
     </div>
     
