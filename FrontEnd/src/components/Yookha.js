@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import Button from '@material-ui/core/Button';
 const Yookha=({url})=> {
     const [yookha, setyookha] = useState({
         who: '',
@@ -18,8 +19,6 @@ const Yookha=({url})=> {
       [name]: value
     });
       };
-
-
 
       const handlesubmit = (e) => {
         e.preventDefault();
@@ -40,7 +39,7 @@ const Yookha=({url})=> {
         }
       
         axios
-          .post('https://letsmeeet.azurewebsites.net/api/meet/submit', data, headers, { withCredentials: true })
+          .post('https://letsmeeet.azurewebsites.net/api/meet/sub', data, headers, { withCredentials: true })
           .then(function (response) {
           console.log(response);
           })
@@ -65,7 +64,6 @@ const Yookha=({url})=> {
     <br/>
     <br/>
     <div className="flex-container">
-        
     <div className="inputbox">
     <text className="subtitle">누구랑?</text>
     <input className="input" name="who" placeholder="?누구랑" dir="rtl" onChange={onChange} value={who} />
@@ -103,8 +101,10 @@ const Yookha=({url})=> {
     <hr color="lightblue" size="3px" align="left"></hr>
     </div>
     </div>
-    <button className="btn">저장</button>
-    <br></br>
+    <span className="midbtn">
+         <Button variant="contained" color="primary"onClick={handlesubmit} >저장</Button>
+    </span>
+    <br></br><br></br>
     </div>
     
   );

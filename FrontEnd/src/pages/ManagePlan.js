@@ -4,7 +4,8 @@ import {CopyToClipboard} from 'react-copy-to-clipboard';
 import {CLIENT_ID} from '../config';
 import axios from 'axios';
 
-import { Header, TimeTable, Comment, Yookha, Top3, ShareModal } from "../components";
+
+import { Header, TimeTable, Comment, Yookha, Top3, ShareModal, Findmidplace } from "../components";
 
 import { Grid, Button } from '@material-ui/core';
 import AccessAlarmIcon from '@material-ui/icons/AccessAlarm';
@@ -148,12 +149,15 @@ const ManagePlan = ({match}) => {
 									<br></br>
 									<div>
 									<text className="nickname">비밀번호 : </text>
-									<input className="logininput" name="pw" onChange={onChange} value={pw} />
+									<input className="logininput" name="pw" type="password" onChange={onChange} value={pw} />
 									</div>
 									<br></br>
 									<text className="notice">*닉네임과 비밀번호는 현재 일정에만 사용됩니다.</text>
 									<br></br>
-									<button onClick={onLogin} className="btn">로그인</button>
+									<span className="midbtn">
+									<Button onClick={onLogin} variant="contained" color="primary">로그인</Button>
+         							</span>
+									
 							</div>
 					</Grid>}
 					<TimeTable 
@@ -163,6 +167,9 @@ const ManagePlan = ({match}) => {
 					<Grid container direction="column" justify="flex-start" alignItems="stretch">
 						<Top3></Top3>
 						<Yookha></Yookha>
+						<br></br>
+						<Findmidplace></Findmidplace>
+						<br></br>
 						<Comment></Comment>
 						<Grid className="btn-con">
 							<Button variant="contained" color="primary" onClick={copyDOM}>카카오톡 공유하기</Button>
