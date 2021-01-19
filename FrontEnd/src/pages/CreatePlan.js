@@ -13,7 +13,7 @@ export default class CreatePlan extends React.PureComponent {
     super(props);
 
     this.state = {
-      planName: "",
+      title: "",
       start: "",
       end: "",
       gap: "",
@@ -22,6 +22,7 @@ export default class CreatePlan extends React.PureComponent {
       dates: [],
       key: "selection",
     };
+    
   }
 
   onRangeChange = (ranges) => {
@@ -62,21 +63,20 @@ export default class CreatePlan extends React.PureComponent {
     console.log(this.state);
     
     const headers = {
-      'Access-Control-Allow-Origin': '*',        
-      'Accept': 'application/json',
-      'Content-Type': 'application/x-www-form-urlencoded'
+      'Access-Control-Allow-Origin': '*', 
+      'Content-Type': 'application/json'
     }
 
-    const data = {
-      "planName": this.planName,
-      "start": this.start,
-      "end": this.end,
-      "gap": this.gap,
-      "dates": this.dates
+    const datas = {
+      title: this.state.title,
+      start: this.state.start,
+      end: this.state.end,
+      gap: this.state.gap,
+      dates: this.state.dates
     }
-
+    
     axios
-      .post('https://letsmeeet.azurewebsites.net/meet', data, headers, { withCredentials: true })
+      .post(`https://letsmeeet.azurewebsites.net/api/meet`, datas, headers, { withCredentials: true })
       .then(function (response) {
         console.log(response);
       })
@@ -97,7 +97,7 @@ export default class CreatePlan extends React.PureComponent {
   };
 
   render() {
-    const { planName, start, end, gap } = this.state;
+    const { title, start, end, gap } = this.state;
 
     //시간 배열
     const Times = new Array();
@@ -114,7 +114,6 @@ export default class CreatePlan extends React.PureComponent {
 
     return (
       <Grid className="create-cont">
-        <form onSubmit={this.submitHandler}>
           <Header />
           <Grid className="create-cont-title">
             <h2>언제가 좋을까요?🤔</h2>
@@ -133,8 +132,8 @@ export default class CreatePlan extends React.PureComponent {
               <input
                 className="create-name"
                 type="text"
-                name="planName"
-                value={planName}
+                name="title"
+                value={title}
                 onChange={this.changeHandler}
                 placeholder="일정 이름을 작성해주세요."
               />
@@ -197,17 +196,12 @@ export default class CreatePlan extends React.PureComponent {
               </Grid>
               {/* 일정생성 버튼 */}
               <Grid className="create-plan">
-                {/* 소정님, a태그 사용하면 submit 처리가 안돼서 button 사용할게요!
-                <a href="#" className="create-plan-text" type="submit">
-                  일정 생성하기
-                </a>*/}
-                <Button type="submit" className="create-plan-btn">
+                <Button className="create-plan-btn" onClick={this.submitHandler}>
                   일정 생성하기
                 </Button>
               </Grid>
             </Grid>
           </Grid>
-        </form>
       </Grid>
     );
   }
