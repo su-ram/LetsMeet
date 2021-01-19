@@ -1,7 +1,11 @@
 .guide-con {
-  background-color: black;
   justify-content: center;
   align-items: center;
+  display: flex;
+  flex-direction: column;
+  button{
+	  margin: 20px 0;
+  }
 }
 
 .guide-img {

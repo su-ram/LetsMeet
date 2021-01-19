@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import Button from '@material-ui/core/Button';
+import { Button } from '@material-ui/core';
 const Yookha=({url})=> {
     const [yookha, setyookha] = useState({
         who: '',
@@ -59,10 +59,11 @@ const Yookha=({url})=> {
           });
         };
   return (
-    <div>
+    <div className="yook-ha">
     <text className="title">육하원칙 <img className="img" alt='hand' src="/img/hand.png"></img> </text>
-    <br/>
-    <br/>
+    <span className="midbtn">
+         <Button variant="contained" color="primary"onClick={handlesubmit} >저장</Button>
+    </span>
     <div className="flex-container">
     <div className="inputbox">
     <text className="subtitle">누구랑?</text>
@@ -101,10 +102,6 @@ const Yookha=({url})=> {
     <hr color="lightblue" size="3px" align="left"></hr>
     </div>
     </div>
-    <span className="midbtn">
-         <Button variant="contained" color="primary"onClick={handlesubmit} >저장</Button>
-    </span>
-    <br></br><br></br>
     </div>
     
   );

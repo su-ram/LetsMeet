@@ -114,7 +114,7 @@ export const stillDragging = async (bool, start, prev, now) => {
 	const distcol2 = now[1]-start[1];
 
 	if(Math.abs(distrow1)<=Math.abs(distrow2)) {
-		await showDragResult(bool, false, start, now);
+		await showDragResult(bool, false, start, now); // stillrc 수정
 		if(Math.abs(distcol1)>Math.abs(distcol2)){
 			// 열이 더 작아졌으면
 			if(distcol1<0)
@@ -135,4 +135,20 @@ export const stillDragging = async (bool, start, prev, now) => {
 				await makeOrignal(prev, [Number(now[0])+1, Number(now[1])+1]);
 		}
 	}
+}
+
+export const calCheckArray = async (dragState, start, end, checkArray, len) => {
+	console.log("cal");
+	let CA = checkArray;
+	const [startPos, endPos] = await setStartAhead(start, end);
+	for(let i=startPos[0]; i<=endPos[0]; i++){
+		for(let j=startPos[1]; j<=endPos[1]; j++){
+			if(dragState)
+				CA[i] &= ~Math.pow(2, len-j-1);
+			else
+				CA[i] |= Math.pow(2, len-j-1);
+		}
+	}
+	console.log(CA);
+	return CA;
 }

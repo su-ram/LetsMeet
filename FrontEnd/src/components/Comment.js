@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Commentitem from './Commentitem';
 import axios from 'axios';
+import { Button } from '@material-ui/core';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 const Comment = ({match}) => {
@@ -87,7 +88,14 @@ const Comment = ({match}) => {
 	]
 	return (
 		<div>
-			<text className="title">댓글 <img className="img" src="/img/comment.png"></img></text>
+			<text className="title">
+				댓글
+				<img className="img" src="/img/comment.png"/>
+			</text>
+			
+			<span className="midbtn">
+				<Button variant="contained" color="primary" className="btn save" onChange={onChange} onClick={handlesubmit}>저장</Button>
+			</span>
 			<div className="commentbox">
 				<br />
 				<table className="table">

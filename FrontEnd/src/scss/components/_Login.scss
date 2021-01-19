@@ -20,14 +20,17 @@
   font-weight: bold;
 }
 .btn {
-  font-size: 15px;
-  font-weight: bold;
-  float: right;
-  width: 25%;
-  height: 10%;
-  background: #2699fb;
-  color: #ffffff;
-  border: transparent;
+    font-size: 15px;
+    font-weight: bold;
+    background: #2699fb;
+    color: #ffffff;
+    border: transparent;
+	padding: 8px 15px;
+	float: right;
+	cursor: pointer;
+	&:active, &:focus{
+		outline: none;
+	}
 }
 .img {
   max-width: 10%;
