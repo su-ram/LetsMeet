@@ -17,6 +17,7 @@ public class User {
 	private String userId;
 	private String userPass;
 	private String meetId;
+	private int[][] userTimes;
 	
 	public static boolean checkUser(UserInfo userInfo) {
 		
@@ -34,11 +35,5 @@ public class User {
 		return mongoTemplate.findOne(query, Meet.class);
 	}
 	
-public static Meet getUser(MongoTemplate mongoTemplate, String Id) {
-		
-		Query query = new Query();
-		query.addCriteria(Criteria.where("meetId").is(meetId));
-		return mongoTemplate.findOne(query, Meet.class);
-	}
 
 }

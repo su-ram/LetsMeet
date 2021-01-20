@@ -2,7 +2,10 @@ package com.example.letsmeet.Meet;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
@@ -14,13 +17,6 @@ public class Meet {
 	
 	private String meetId;
 	private String title;
-	
-	/*
-	@DateTimeFormat(pattern = "HH:mm")
-	@JsonFormat(pattern = "HH:mm", timezone="Asia/Seoul")
-	private LocalDateTime start;
-	*/
-	@JsonFormat(pattern="HH:mm")
 	private String start, end;
 	private LocalDateTime created;
 	
@@ -31,5 +27,8 @@ public class Meet {
 	
 	private int num =0;
 	private ArrayList<Integer> users = new ArrayList<Integer>();
+	
+	private int[] checkArray;
+	private int[][] checkUser;
 
 }

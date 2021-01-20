@@ -3,6 +3,7 @@ package com.example.letsmeet.User;
 import javax.annotation.Resource;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.FindAndModifyOptions;
 import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
@@ -16,10 +17,11 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.letsmeet.Meet.Meet;
+import com.example.letsmeet.Meet.MeetSub;
 import com.example.letsmeet.Time.UserInfo;
 
 @RestController
-@RequestMapping(value="/user")
+@RequestMapping(value="/api/user")
 public class UserController {
 
 	@Resource
@@ -31,11 +33,10 @@ public class UserController {
 	private Meet queryMeet;
 	private String message;
 	private HttpStatus status;
-	private Meet resultMeet;
 	private User queryUser;
 	
 	@PostMapping("signin")
-	public ResponseEntity<?> newUser(@RequestBody User newbie) {
+	public ResponseEntity<?> signIn(@RequestBody User newbie) {
 		
 		//유저 검증. 
 		
@@ -54,6 +55,14 @@ public class UserController {
 				
 			case 1 :
 				
+				//새로운 유저. 
+				int col = Integer.parseInt(queryMeet.getEnd().substring(0, 2)) - Integer.parseInt(queryMeet.getStart().substring(0,2));				
+				col = (int)(60 / queryMeet.getGap()) * col;
+				int row = queryMeet.getDates().size();
+				
+				
+				int[][] userTime = new int[col][row];
+				newbie.setUserTimes(userTime);
 				newbie.setUserKey(Math.abs(newbie.hashCode()));
 				mongoTemplate.insert(newbie,"user").hashCode();
 				
@@ -63,23 +72,32 @@ public class UserController {
 				Update update = new Update();
 				update.inc("num", 1);
 				update.push("users",newbie.getUserKey());
+				update.push("meetSubInfo.who", newbie.getUserId());
 				
-				mongoTemplate.updateFirst(query, update, "meet");
+				FindAndModifyOptions option = new FindAndModifyOptions();
+				option.returnNew(true);
+
+				Meet result = (Meet)mongoTemplate.findAndModify(query, update, option, Meet.class, "meet");
 				
+				
+				
+				userInfo.setUser(newbie);
 				message = "아이디 생성 완료.";
 				status = HttpStatus.CREATED;
-				break;
+				
+				return new ResponseEntity<Meet>(result, status);
 			
 			
 				
 			case 3 :
 				
 				Meet meet = newbie.getMeet(mongoTemplate, newbie.getMeetId());
-				message = "로그인 성공";
+				message = "로그인 완료";
+				
 				status = HttpStatus.OK;
 				userInfo.setUser(queryUser);
 				
-				break;
+				return new ResponseEntity<Meet>(meet, status);
 		}
 		
 		
@@ -118,6 +136,11 @@ public class UserController {
 		
 		
 		return 3;
+		
+	}
+	
+	public void newUser() {
+		
 		
 	}
 	
