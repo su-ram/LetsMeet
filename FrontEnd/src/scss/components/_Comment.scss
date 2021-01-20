@@ -1,6 +1,17 @@
 /* comment */
 
+.commentinputbox {
+  position: relative;
+}
 
+.commentinputbox .saveicon {
+  position: absolute;
+  top: 10%;
+  margin-left: 90%;
+  z-index: 1;
+  color: #2699fb;
+  font-size: 25px;
+}
 .commentinput {
   border: 1px solid #2699fb;
   width: 100%;
