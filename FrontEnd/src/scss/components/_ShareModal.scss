@@ -1,0 +1,25 @@
+.share-modal{
+    width: 500px;
+	height: auto;
+	margin: 20px auto;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    -ms-overflow-style: none; /* IE and Edge */
+	scrollbar-width: none; /* Firefox */
+	&::-webkit-scrollbar {
+		display: none; /* Chrome, Safari, Opera*/
+	}
+	.modal-con{
+		background-color: white;
+		padding: 30px;
+		img{
+			width: 100%;
+			padding: 20px;
+		}
+		.modal-header{
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+		}
+	}
+}

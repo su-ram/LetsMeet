@@ -8,6 +8,7 @@ const Main = () => {
       <Switch>
         <Route exact path="/Create" component={CreatePlan} />
         <Route exact path="/Place" component={PlaceMain} />
+				<Route exact path="/Guide" component={ Guide }/>
         <Route
           exact
           path="/SearchPlace/:longCenter/:latCenter"

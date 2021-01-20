@@ -1,10 +1,12 @@
 export const getMonthDate = (date) => {
-	return (date.getMonth()+1)+"/"+date.getDate();
+	const d = new Date(date);
+	return (d.getMonth()+1)+"/"+d.getDate();
 }
 
 export const getDay = (date) => {
+	const d = new Date(date);
 	const dayString = ["SUN", "MON", "TUE", "WED", "THU", "FRI", "SAT"];
-	return dayString[date.getDay()];
+	return dayString[d.getDay()];
 }
 
 export const getTimeString = (start, end, gap) => {
