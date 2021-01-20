@@ -17,6 +17,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import javafx.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -187,6 +188,8 @@ public class TimeController {
 		int notation = num+1;
 		int[][] checkUsers = new int[col][row];
 		
+		Map<Pair, Integer> top = new HashMap<Pair, Integer>();
+		
 		
 		
 		//checkArray : 단순히 해당 시간대에 몇 명이 가능한지 표현함. 1차원 배열
@@ -243,11 +246,13 @@ public class TimeController {
 			//한줄 계산 다 끝남. 
 		
 			int updated = 0;
-			
+			Pair pos;
 			
 			for(int j=0; j<row; j++) {
 				
 				updated += Math.pow(notation, row-j-1)*(value[j]);
+				pos = new Pair(i,j);
+				
 				
 				
 			}
