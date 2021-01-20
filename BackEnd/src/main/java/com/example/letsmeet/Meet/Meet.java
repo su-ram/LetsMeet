@@ -17,7 +17,7 @@ public class Meet {
 	
 	private String meetId;
 	private String title;
-	private int start, end;
+	private String start, end;
 	private LocalDateTime created;
 	
 	private int gap;
