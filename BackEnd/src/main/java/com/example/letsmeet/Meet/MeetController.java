@@ -88,15 +88,6 @@ public class MeetController {
 		return new ResponseEntity<>(newUrl,HttpStatus.OK);
 	}
 	
-	@GetMapping(value="/info")
-	public Meet MeetInfo(@RequestParam String id) {
-		
-		Query query = new Query();
-		query.addCriteria(Criteria.where("meetId").is(id));
-		
-		return mongoTemplate.findOne(query, Meet.class, "meet"); 
-	}
-	
 	@GetMapping
 	public ResponseEntity<?> getMyMeet(HttpSession session){
 		
