@@ -94,7 +94,7 @@ public class MeetController {
 		if(userInfo.getUser() == null) {
 			return new ResponseEntity<String>("로그인 필요", HttpStatus.UNAUTHORIZED);
 		}
-		String meetId = userInfo.getMeetId();
+		String meetId = userInfo.getUser().getMeetId();
 		query = new Query();
 		query.addCriteria(Criteria.where("meetId").is(meetId));
 		

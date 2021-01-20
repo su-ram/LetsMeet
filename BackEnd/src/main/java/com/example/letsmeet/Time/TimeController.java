@@ -45,7 +45,7 @@ public class TimeController {
 		
 		User user = userInfo.getUser();
 		
-		Meet meet = user.getMeet(mongoTemplate, user.getMeetId());
+		Meet meet = User.getMeet(mongoTemplate, user.getMeetId());
 		int col = myTime.getCheckArray().length;
 		
 		
@@ -125,11 +125,14 @@ public class TimeController {
 	}
 	
 	@DeleteMapping
-	public void deleteMyTime() {
+	public ResponseEntity<?> deleteMyTime() {
 		
 		User user = userInfo.getUser();
 		
-		Meet myMeet = user.getMeet(mongoTemplate, user.getMeetId());
+		if( user == null ) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		}
+		Meet myMeet = User.getMeet(mongoTemplate, user.getMeetId());
 		
 		int col = myMeet.getCheckArray().length;
 		int row = myMeet.getDates().size();
@@ -144,6 +147,8 @@ public class TimeController {
 		mongoTemplate.findAndReplace(query, user);
 		
 		updateTotalTable(myMeet);
+		
+		return ResponseEntity.ok().build();
 		
 	}
 	
@@ -174,15 +179,12 @@ public class TimeController {
 		//한 약속에 참여한 사용자들의 공동 시간표를 업데이트 하는 메소드. 
 		
 		ArrayList<User> users = new ArrayList<User>();
-		int col = Integer.parseInt(meet.getEnd().split(":")[0]) - Integer.parseInt(meet.getStart().split(":")[1]);		
+		int col = Integer.parseInt(meet.getEnd().split(":")[0]) - Integer.parseInt(meet.getStart().split(":")[0]);		
 		col = (int)(60 / meet.getGap()) * col;
 		int row = meet.getDates().size();
 		int[] totalTable = new int[col];
 		int num = meet.getNum();
 		int notation = num+1;
-		if (num == 1) {
-			notation = 2;
-		}
 		int[][] checkUsers = new int[col][row];
 		
 		
