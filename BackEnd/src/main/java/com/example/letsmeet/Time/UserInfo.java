@@ -32,13 +32,7 @@ public class UserInfo implements Serializable{
 	private ArrayList<LocalDate> dates;
 	private ArrayList<Integer> timetables;
 	
-	public Meet getUserMeet(MongoTemplate mongoTemplate) {
-		
-		Query query = new Query();
-		query.addCriteria(Criteria.where("meetId").is(meetId));
-		
-		return mongoTemplate.findOne(query, Meet.class);
-	}
+	
 	
 	
 
