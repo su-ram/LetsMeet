@@ -4,10 +4,8 @@ export const getBool = (str) => {
 	if(first_cell===null)
 		return null;
 	if(first_cell.classList.contains("not-selected")){
-		console.log("false");
 		return false;
 	}
-	console.log("true");
 	return true;
 }
 
@@ -61,8 +59,6 @@ export const showDragResult = async (bool, type, start, end) => {
 	if(type)
 		table_type = "rc";
 
-	await console.log("showDragResult: "+ table_type + " " + bool+"("+startPos[0]+","+startPos[1]+")~("+endPos[0]+","+endPos[1]+")");
-
 	for(let i=startPos[0]; i<=endPos[0]; i++){
 		for(let j=startPos[1]; j<=endPos[1]; j++){
 			const className = table_type+"/"+i+"/"+j;
@@ -82,9 +78,7 @@ export const showDragResult = async (bool, type, start, end) => {
 
 // 원래 표랑 똑같게 만들기
 export const makeOrignal = async (start, end) => {
-	console.log("makeoriginal"+"("+start[0]+","+start[1]+")~("+end[0]+","+end[1]+")");
 	const [startPos, endPos] = await setStartAhead(start, end);
-	console.log("makeoriginal"+"("+startPos[0]+","+startPos[1]+")~("+endPos[0]+","+endPos[1]+")");
 
 	for(let i=startPos[0]; i<=endPos[0]; i++){
 		for(let j=startPos[1]; j<=endPos[1]; j++){
@@ -107,7 +101,6 @@ export const makeOrignal = async (start, end) => {
 // still 상태일 때 drag 처리
 export const stillDragging = async (bool, start, prev, now) => {
 	// prev보다 now의 좌표가 더 작으면 해당 부분 original로 돌리기
-	console.log("stillDragging");
 	const distrow1 = prev[0]-start[0];
 	const distrow2 = now[0]-start[0];
 	const distcol1 = prev[1]-start[1];
@@ -138,7 +131,6 @@ export const stillDragging = async (bool, start, prev, now) => {
 }
 
 export const calCheckArray = async (dragState, start, end, checkArray, len) => {
-	console.log("cal");
 	let CA = checkArray;
 	const [startPos, endPos] = await setStartAhead(start, end);
 	for(let i=startPos[0]; i<=endPos[0]; i++){
@@ -149,6 +141,5 @@ export const calCheckArray = async (dragState, start, end, checkArray, len) => {
 				CA[i] |= Math.pow(2, len-j-1);
 		}
 	}
-	console.log(CA);
 	return CA;
 }
