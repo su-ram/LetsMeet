@@ -22,19 +22,17 @@ import lombok.Data;
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserInfo implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private User user;
 	private String meetId;
 	private int gap; 
 	private ArrayList<LocalDate> dates;
 	private ArrayList<Integer> timetables;
 	
-	public Meet getUserMeet(MongoTemplate mongoTemplate) {
-		
-		Query query = new Query();
-		query.addCriteria(Criteria.where("meetId").is(meetId));
-		
-		return mongoTemplate.findOne(query, Meet.class);
-	}
+	
 	
 	
 

@@ -1,6 +1,12 @@
 package com.example.letsmeet.Time;
 
+import java.time.LocalDate;
+import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Locale;
+import java.util.Map;
 import java.util.Stack;
 
 import javax.annotation.Resource;
@@ -11,16 +17,21 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.letsmeet.Meet.Meet;
 import com.example.letsmeet.User.User;
 
 @RestController
-@RequestMapping("/time")
+@RequestMapping("/api/time")
 public class TimeController {
 
 	@Resource
@@ -30,12 +41,17 @@ public class TimeController {
 	private MongoTemplate mongoTemplate;
 	
 	@PutMapping
-	public Meet myTime(@RequestBody MyTime myTime) {
+	public ResponseEntity<?> myTime(@RequestBody MyTime myTime) {
 		
 		User user = userInfo.getUser();
 		
 		Meet meet = user.getMeet(mongoTemplate, user.getMeetId());
 		int col = myTime.getCheckArray().length;
+		
+		
+		if(meet.getCheckArray().length != col) {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
+		}
 		int row = meet.getDates().size();
 		int[] checkArray = myTime.getCheckArray();
 		int[][] times = new int[col][row];
@@ -59,19 +75,80 @@ public class TimeController {
 		Update update = new Update();
 		update.set("userTimes", times);
 		
+		HttpStatus status;
+		
 		if(userTimeChanged(queryUser.getUserTimes(),times)) {
 			mongoTemplate.updateFirst(query, update, "user");
-			return updateTotalTable(meet);
-			
+			status = HttpStatus.CREATED;
 		}else {
-			return meet;
+			status = HttpStatus.OK;
 		}
 		
+		return new ResponseEntity<Meet>(updateTotalTable(meet), status);
+
 		
+	}
+
+	@GetMapping
+	@ResponseBody
+	public Map possibleTime() {
+		
+		Map possibleTimeInfo = new HashMap<String, Object>();
+		Meet meet = userInfo.getUser().getMeet(mongoTemplate, userInfo.getUser().getMeetId());
+		
+		int startTime = Integer.parseInt(meet.getStart().substring(0, 2));
+		int endTime = Integer.parseInt(meet.getEnd().substring(0, 2));
+
+		possibleTimeInfo.put("startTime", startTime);
+		possibleTimeInfo.put("endTime", endTime);
+		
+		LocalDate startDate = meet.getDates().get(0);
+		int length = meet.getDates().size();
+		LocalDate endDate = meet.getDates().get(length - 1);
+		
+		possibleTimeInfo.put("startDate", startDate);
+		possibleTimeInfo.put("endDate", endDate);
+		
+		ArrayList<LocalDate> dates = meet.getDates();
+		List<String> days = new ArrayList<String>();
+		
+		for(LocalDate date : dates) {
+			days.add(date.getDayOfWeek().getDisplayName(TextStyle.FULL, Locale.KOREAN));
+		}
+		
+		possibleTimeInfo.put("days", days);
+		
+		
+		return possibleTimeInfo;
+	}
+	
+	@DeleteMapping
+	public void deleteMyTime() {
+		
+		User user = userInfo.getUser();
+		
+		Meet myMeet = user.getMeet(mongoTemplate, user.getMeetId());
+		
+		int col = myMeet.getCheckArray().length;
+		int row = myMeet.getDates().size();
+		
+		int[][] reset = new int[col][row];
+		
+		
+		user.setUserTimes(reset);
+		
+		Query query = new Query();
+		query.addCriteria(Criteria.where("_id").is(user.getUserKey()));
+		mongoTemplate.findAndReplace(query, user);
+		
+		updateTotalTable(myMeet);
 		
 	}
 	
+	
 	public boolean userTimeChanged(int[][] before, int[][] after) {
+		
+		
 		
 		int col = before.length;
 		int row = before[0].length;
@@ -80,10 +157,13 @@ public class TimeController {
 			
 			for(int j = 0; j < row; j++) {
 				
+	
 				if (before[i][j] != after[i][j]) {
 					return true;
 				}
 			}
+			
+			
 		}
 		
 		return false;
@@ -92,7 +172,7 @@ public class TimeController {
 		//한 약속에 참여한 사용자들의 공동 시간표를 업데이트 하는 메소드. 
 		
 		ArrayList<User> users = new ArrayList<User>();
-		int col = meet.getEnd()-meet.getStart();
+		int col = Integer.parseInt(meet.getEnd().substring(0, 2)) - Integer.parseInt(meet.getStart().substring(0,2));		
 		col = (int)(60 / meet.getGap()) * col;
 		int row = meet.getDates().size();
 		int[] totalTable = new int[col];
