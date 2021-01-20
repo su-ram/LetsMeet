@@ -156,7 +156,7 @@ const ManagePlan = ({ match }) => {
 									</div>
 									<div>
 										<text className="nickname">비밀번호 : </text>
-										<input className="logininput" name="pw" onChange={onChange} value={pw} />
+										<input className="logininput" name="pw" type="password" onChange={onChange} value={pw} />
 									</div>
 								</div>
 								<div className="extra-con">
