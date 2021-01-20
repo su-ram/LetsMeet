@@ -58,10 +58,10 @@ public class MeetController {
 		}
 		meet.setDates(dates);
 		
+		String start = meet.getStart().split(":")[0];
+		String end = meet.getEnd().split(":")[0];
 		
-		
-		
-		int col = Integer.parseInt(meet.getEnd().substring(0, 2)) - Integer.parseInt(meet.getStart().substring(0,2));		
+		int col = Integer.parseInt(end) - Integer.parseInt(start);		
 		col = (int)(60 / meet.getGap()) * col;
 		int[] checkArray = new int[col];
 		
@@ -94,7 +94,7 @@ public class MeetController {
 		if(userInfo.getUser() == null) {
 			return new ResponseEntity<String>("로그인 필요", HttpStatus.UNAUTHORIZED);
 		}
-		String meetId = userInfo.getMeetId();
+		String meetId = userInfo.getUser().getMeetId();
 		query = new Query();
 		query.addCriteria(Criteria.where("meetId").is(meetId));
 		
