@@ -130,6 +130,8 @@ const UserInsert = ({ onInsert, users }) => {
     });
     setdialogOpen(false);
     setName("");
+    setAddress("");
+    setResults([]);
   };
 
   return (
@@ -143,7 +145,7 @@ const UserInsert = ({ onInsert, users }) => {
         open={dialogOpen}
       >
         <Grid onSubmit={handleSubmit}>
-          <Typography>이름</Typography>
+          {/* <Typography>이름</Typography> */}
           <TextField
             id="outlined-dense"
             label="나의 이름"
@@ -154,21 +156,26 @@ const UserInsert = ({ onInsert, users }) => {
           />
           <IconButton aria-label="Directions" onClick={handleMyPosition}>
             <Typography variant="body2" color="primary">
-              내 위치
+              내 위치 받아오기
             </Typography>
           </IconButton>
-          <InputBase
-            id="input-address"
-            placeholder="어디서 출발할거야?"
-            onKeyPress={(event) => {
-              if (event.key === "Enter") {
-                handleSubmit();
-              }
-            }}
-          />
-          <Button variant="outlined" color="primary" onClick={handleSubmit}>
-            장소검색
-          </Button>
+          <Grid className="address-inputBtn">
+            <TextField
+              id="input-address"
+              // placeholder="어디서 출발할거야?"
+              onKeyPress={(event) => {
+                if (event.key === "Enter") {
+                  handleSubmit();
+                }
+              }}
+              margin="dense"
+              variant="outlined"
+              label="어디서 출발할거야?"
+            />
+            <Button variant="outlined" color="primary" onClick={handleSubmit}>
+              장소검색
+            </Button>
+          </Grid>
           {/* kakao api 주소 나타내는 영역 */}
           <List component="nav" aria-label="contacts">
             {results.map((address, i) => (

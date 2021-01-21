@@ -1,96 +1,106 @@
 .place-main-title {
-    font-weight: bold;
-    font-size: 2rem;
-    margin: 20px auto;
+  font-weight: bold;
+  font-size: 2rem;
+  margin: 20px auto;
 }
 .place-mid-title {
-    font-weight: bold;
-    font-size: 1.3rem;
-    margin: 18px auto;
+  font-weight: bold;
+  font-size: 1.3rem;
+  margin: 18px auto;
 }
 .place-cont {
+  @media screen and (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+  }
+  .place-left-cont {
+    border: 1px solid;
+    padding: 1rem;
+    overflow-y: auto; //scroll바 생긴다
+    height: 300px;
     @media screen and (min-width: 768px) {
-        display: flex;
-        flex-direction: row;
+      width: 48%;
+      height: 440px;
+      // overflow-y: auto; //scroll바 생긴다
     }
-    .place-left-cont {
-        border: 1px solid;
-        @media screen and (min-width: 768px) {
-            width: 48%;
-            height: 440px;
-        }
-        .place-user-none {
-            font-weight: bold;
-            font-size: 1.3rem;
-            margin: 35% 18%;
-        }
+    .place-user-none-cont {
+      height: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .place-user-none {
+        font-weight: bold;
+        font-size: 1.3rem;
+        margin: 0 auto;
+      }
     }
-    .place-right-cont {
-        margin-top: 30px;
-        @media screen and (min-width: 768px) {
-            width: 48%;
-            margin-left: 80px;
-            margin-top: 0px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .place-my-place {
-            height: 200px;
-            box-shadow: 5px 5px 5px #747474;
-            .place-img-my {
-                width: 100%;
-                height: 100%;     
-                z-index: -1;  
-                opacity: 0.4;
-            }    
-            .MuiButton-outlinedPrimary {
-                float: right;
-                width: 140px;
-                height: 37px;
-                margin-top: -190px;
-                margin-right: 10px;
-                color: white;
-                background-color: #2699FB;
-                border: 0;
-            }
-            .place-my-title {
-                font-weight: bold;
-                font-size: 1.3rem;
-                margin-top: -110px;
-                margin-left: 20px;
-            }
-        }
-        .place-our-mid {
-            margin-top: 30px;
-            height: 200px;
-            box-shadow: 5px 5px 5px #747474;
-            @media screen and (min-width: 768px) {
-                margin-top: 0px;
-            }
-            .place-img-mid {
-                width: 100%;
-                height: 100%;     
-                z-index: -1; 
-                opacity: 0.4;
-            }
-            .MuiButton-containedPrimary {
-                color: white;
-                background-color: #2699FB;
-                border: 0;
-                float: right;
-                margin-top: -190px;
-                margin-right: 10px;
-            }
-            .MuiButton-contained {
-                box-shadow: none;
-            }
-            .place-our-title {
-                font-weight: bold;
-                font-size: 1.3rem;
-                margin-top: -110px;
-                margin-left: 20px;
-            }
-        }
+  }
+  .place-right-cont {
+    margin-top: 30px;
+    @media screen and (min-width: 768px) {
+      width: 48%;
+      margin-left: 80px;
+      margin-top: 0px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
     }
+    .place-my-place {
+      height: 200px;
+      box-shadow: 5px 5px 5px #747474;
+      .place-img-my {
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.4;
+      }
+      .MuiButton-outlinedPrimary {
+        float: right;
+        width: 140px;
+        height: 37px;
+        margin-top: -190px;
+        margin-right: 10px;
+        color: white;
+        background-color: #2699fb;
+        border: 0;
+      }
+      .place-my-title {
+        font-weight: bold;
+        font-size: 1.3rem;
+        margin-top: -110px;
+        margin-left: 20px;
+      }
+    }
+    .place-our-mid {
+      margin-top: 30px;
+      height: 200px;
+      box-shadow: 5px 5px 5px #747474;
+      @media screen and (min-width: 768px) {
+        margin-top: 0px;
+      }
+      .place-img-mid {
+        width: 100%;
+        height: 100%;
+        z-index: -1;
+        opacity: 0.4;
+      }
+      .MuiButton-containedPrimary {
+        color: white;
+        background-color: #2699fb;
+        border: 0;
+        float: right;
+        margin-top: -190px;
+        margin-right: 10px;
+      }
+      .MuiButton-contained {
+        box-shadow: none;
+      }
+      .place-our-title {
+        font-weight: bold;
+        font-size: 1.3rem;
+        margin-top: -110px;
+        margin-left: 20px;
+      }
+    }
+  }
 }

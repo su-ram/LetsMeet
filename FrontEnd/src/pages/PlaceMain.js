@@ -27,6 +27,11 @@ const PlaceMain = ({ history }) => {
         // 유저이름이 빈칸이라면 "유저3", "유저3의 현재위치" 식으로 반환
         const userslen = users.length + 1;
         name = `유저${userslen}`;
+        if (address.length === 0) {
+          // 유저이름이 빈칸이고, 내 위치 반환
+          address = `${name}의 현재 위치`;
+        }
+      } else if (address.length === 0) {
         address = `${name}의 현재 위치`;
       }
       const user = {
@@ -65,40 +70,47 @@ const PlaceMain = ({ history }) => {
 
   return (
     <Container>
-      <Header/>
-      <Grid className="place-main-title">⏰  {title} 디자인 회의</Grid>
+      <Header />
+      <Grid className="place-main-title">⏰ {title} 디자인 회의</Grid>
       <Grid className="place-mid-title">중간지점 찾기 📍</Grid>
       <Grid className="place-cont">
         <Grid className="place-left-cont">
-          <Grid className="place-user-list">
-            {
-              users==""?
-                <Grid className="place-user-none">
-                  아직 아무도 위치를 등록하지 않았어요.<br/>
-                  위치를 등록해주세요!
-                </Grid>
-                :<UserList users={users}/>
-            }
-          </Grid>
+          {/* <Grid className="place-user-list"> */}
+          {users == "" ? (
+            <Grid className="place-user-none-cont">
+              <Grid className="place-user-none">
+                아직 아무도 위치를 등록하지 않았어요.
+                <br />
+                위치를 등록해주세요!
+              </Grid>
+            </Grid>
+          ) : (
+            <UserList users={users} />
+          )}
+          {/* </Grid> */}
         </Grid>
         <Grid className="place-right-cont">
           <Grid className="place-my-place">
-            <img className="place-img-my" src="/img/myPlace.jpg"/>
+            <img className="place-img-my" src="/img/myPlace.jpg" />
             <UserInsert users={users} onInsert={onInsert} />
             <Grid className="place-my-title">
-              출발 할 현재 내 위치를 등록하고,<br/>
-              서로의 위치를 공유하면서<br/>
+              출발 할 현재 내 위치를 등록하고,
+              <br />
+              서로의 위치를 공유하면서
+              <br />
               약속 장소를 정해보세요.
             </Grid>
           </Grid>
           <Grid className="place-our-mid">
-            <img className="place-img-mid" src="/img/middlePlace.png"/>
+            <img className="place-img-mid" src="/img/middlePlace.png" />
             <Button variant="contained" color="primary" onClick={searchCenter}>
               <PlaceIcon></PlaceIcon>중간지점 보기
             </Button>
             <Grid className="place-our-title">
-              각자 입력하신 위치를 기반으로 하여,<br/>
-              최적의 약속 장소를 정하기 위한<br/>
+              각자 입력하신 위치를 기반으로 하여,
+              <br />
+              최적의 약속 장소를 정하기 위한
+              <br />
               중간 지점을 알려드려요.
             </Grid>
           </Grid>
