@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createRef } from 'react';
 import clsx from 'clsx';
 import axios from 'axios';
 
@@ -6,11 +6,12 @@ import { getMonthDate, getDay, getTimeString } from '../function/getString';
 import { getBool, showDragResult, initializeStill, stillDragging, calCheckArray } from '../function/timeTableFunc';
 
 import { Grid } from '@material-ui/core';
-import { Table, TableBody, TableContainer, TableHead, TableRow, TableCell } from '@material-ui/core';
+import { Table, TableBody, TableContainer, TableHead, TableRow, TableCell, Tooltip, Button } from '@material-ui/core';
 import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
 import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 
 const TimeTable = (props) => {
+
 	const cellNum = 5;
 	const [timeString, setTS] = useState([]);
 	const [cellWidth, setCW] = useState([]);
@@ -18,12 +19,19 @@ const TimeTable = (props) => {
 
 	const [dragging, setDragging] = useState(false);
 	const [dragPos, setDP] = useState({"start":[-1, -1], "end":[-1, -1]});
-	const [checkArray, setCA] = useState([]);
+	const [checkArray, setCA] = useState();
+	const [checkGroup, setCG] = useState();
+	const [user, setUser] = useState();
 	const [dragState, setDS] = useState(false); // drag 시작점의 state
 	const [update, forceUpdate] = useState(true);
 
+	const tooltipRef = createRef();
+
 	useEffect(()=>{
 		setTS(getTimeString(props.data.start, props.data.end, props.data.gap));
+		setCA(props.checkUser);
+		setCG(props.checkGroup);
+		setUser(props.user);
 	}, [props])
 
 	useEffect(()=>{
@@ -105,28 +113,33 @@ const TimeTable = (props) => {
 	}
 
 	const updateToDB = async () => {
-		await axios.put(`https://letsmeeet.azurewebsites.net/api/user/time`, {
-			//"checkArray" : checkArray
+		await checkArray.pop(); // 마지막 열은 빼야함 => 프론트엔드 출력 때문에 넣어둠
+		await axios.put(`https://letsmeeet.azurewebsites.net/api/time`, {
 			"userId": "user11",
 			"userPass": "lovesk2",
 			"meetId": "177eadfb377e863",
-			"checkArray" : [1,1,3,0,0,2,0,2,0,1,1,1,1,10,1,1]
+			"checkArray" : checkArray
 		}, {
 			headers: {
 				'Access-Control-Allow-Origin': '*'
 			}
 		})
 		.then(res => {
+			props && props.setCheckGroup(res.data.checkArray);
+		})
+		.catch(err => {
+			console.log(err);
+		})
+	}
+
+	const deleteAll = () => {
+		axios.delete(`https://letsmeeet.azurewebsites.net/api/myTime`)
+		.then(res => {
 			console.log(res);
 		})
 		.catch(err => {
 			console.log(err);
 		})
-		await getGroupTime();
-	}
-
-	const getGroupTime = () => {
-		console.log("get group time");
 	}
 
 	return (
@@ -247,6 +260,19 @@ const TimeTable = (props) => {
 						</TableContainer>
 						{nowCell<cellWidth.length-1?<ArrowForwardIosIcon onClick={nextCell} className="next-btn"/>:undefined}
 					</Grid>
+					<Grid className="table-footer-con">
+						<Grid className="mine-footer">
+							<Grid className="color-box impossible"> </Grid>
+							<p>불가능</p>
+						</Grid>
+						<Grid className="mine-footer">
+							<Grid className="color-box possible"> </Grid>
+							<p>가능</p>
+						</Grid>
+						<Grid>
+							<Button variant="contained" color="primary" onClick={deleteAll}>전체 삭제</Button>
+						</Grid>
+					</Grid>
 				</> :
 				<>	
 					<Grid className="timetable-title"><h2>▶ 전체 가능 시간</h2></Grid>
@@ -279,7 +305,7 @@ const TimeTable = (props) => {
 									</TableRow>
 								</TableHead>
 								<TableBody>
-									{timeString.length!==0?
+									{timeString.length!==0 && checkGroup && user.length ?
 										timeString.map((t, index) =>{
 											// 첫시작과 분단위가 같거나 마지막 시간인지 확인
 											const last = index===timeString.length-1;
@@ -287,20 +313,51 @@ const TimeTable = (props) => {
 											return(
 												<TableRow key={index} className="timetable-time">
 													<TableCell className="timetable-time-string">
-														<Grid>{ bool? t:undefined }</Grid>
+														<Grid>{ bool && t }</Grid>
 													</TableCell>
-												{
-													last? // 마지막 셀은 출력 x
-													undefined:
-													cellWidth.map((_, index2) => {
-														let clsName = "table-body-team";
-														clsName += index2<cellNum?" visible":" unvisible";
-														clsName += bool?" midterm":" fullterm";
-														return (
-															<TableCell key={""+index+index2} id={"rc/"+index+"/"+index2} className={clsx("not-selected","cell"+index2, clsName)}></TableCell>
-														);
-													})
-												}
+													{
+														!last && 
+														cellWidth.map((_, index2) => {
+															let clsName = "table-body-team";
+															clsName += bool?" midterm":" fullterm";
+
+															let arrNum = 0;
+															let numStr = checkGroup[index].toString();
+															const diff = user.length-numStr.length;
+															if(index2>=diff){
+																arrNum = Number(numStr[index2-diff]);
+															}
+
+															// 선택한 유저 수 별 색상 표현
+															const defaultNum = user.length/5;
+															let bgColor = "";
+															if(arrNum===0){
+																bgColor = "";
+															}else if(defaultNum>arrNum){
+																bgColor = " bg1";
+															}else if(defaultNum*2>arrNum){
+																bgColor = " bg2";
+															}else if(defaultNum*3>arrNum){
+																bgColor = " bg3";
+															}else if(user.length>arrNum){
+																bgColor = " bg4";
+															}
+															clsName += bgColor;
+
+															// tooltip content
+															const ttContent = 
+																<div className="ttcontent">
+																	<p>가능 : {arrNum} / {user.length}</p>
+																	<p>불가능 : {user.length-arrNum} / {user.length}</p>
+																</div>;
+
+															return (
+																<Tooltip title={ttContent} ref={tooltipRef} arrow>
+																	<TableCell key={""+index+index2} id={"rc/"+index+"/"+index2} className={clsx("cell"+index2, clsName)}> </TableCell>
+																</Tooltip>
+															);
+														})
+													}
 												</TableRow>
 											);
 										}):undefined
@@ -308,7 +365,19 @@ const TimeTable = (props) => {
 								</TableBody>
 							</Table>
 						</TableContainer>
+						
 						{nowCell<cellWidth.length-1?<ArrowForwardIosIcon onClick={nextCell} className="next-btn"/>:undefined}
+					</Grid>
+					<Grid className="table-footer-con">
+						<Grid>0% 가능</Grid>
+						<Grid className="color-box-con">
+							<Grid className="color-box"> </Grid>
+							<Grid className="color-box bg1"> </Grid>
+							<Grid className="color-box bg2"> </Grid>
+							<Grid className="color-box bg3"> </Grid>
+							<Grid className="color-box bg4"> </Grid>
+						</Grid>
+						<Grid>100% 가능</Grid>
 					</Grid>
 				</>
 			}

@@ -1,5 +1,6 @@
 import * as React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import { Grid, Button } from "@material-ui/core";
 import { Header } from "../components";
@@ -79,7 +80,8 @@ export default class CreatePlan extends React.PureComponent {
     axios
       .post(`https://letsmeeet.azurewebsites.net/api/meet`, datas, headers, { withCredentials: true })
       .then(function (response) {
-        console.log(response);
+		console.log(response);
+		//window.location.href = window.location.origin + "/177eadfb377e863";
       })
       .catch(function (error) {
         console.log(error);
@@ -197,9 +199,9 @@ export default class CreatePlan extends React.PureComponent {
               </Grid>
               {/* 일정생성 버튼 */}
               <Grid className="create-plan">
-                <Button className="create-plan-btn" onClick={this.submitHandler}>
-                  일정 생성하기
-                </Button>
+				<Button className="create-plan-btn" onClick={this.submitHandler}>
+					일정 생성하기
+				</Button>
               </Grid>
             </Grid>
           </Grid>

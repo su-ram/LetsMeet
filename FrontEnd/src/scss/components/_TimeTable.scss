@@ -99,15 +99,76 @@
 				}
 			}
 			.table-body-team{
-				&.selected{
-					background-color: blue;
+				background-color: white;
+				&.bg1{
+					background-color: $first-color;
 				}
-				&.not-selected{
-					background-color: white;
+				&.bg2{
+					background-color: $second-color;
+				}
+				&.bg3{
+					background-color: $third-color;
+				}
+				&.bg4{
+					background-color: $last-color;
 				}
 			}
 			.table-body-mine, .still-body-mine{
 				cursor: pointer;
+			}
+		}
+	}
+	.table-footer-con{
+		display: flex;
+		align-items: center;
+		margin-top: 2rem;
+		&>div{
+			flex-shrink: 0;
+			&:first-of-type{
+				margin-right: 5px;
+			}
+			&:last-of-type{
+				margin-left: 5px;
+			}
+		}
+		.color-box{
+			height: 25px;
+			background-color: white;
+			border: 1px solid $gray;
+			&.bg1{
+				background-color: $first-color;
+			}
+			&.bg2{
+				background-color: $second-color;
+			}
+			&.bg3{
+				background-color: $third-color;
+			}
+			&.bg4{
+				background-color: $last-color;
+			}
+			&.possible{
+				background-color: $mid-color;
+			}
+			&.impossible{
+				background-color: $light-pink;
+			}
+		}
+		.mine-footer{
+			display: flex;
+			align-items: center;
+			width: 30%;
+			.color-box{
+				width: 50%;
+				margin-right: 5px;
+			}
+		}
+		.color-box-con{
+			display: flex;
+			width: 70%;
+			flex-shrink: 1;
+			.color-box{
+				width: 20%;
 			}
 		}
 	}
@@ -163,4 +224,9 @@
 			background-color: $light-pink!important;
 		}
 	}
+}
+
+
+.ttcontent{
+	padding: 0 5px;
 }
