@@ -1,10 +1,23 @@
 import React, { useState, useRef, useCallback } from "react";
+<<<<<<< HEAD
 import { Container, Button } from "@material-ui/core";
 import UserList from "../components/UserList";
 import UserInsert from "../components/UserInsert";
 import PlaceIcon from "@material-ui/icons/Place";
 
 const PlaceMain = ({ history }) => {
+=======
+import { Container, Button, Grid } from "@material-ui/core";
+import UserList from "../components/UserList";
+import UserInsert from "../components/UserInsert";
+import PlaceIcon from "@material-ui/icons/Place";
+import { Header } from "../components";
+import "../scss/pages/_PlaceMain.scss";
+
+const PlaceMain = ({ history }) => {
+  //장소 api에서 title(planName) 받아와야함
+  const title = "비주얼팀";
+>>>>>>> d501b80aed495100410fd291e633748ad89bb315
   const [users, setUsers] = useState([
     // sample
     // {
@@ -61,11 +74,53 @@ const PlaceMain = ({ history }) => {
 
   return (
     <Container>
+<<<<<<< HEAD
       <UserList users={users}></UserList>
       <UserInsert users={users} onInsert={onInsert} />
       <Button variant="contained" color="primary" onClick={searchCenter}>
         <PlaceIcon></PlaceIcon>장소 검색하기
       </Button>
+=======
+      <Header/>
+      <Grid className="place-main-title">⏰  {title} 디자인 회의</Grid>
+      <Grid className="place-mid-title">중간지점 찾기 📍</Grid>
+      <Grid className="place-cont">
+        <Grid className="place-left-cont">
+          <Grid className="place-user-list">
+            {
+              users==""?
+                <Grid className="place-user-none">
+                  아직 아무도 위치를 등록하지 않았어요.<br/>
+                  위치를 등록해주세요!
+                </Grid>
+                :<UserList users={users}/>
+            }
+          </Grid>
+        </Grid>
+        <Grid className="place-right-cont">
+          <Grid className="place-my-place">
+            <img className="place-img-my" src="/img/myPlace.jpg"/>
+            <UserInsert users={users} onInsert={onInsert} />
+            <Grid className="place-my-title">
+              출발 할 현재 내 위치를 등록하고,<br/>
+              서로의 위치를 공유하면서<br/>
+              약속 장소를 정해보세요.
+            </Grid>
+          </Grid>
+          <Grid className="place-our-mid">
+            <img className="place-img-mid" src="/img/middlePlace.png"/>
+            <Button variant="contained" color="primary" onClick={searchCenter}>
+              <PlaceIcon></PlaceIcon>중간지점 보기
+            </Button>
+            <Grid className="place-our-title">
+              각자 입력하신 위치를 기반으로 하여,<br/>
+              최적의 약속 장소를 정하기 위한<br/>
+              중간 지점을 알려드려요.
+            </Grid>
+          </Grid>
+        </Grid>
+      </Grid>
+>>>>>>> d501b80aed495100410fd291e633748ad89bb315
     </Container>
   );
 };

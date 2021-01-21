@@ -17,7 +17,10 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+<<<<<<< HEAD
 
+=======
+>>>>>>> master
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -104,10 +107,21 @@ public class TimeController {
 		Map possibleTimeInfo = new HashMap<String, Object>();
 		Meet meet = userInfo.getUser().getMeet(mongoTemplate, userInfo.getUser().getMeetId());
 		
+<<<<<<< HEAD
+<<<<<<< HEAD
+		int startTime = Integer.parseInt(meet.getStart().substring(0, 2));
+		int endTime = Integer.parseInt(meet.getEnd().substring(0, 2));
+=======
+=======
+>>>>>>> 0801df24e99a11d9fca4ef6c92633169fbc1fe45
 		String start = meet.getStart().split(":")[0];
 		String end = meet.getEnd().split(":")[0];
 		int startTime = Integer.parseInt(start);
 		int endTime = Integer.parseInt(end);
+<<<<<<< HEAD
+>>>>>>> d501b80aed495100410fd291e633748ad89bb315
+=======
+>>>>>>> 0801df24e99a11d9fca4ef6c92633169fbc1fe45
 
 		possibleTimeInfo.put("startTime", startTime);
 		possibleTimeInfo.put("endTime", endTime);
@@ -187,7 +201,15 @@ public class TimeController {
 		//한 약속에 참여한 사용자들의 공동 시간표를 업데이트 하는 메소드. 
 		
 		ArrayList<User> users = new ArrayList<User>();
+<<<<<<< HEAD
+<<<<<<< HEAD
+		int col = Integer.parseInt(meet.getEnd().substring(0, 2)) - Integer.parseInt(meet.getStart().substring(0,2));		
+=======
+		int col = Integer.parseInt(meet.getEnd().split(":")[0]) - Integer.parseInt(meet.getStart().split(":")[1]);		
+>>>>>>> d501b80aed495100410fd291e633748ad89bb315
+=======
 		int col = Integer.parseInt(meet.getEnd().split(":")[0]) - Integer.parseInt(meet.getStart().split(":")[0]);		
+>>>>>>> 0801df24e99a11d9fca4ef6c92633169fbc1fe45
 		col = (int)(60 / meet.getGap()) * col;
 		int row = meet.getDates().size();
 		int[] totalTable = new int[col];
@@ -195,8 +217,11 @@ public class TimeController {
 		int notation = num+1;
 		int[][] checkUsers = new int[col][row];
 		
+<<<<<<< HEAD
 		
 		
+=======
+>>>>>>> master
 		
 		
 		//checkArray : 단순히 해당 시간대에 몇 명이 가능한지 표현함. 1차원 배열
@@ -258,8 +283,11 @@ public class TimeController {
 			for(int j=0; j<row; j++) {
 				
 				updated += Math.pow(notation, row-j-1)*(value[j]);
+<<<<<<< HEAD
 				
 				
+=======
+>>>>>>> master
 				
 				
 			}
