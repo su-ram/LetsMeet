@@ -32,7 +32,7 @@ const TimeTable = (props) => {
 		setCA(props.checkUser);
 		setCG(props.checkGroup);
 		setUser(props.user);
-	}, [props])
+	}, [props]);
 
 	useEffect(()=>{
 		let arr = [];
