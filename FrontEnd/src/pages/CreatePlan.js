@@ -1,5 +1,6 @@
 import * as React from "react";
 import axios from "axios";
+import { Link } from "react-router-dom";
 
 import { Grid, Button } from "@material-ui/core";
 import { Header } from "../components";
@@ -199,9 +200,9 @@ export default class CreatePlan extends React.PureComponent {
               </Grid>
               {/* 일정생성 버튼 */}
               <Grid className="create-plan">
-                <Button className="create-plan-btn" onClick={this.submitHandler}>
-                  일정 생성하기
-                </Button>
+				<Button className="create-plan-btn" onClick={this.submitHandler}>
+					일정 생성하기
+				</Button>
               </Grid>
             </Grid>
           </Grid>

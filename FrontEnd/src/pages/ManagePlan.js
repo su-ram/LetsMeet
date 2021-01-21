@@ -14,6 +14,9 @@ const ManagePlan = ({ match }) => {
 	const [data, setData] = useState();
 	const [shareImg, setShareImg] = useState("");
 	const [open, setOpen] = useState(false);
+	const [checkUser, setCheckUser] = useState();
+	const [checkGroup, setCheckGroup] = useState();
+	const [user, setUser] = useState();
 	
 	const [isloggedin, setloggedin] = useState(false);
 	const [logininput, setlogininput] = useState({
@@ -33,13 +36,16 @@ const ManagePlan = ({ match }) => {
 		if(!match.url)
 			return;
 		getData(match.url.substr(1));
-	}, [match.url])
+	}, [match.url]);
 
-	const getData = (url) => {
-		console.log(url);
-		axios.get(`https://letsmeeet.azurewebsites.net/api/meet/info?id=${url}`)
+	const getData = async (url) => {
+		await axios.get(`https://letsmeeet.azurewebsites.net/api/meet/info?id=${url}`)
 		.then((res) => {
+			console.log(res.data);
 			setData(res.data);
+			setCheckUser(res.data.userTime);
+			setCheckGroup(res.data.checkArray);
+			setUser(res.data.users);
 		})
 		.catch((err) => {
 			const status = err?.response?.status;
@@ -57,7 +63,7 @@ const ManagePlan = ({ match }) => {
 				console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
 			}
 		});
-	}
+	};
 
 	const onLogin = (e) => {
 		if (id === '' || pw === '') {
@@ -71,7 +77,6 @@ const ManagePlan = ({ match }) => {
 			}
 			axios.post(`https://letsmeeet.azurewebsites.net/api/user/signin`, data)
 				.then((res) => {
-					console.log(res);
 					setloggedin(true);
 				})
 				.catch((err) => {
@@ -137,12 +142,22 @@ const ManagePlan = ({ match }) => {
 	return (
 		<Grid container direction="column" className="Manage-page-con">
 			<Header />
-			{isloggedin && <Grid className="Manage-plan-title"><AccessAlarmIcon fontSize="large" /><h2>{data.title}</h2></Grid>}
-			{data &&
+			{isloggedin && 
+				<Grid className="Manage-plan-title">
+					<img className="img" src="/img/alarm.png" />
+					<h2>{data.title}</h2>
+				</Grid>
+			}
+			{data ?
 				<Grid container direction="row" className="Manage-contents-con">
-					{isloggedin ? <TimeTable
+					{isloggedin ? 
+					<TimeTable
 						data={data}
 						type="mine"
+						checkUser={checkUser}
+						checkGroup={checkGroup}
+						setCheckGroup={setCheckGroup}
+						user={user}
 					/> : <Grid container direction="row" justify="center" alignItems="center" className="login-con">
 							<div className="login-flex-container">
 								<div className="title">
@@ -161,20 +176,25 @@ const ManagePlan = ({ match }) => {
 								</div>
 								<div className="extra-con">
 									<text className="notice">*닉네임과 비밀번호는 현재 일정에만 사용됩니다.</text>
-									<button onClick={onLogin} className="btn">로그인</button>
+									<Button variant="contained" color="primary" onClick={onLogin}>로그인</Button>
 								</div>
 							</div>
 						</Grid>}
-					<TimeTable
-						data={data}
-						type="team"
-					/>
-					<Grid container direction="column" justify="flex-start" alignItems="stretch">
+					{ 
+						user && checkGroup &&
+						<TimeTable
+							data={data}
+							type="team"
+							checkUser={checkUser}
+							checkGroup={checkGroup}
+							setCG={setCheckGroup}
+							user={user}
+						/>
+					}
+					<Grid container className="yook-ha-con" direction="column" justify="flex-start" alignItems="stretch">
 						<Top3></Top3>
 						<Yookha></Yookha>
-						<br></br>
 						<Findmidplace></Findmidplace>
-						<br></br>
 						<Comment></Comment>
 						<Grid className="btn-con">
 							<Button variant="contained" color="primary" onClick={copyDOM}>카카오톡 공유하기</Button>
@@ -189,6 +209,7 @@ const ManagePlan = ({ match }) => {
 						handleClose={handleClose}
 					/>
 				</Grid>
+				: "로딩중입니다."
 			}
 		</Grid>
 	);
