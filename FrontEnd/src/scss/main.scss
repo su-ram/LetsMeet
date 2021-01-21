@@ -11,10 +11,13 @@
 @import "./components/Top3";
 @import "./components/Yookha";
 @import "./components/Login";
+@import "./components/ShareModal";
+@import "./components/Findmidplace";
 
 // pages
 @import "./pages/CreatePlan";
 @import "./pages/ManagePlan";
+@import "./pages/Guide";
 
 // layout
 @import "./layout/grid";

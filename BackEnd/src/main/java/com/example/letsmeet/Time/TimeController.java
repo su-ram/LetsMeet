@@ -17,6 +17,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import javafx.util.Pair;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -45,7 +46,7 @@ public class TimeController {
 		
 		User user = userInfo.getUser();
 		
-		Meet meet = user.getMeet(mongoTemplate, user.getMeetId());
+		Meet meet = User.getMeet(mongoTemplate, user.getMeetId());
 		int col = myTime.getCheckArray().length;
 		
 		
@@ -97,14 +98,20 @@ public class TimeController {
 		Meet meet = userInfo.getUser().getMeet(mongoTemplate, userInfo.getUser().getMeetId());
 		
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int startTime = Integer.parseInt(meet.getStart().substring(0, 2));
 		int endTime = Integer.parseInt(meet.getEnd().substring(0, 2));
 =======
+=======
+>>>>>>> 0801df24e99a11d9fca4ef6c92633169fbc1fe45
 		String start = meet.getStart().split(":")[0];
 		String end = meet.getEnd().split(":")[0];
 		int startTime = Integer.parseInt(start);
 		int endTime = Integer.parseInt(end);
+<<<<<<< HEAD
 >>>>>>> d501b80aed495100410fd291e633748ad89bb315
+=======
+>>>>>>> 0801df24e99a11d9fca4ef6c92633169fbc1fe45
 
 		possibleTimeInfo.put("startTime", startTime);
 		possibleTimeInfo.put("endTime", endTime);
@@ -130,11 +137,14 @@ public class TimeController {
 	}
 	
 	@DeleteMapping
-	public void deleteMyTime() {
+	public ResponseEntity<?> deleteMyTime() {
 		
 		User user = userInfo.getUser();
 		
-		Meet myMeet = user.getMeet(mongoTemplate, user.getMeetId());
+		if( user == null ) {
+			return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+		}
+		Meet myMeet = User.getMeet(mongoTemplate, user.getMeetId());
 		
 		int col = myMeet.getCheckArray().length;
 		int row = myMeet.getDates().size();
@@ -149,6 +159,8 @@ public class TimeController {
 		mongoTemplate.findAndReplace(query, user);
 		
 		updateTotalTable(myMeet);
+		
+		return ResponseEntity.ok().build();
 		
 	}
 	
@@ -180,19 +192,22 @@ public class TimeController {
 		
 		ArrayList<User> users = new ArrayList<User>();
 <<<<<<< HEAD
+<<<<<<< HEAD
 		int col = Integer.parseInt(meet.getEnd().substring(0, 2)) - Integer.parseInt(meet.getStart().substring(0,2));		
 =======
 		int col = Integer.parseInt(meet.getEnd().split(":")[0]) - Integer.parseInt(meet.getStart().split(":")[1]);		
 >>>>>>> d501b80aed495100410fd291e633748ad89bb315
+=======
+		int col = Integer.parseInt(meet.getEnd().split(":")[0]) - Integer.parseInt(meet.getStart().split(":")[0]);		
+>>>>>>> 0801df24e99a11d9fca4ef6c92633169fbc1fe45
 		col = (int)(60 / meet.getGap()) * col;
 		int row = meet.getDates().size();
 		int[] totalTable = new int[col];
 		int num = meet.getNum();
 		int notation = num+1;
-		if (num == 1) {
-			notation = 2;
-		}
 		int[][] checkUsers = new int[col][row];
+		
+		Map<Pair, Integer> top = new HashMap<Pair, Integer>();
 		
 		
 		
@@ -250,11 +265,13 @@ public class TimeController {
 			//한줄 계산 다 끝남. 
 		
 			int updated = 0;
-			
+			Pair pos;
 			
 			for(int j=0; j<row; j++) {
 				
 				updated += Math.pow(notation, row-j-1)*(value[j]);
+				pos = new Pair(i,j);
+				
 				
 				
 			}
