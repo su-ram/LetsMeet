@@ -1,12 +1,4 @@
 import React, { useState, useRef, useCallback } from "react";
-<<<<<<< HEAD
-import { Container, Button } from "@material-ui/core";
-import UserList from "../components/UserList";
-import UserInsert from "../components/UserInsert";
-import PlaceIcon from "@material-ui/icons/Place";
-
-const PlaceMain = ({ history }) => {
-=======
 import { Container, Button, Grid } from "@material-ui/core";
 import UserList from "../components/UserList";
 import UserInsert from "../components/UserInsert";
@@ -17,7 +9,6 @@ import "../scss/pages/_PlaceMain.scss";
 const PlaceMain = ({ history }) => {
   //장소 api에서 title(planName) 받아와야함
   const title = "비주얼팀";
->>>>>>> d501b80aed495100410fd291e633748ad89bb315
   const [users, setUsers] = useState([
     // sample
     // {
@@ -74,13 +65,6 @@ const PlaceMain = ({ history }) => {
 
   return (
     <Container>
-<<<<<<< HEAD
-      <UserList users={users}></UserList>
-      <UserInsert users={users} onInsert={onInsert} />
-      <Button variant="contained" color="primary" onClick={searchCenter}>
-        <PlaceIcon></PlaceIcon>장소 검색하기
-      </Button>
-=======
       <Header/>
       <Grid className="place-main-title">⏰  {title} 디자인 회의</Grid>
       <Grid className="place-mid-title">중간지점 찾기 📍</Grid>
@@ -120,7 +104,6 @@ const PlaceMain = ({ history }) => {
           </Grid>
         </Grid>
       </Grid>
->>>>>>> d501b80aed495100410fd291e633748ad89bb315
     </Container>
   );
 };
