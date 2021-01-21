@@ -5,9 +5,13 @@ import { Button } from '@material-ui/core';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 const Comment = ({match}) => {
-	//const [comments, setcomments] = useState(null);
 	const [comments, setcomments] = useState(null);
 	const [text, settext] = useState('');
+
+	/*const comments
+	=[{"userId":"user222","userKey":2098202681,"content":"ㅎㅎㅎㅎㅎㅎㅎ","created":"2021-01-20T01:50:25.915"},
+	{"userId":"user111","userKey":1894261334,"content":"ㅋㅋㅋㅋㅋ","created":"2021-01-20T01:51:10.426"},
+	{"userId":"user11","userKey":2076160027,"content":"This is your comment.","created":"2021-01-21T01:50:41.112"}]*/
 	const onChange = (e) => {
 		settext(e.target.value);
 	  };
@@ -78,7 +82,7 @@ const Comment = ({match}) => {
 				<table className="table">
 					<tbody>
 						{comments.map(comment => {
-							return <Commentitem key={comment.user.userId} id={comment.user.userId} name={comment.user.userId} description={comment.content} />
+							return <Commentitem key={comment.userId} id={comment.userId} name={comment.userId} description={comment.content} />
 						})}
 					</tbody>
 				</table>

@@ -3,7 +3,7 @@ import { Grid } from '@material-ui/core'
 import axios from 'axios';
 const Top3 = () => {
     //나중에 timedata 맵으로 바꿔야함,,안바꿔도될듯??
-    /*const timedata = [
+    const timedata = [
         {
         'date': '12/15(수)',
         'time': '2:30PM~4:30PM',
@@ -16,8 +16,8 @@ const Top3 = () => {
         'date': '12/18(금)',
         'time': '3PM~4PM',
         },
-        ]*/
-    const [timedata, settimedata] = useState('');
+        ]
+    //const [timedata, settimedata] = useState('');
     	/*useEffect(()=>{
 			axios.get(`https://letsmeeet.azurewebsites.net/api/topN`)
 			.then((res)=>{
