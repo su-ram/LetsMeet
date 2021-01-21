@@ -17,7 +17,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-import javafx.util.Pair;
+
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -44,9 +44,16 @@ public class TimeController {
 	@PutMapping
 	public ResponseEntity<?> myTime(@RequestBody MyTime myTime) {
 		
-		User user = userInfo.getUser();
+		System.out.println(myTime.toString());
 		
-		Meet meet = User.getMeet(mongoTemplate, user.getMeetId());
+		User user = User.getUser(mongoTemplate, myTime.getUserId(), myTime.getMeetId());
+		System.out.println(user);
+		Meet meet = User.getMeet(mongoTemplate, myTime.getMeetId());
+		
+		
+		
+		
+		
 		int col = myTime.getCheckArray().length;
 		
 		
@@ -188,7 +195,7 @@ public class TimeController {
 		int notation = num+1;
 		int[][] checkUsers = new int[col][row];
 		
-		Map<Pair, Integer> top = new HashMap<Pair, Integer>();
+		
 		
 		
 		
@@ -246,12 +253,12 @@ public class TimeController {
 			//한줄 계산 다 끝남. 
 		
 			int updated = 0;
-			Pair pos;
+			
 			
 			for(int j=0; j<row; j++) {
 				
 				updated += Math.pow(notation, row-j-1)*(value[j]);
-				pos = new Pair(i,j);
+				
 				
 				
 				
@@ -330,7 +337,7 @@ public class TimeController {
 		
 			
 			
-		for(int i=0; i<n; i++) {
+		for(int i=0; i<row; i++) {
 			
 			if(!stack.empty()) {
 				

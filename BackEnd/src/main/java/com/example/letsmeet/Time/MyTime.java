@@ -7,7 +7,8 @@ import lombok.Data;
 @Data
 public class MyTime {
 	
-	private User user;
+	
 	private int[] checkArray;
-	private int[][] times;
+	private String userId;
+	private String meetId;
 }
