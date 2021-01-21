@@ -14,9 +14,9 @@ export const getTimeString = (start, end, gap) => {
 		return [];
 
 	let TSArray = [start];
-	let now = [Number(start.split(":")[0]), Number(start.split(":")[1])];
-	const endTime = [Number(end.split(":")[0]), Number(end.split(":")[1])];
-	console.log("now "+now);
+	let now = [Number(start.substring(0,2)), Number(start.substring(3,5))];
+	const endTime = [Number(end.substring(0,2)), Number(end.substring(3,5))];
+
 	while(true){
 		let hour = now[0]; let minute = now[1];
 		minute += gap;
@@ -36,7 +36,6 @@ export const getTimeString = (start, end, gap) => {
 }
 
 const isTimeBefore = (h1, m1, h2, m2) => {
-	console.log(h1, m1, h2, m2);
 	if(h1<h2)
 		return true;
 	else if(h1===h2){
