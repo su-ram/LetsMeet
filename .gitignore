@@ -1,7 +1,7 @@
 .metadata
-/Servers/
+.gitignore
 /BackEnd/.metadata
-
+/BackEnd/src/main/resources/static/
 # Created by https://www.toptal.com/developers/gitignore/api/eclipse
 # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse
 
