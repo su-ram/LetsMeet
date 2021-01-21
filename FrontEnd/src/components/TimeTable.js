@@ -107,25 +107,10 @@ const TimeTable = (props) => {
 	const updateToDB = async () => {
 		await axios.put(`https://letsmeeet.azurewebsites.net/api/user/time`, {
 			//"checkArray" : checkArray
-			"checkArray": [
-				1,
-				2,
-				2,
-				0,
-				0,
-				7,
-				1,
-				1,
-				0,
-				0,
-				0,
-				2,
-				3,
-				0,
-				0,
-				0,
-				1
-			  ]
+			"userId": "user11",
+			"userPass": "lovesk2",
+			"meetId": "177eadfb377e863",
+			"checkArray" : [1,1,3,0,0,2,0,2,0,1,1,1,1,10,1,1]
 		}, {
 			headers: {
 				'Access-Control-Allow-Origin': '*'
