@@ -14,8 +14,8 @@ export const getTimeString = (start, end, gap) => {
 		return [];
 
 	let TSArray = [start];
-	let now = [Number(start.substring(0,2)), Number(start.substring(3,5))];
-	const endTime = [Number(end.substring(0,2)), Number(end.substring(3,5))];
+	let now = [Number(start.split(":")[0]), Number(start.split(":")[1])];
+	const endTime = [Number(end.split(":")[0]), Number(end.split(":")[1])];
 
 	while(true){
 		let hour = now[0]; let minute = now[1];

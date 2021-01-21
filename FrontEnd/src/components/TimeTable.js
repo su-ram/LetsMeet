@@ -22,6 +22,7 @@ const TimeTable = (props) => {
 	const [checkArray, setCA] = useState();
 	const [checkGroup, setCG] = useState();
 	const [user, setUser] = useState();
+	const [userLength, setUL] = useState();
 	const [dragState, setDS] = useState(false); // drag 시작점의 state
 	const [update, forceUpdate] = useState(true);
 
@@ -32,6 +33,7 @@ const TimeTable = (props) => {
 		setCA(props.checkUser);
 		setCG(props.checkGroup);
 		setUser(props.user);
+		setUL(props.user.length);
 	}, [props])
 
 	useEffect(()=>{
@@ -180,7 +182,7 @@ const TimeTable = (props) => {
 										timeString.map((t, index) =>{
 											// 첫시작과 분단위가 같거나 마지막 시간인지 확인
 											const last = index===timeString.length-1;
-											const bool = t.substring(3,5)===props.data.start.substring(3,5) || last;
+											const bool = t.split(":")[1]===props.data.start.split(":")[1] || last;
 											return(
 												<TableRow key={index} className="timetable-time">
 													<TableCell className="timetable-time-string">
@@ -192,7 +194,7 @@ const TimeTable = (props) => {
 													cellWidth.map((_, index2) => {
 														let clsName = "table-body-mine";
 														clsName += index2<cellNum?" visible":" unvisible";
-														clsName += bool?" midterm":" fullterm";
+														clsName += bool?" fullterm":" midterm";
 														return (
 															<TableCell key={""+index+index2} id={"rc/"+index+"/"+index2} className={clsx("not-selected","cell"+index2, clsName)}></TableCell>
 														);
@@ -233,8 +235,9 @@ const TimeTable = (props) => {
 									{timeString.length!==0 &&
 										timeString.map((t, index) =>{
 											// 첫시작과 분단위가 같거나 마지막 시간인지 확인
+											console.log(t);
 											const last = index===timeString.length-1;
-											const bool = t.substring(3,5)===props.data.start.substring(3,5) || last;
+											const bool = t.split(":")[1]===props.data.start.split(":")[1] || last;
 											return(
 												<TableRow key={index} className="timetable-time">
 													<TableCell className="timetable-time-string">
@@ -305,11 +308,11 @@ const TimeTable = (props) => {
 									</TableRow>
 								</TableHead>
 								<TableBody>
-									{timeString.length!==0 && checkGroup && user.length ?
+									{timeString.length!==0 && checkGroup && userLength !== undefined?
 										timeString.map((t, index) =>{
 											// 첫시작과 분단위가 같거나 마지막 시간인지 확인
 											const last = index===timeString.length-1;
-											const bool = t.substring(3,5)===props.data.start.substring(3,5) || last;
+											const bool = t.split(":")[1]===props.data.start.split(":")[1] || last;
 											return(
 												<TableRow key={index} className="timetable-time">
 													<TableCell className="timetable-time-string">
@@ -319,17 +322,17 @@ const TimeTable = (props) => {
 														!last && 
 														cellWidth.map((_, index2) => {
 															let clsName = "table-body-team";
-															clsName += bool?" midterm":" fullterm";
+															clsName += bool?" fullterm":" midterm";
 
 															let arrNum = 0;
 															let numStr = checkGroup[index].toString();
-															const diff = user.length-numStr.length;
+															const diff = timeString.length-numStr.length;
 															if(index2>=diff){
 																arrNum = Number(numStr[index2-diff]);
 															}
 
 															// 선택한 유저 수 별 색상 표현
-															const defaultNum = user.length/5;
+															const defaultNum = userLength/5;
 															let bgColor = "";
 															if(arrNum===0){
 																bgColor = "";
@@ -339,7 +342,7 @@ const TimeTable = (props) => {
 																bgColor = " bg2";
 															}else if(defaultNum*3>arrNum){
 																bgColor = " bg3";
-															}else if(user.length>arrNum){
+															}else if(userLength>arrNum){
 																bgColor = " bg4";
 															}
 															clsName += bgColor;
@@ -347,8 +350,8 @@ const TimeTable = (props) => {
 															// tooltip content
 															const ttContent = 
 																<div className="ttcontent">
-																	<p>가능 : {arrNum} / {user.length}</p>
-																	<p>불가능 : {user.length-arrNum} / {user.length}</p>
+																	<p>가능 : {arrNum} / {userLength}</p>
+																	<p>불가능 : {userLength-arrNum} / {userLength}</p>
 																</div>;
 
 															return (
