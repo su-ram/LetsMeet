@@ -85,7 +85,7 @@ const Comment = ({match}) => {
 				<br />
 				</div>
 				<div className="commentinputbox">
-				<span class="saveicon" onClick={handlesubmit}><i class="fa fa-arrow-up"></i></span>
+				<span className="saveicon" onClick={handlesubmit}><i className="fa fa-arrow-up"></i></span>
 				<input className="commentinput" onChange={onChange} placeholder="로그인 후 댓글을 적어주세요">
 				</input>
 				</div>
