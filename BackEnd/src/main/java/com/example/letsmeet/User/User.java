@@ -35,5 +35,12 @@ public class User {
 		return mongoTemplate.findOne(query, Meet.class);
 	}
 	
+	public static User getUser(MongoTemplate mongoTemplate, String userId, String meetId) {
+		Query query = new Query();
+		query.addCriteria(Criteria.where("userId").is(userId));
+		//query.addCriteria(Criteria.where("meetId").is(meetId));
+		return mongoTemplate.findOne(query, User.class);
+	}
+	
 
 }
