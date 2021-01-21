@@ -11,6 +11,7 @@ import {
 import ListItem from "@material-ui/core/ListItem";
 import List from "@material-ui/core/List";
 import ListItemText from "@material-ui/core/ListItemText";
+import "../scss/components/_UserInsert.scss";
 
 const { kakao } = window;
 
@@ -140,10 +141,11 @@ const UserInsert = ({ onInsert, users }) => {
       <Dialog
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
+        maxWidth="false"
         open={dialogOpen}
       >
         <Grid onSubmit={handleSubmit}>
-          <Typography>이름</Typography>
+          <Typography variant="outlined">이름</Typography>
           <TextField
             id="outlined-dense"
             label="나의 이름"
@@ -153,7 +155,7 @@ const UserInsert = ({ onInsert, users }) => {
             variant="outlined"
           />
           <IconButton aria-label="Directions" onClick={handleMyPosition}>
-            <Typography variant="body2" color="primary">
+            <Typography variant="body2" >
               내 위치
             </Typography>
           </IconButton>
