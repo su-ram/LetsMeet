@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { Button } from '@material-ui/core';
-const Yookha=({url})=> {
+const Yookha=({match})=> {
     const [yookha, setyookha] = useState({
         who: '',
         when: '',
@@ -11,7 +11,7 @@ const Yookha=({url})=> {
         why: '',
       });
       const { who, when, where, what, how, why } = yookha;
-
+      const [data, setdata] = useState([]);
     const onChange = (e) => {
         const { value, name } = e.target;
         setyookha({
@@ -20,15 +20,37 @@ const Yookha=({url})=> {
     });
       };
 
+      useEffect(()=>{
+          axios.get(`https://letsmeeet.azurewebsites.net/api/meet/info?id=${match.url}`)
+          .then((res)=>{
+            console.log(res.data.meetSubInfo);
+            setdata(res.data.meetSubInfo);
+            data.who=yookha.who;
+            data.when=yookha.when;
+            data.where=yookha.where;
+            data.what=yookha.what;
+            data.how=yookha.how;
+            data.why=yookha.why;
+          })
+          .catch((err)=>{
+          const status = err?.response?.status;
+          if (status === undefined) {
+            console.dir("데이터를 불러오던 중 예기치 못한 예외가 발생하였습니다.\n" + JSON.stringify(err));
+          }
+          else if (status === 400) {
+            console.dir("400에러");
+          }
+          else if (status === 401) {
+            console.dir("401에러");
+          }
+          else if (status === 500) {
+            console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
+          }
+          });
+      }, []);
+     
       const handlesubmit = (e) => {
         e.preventDefault();
-        //console.log(text);
-        const headers = {
-          'Access-Control-Allow-Origin': '*',        
-          'Accept': 'application/json',
-          'Content-Type': 'application/x-www-form-urlencoded'
-        }
-      
         const data = {
           "who": who,
           "when": when,
@@ -37,9 +59,8 @@ const Yookha=({url})=> {
           "how": how,
           "what": what,
         }
-      
         axios
-          .post('https://letsmeeet.azurewebsites.net/api/meet/sub', data, headers, { withCredentials: true })
+          .post('https://letsmeeet.azurewebsites.net/api/meet/sub', data)
           .then(function (response) {
           console.log(response);
           })

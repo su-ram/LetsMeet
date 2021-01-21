@@ -6,18 +6,13 @@ import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 const Comment = ({match}) => {
 	//const [comments, setcomments] = useState(null);
-	//const [comments, setcomments] = useState(null);
+	const [comments, setcomments] = useState(null);
 	const [text, settext] = useState('');
 	const onChange = (e) => {
 		settext(e.target.value);
 	  };
-	/*useEffect(()=>{
-		const headers = {
-			'Access-Control-Allow-Origin': '*',        
-			'Accept': 'application/json',
-			'Content-Type': 'application/x-www-form-urlencoded',
-			}
-			axios.get(`https://letsmeeet.azurewebsites.net/5b1ea1384b0963e/api/meet`, headers)
+	useEffect(()=>{
+			axios.get(`https://letsmeeet.azurewebsites.net/api/comment`)
 			.then((res)=>{
 				//console.log(res.data);
 				setcomments(res.data);
@@ -38,23 +33,17 @@ const Comment = ({match}) => {
 			}
 			});
 	}, []);
-	*/
 	
 	const handlesubmit = (e) => {
 		e.preventDefault();
 		//console.log(text);
-		const headers = {
-		  'Access-Control-Allow-Origin': '*',        
-		  'Accept': 'application/json',
-		  'Content-Type': 'application/x-www-form-urlencoded'
-		}
 	
 		const data = {
 		  "content": text,
 		}
 	
 		axios
-		  .post('https://letsmeeet.azurewebsites.net/api/comment', data, headers, { withCredentials: true })
+		  .post('https://letsmeeet.azurewebsites.net/api/comment', data)
 		  .then(function (response) {
 			console.log(response);
 		  })
@@ -74,18 +63,6 @@ const Comment = ({match}) => {
 		  });
 	  };
 	
-
-	const comments = [
-		{
-			"user": {
-			"userId": "첫번째유저",
-			"userPass": "lovesk2",
-			"meetId": "5b1ea1384b0963e"
-			},
-			"created": "2021-01-19",
-			"content": "string"
-		}
-	]
 	return (
 		<div>
 			<text className="title">

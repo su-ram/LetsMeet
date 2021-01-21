@@ -1,9 +1,9 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Grid } from '@material-ui/core'
 import axios from 'axios';
 const Top3 = () => {
     //나중에 timedata 맵으로 바꿔야함,,안바꿔도될듯??
-    const timedata = [
+    /*const timedata = [
         {
         'date': '12/15(수)',
         'time': '2:30PM~4:30PM',
@@ -16,18 +16,13 @@ const Top3 = () => {
         'date': '12/18(금)',
         'time': '3PM~4PM',
         },
-        ]
-
+        ]*/
+    const [timedata, settimedata] = useState('');
     	/*useEffect(()=>{
-		const headers = {
-			'Access-Control-Allow-Origin': '*',        
-			'Accept': 'application/json',
-			'Content-Type': 'application/x-www-form-urlencoded',
-			}
-			axios.get(`https://letsmeeet.azurewebsites.net/5b1ea1384b0963e/api/topN`, headers)
+			axios.get(`https://letsmeeet.azurewebsites.net/api/topN`)
 			.then((res)=>{
 				//console.log(res.data);
-				setcomments(res.data);
+				settimedata(res.data);
 			})
 			.catch((err)=>{
 			const status = err?.response?.status;
@@ -44,8 +39,8 @@ const Top3 = () => {
 				console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
 			}
 			});
-	}, []);
-	*/
+	}, []);*/
+	
 return (
     <div>
          <div className="title">TOP 3 <img className="img" alt='top3' src="/img/Top3.png"></img></div>
