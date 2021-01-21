@@ -1,9 +1,0 @@
-diff a/.gitignore b/.gitignore	(rejected hunks)
-@@ -1,6 +1,7 @@
- .metadata
- .gitignore
- /BackEnd/.metadata
-+/FrontEnd/build/
- /BackEnd/src/main/resources/static/
- # Created by https://www.toptal.com/developers/gitignore/api/eclipse
- # Edit at https://www.toptal.com/developers/gitignore?templates=eclipse
