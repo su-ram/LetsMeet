@@ -84,10 +84,10 @@
 				border:1px solid $gray;
 				-ms-user-select: none; -moz-user-select: -moz-none; -webkit-user-select: none; -khtml-user-select: none; user-select:none;
 				&.midterm{
-					border-bottom: 2px dotted $gray;
+					border-top: 2px dotted $gray;
 				}
 				&.fullterm{
-					border-top: none;
+					border-bottom: none;
 				}
 			}
 			.table-body-mine{

@@ -5,7 +5,9 @@ import {Link} from "react-router-dom"
 const Header = () => (
   <Grid className="header-rule">
     <Grid className="header-logo">
-      <img src="/img/letsmeet.png" alt="logo" />
+		<a href="/Create">
+			<img src="/img/letsmeet.png" alt="logo" />
+		</a>
     </Grid>
     <Grid className="goto-manual">
       <a href="/Guide">사용법 바로가기</a>
