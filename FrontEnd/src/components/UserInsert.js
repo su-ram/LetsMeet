@@ -135,11 +135,7 @@ const UserInsert = ({ onInsert, users }) => {
   return (
     <div>
       <Button variant="outlined" color="primary" onClick={handleClickOpen}>
-<<<<<<< HEAD
-        장소 선택하기
-=======
         내 위치 등록하기
->>>>>>> d501b80aed495100410fd291e633748ad89bb315
       </Button>
       <Dialog
         onClose={handleClose}
@@ -147,10 +143,7 @@ const UserInsert = ({ onInsert, users }) => {
         open={dialogOpen}
       >
         <Grid onSubmit={handleSubmit}>
-<<<<<<< HEAD
-=======
           <Typography>이름</Typography>
->>>>>>> d501b80aed495100410fd291e633748ad89bb315
           <TextField
             id="outlined-dense"
             label="나의 이름"
