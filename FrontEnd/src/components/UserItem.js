@@ -7,11 +7,11 @@ const UserItem = ({ user }) => {
   const { name, address } = user;
   return (
     <List>
-      <Grid>
-        <img className="user-img" src="/img/userList.png"/>
+      <Grid className="img-userName">
+        <img className="user-img" src="/img/userList.png" />
         <Grid className="user-name">{name}</Grid>
       </Grid>
-      <Grid>{address}</Grid>
+      <Grid className="user-address">{address}</Grid>
     </List>
   );
 };

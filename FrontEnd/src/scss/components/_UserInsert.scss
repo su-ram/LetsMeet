@@ -1,7 +1,24 @@
 .MuiDialog-paper {
-    margin: 32px;
-    position: relative;
-    overflow-y: auto;
-    width: 800px;
-    height: 500px;
+  width: 500x;
+  height: 500px;
+  padding: 10px;
+}
+
+.MuiFormControl-marginDense {
+  width: 70%;
+}
+
+.address-inputBtn {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (min-width: 768px) {
+  .MuiFormControl-marginDense {
+    width: 60%;
+  }
+  .user-info {
+    display: flex;
+    // flex-direction: ;
+  }
 }

@@ -29,6 +29,7 @@ const UserInsert = ({ onInsert, users }) => {
   // Dialog close
   const handleClose = () => {
     setdialogOpen(false);
+    setResults([]);
   };
 
   // textfield 이름 변경
@@ -141,42 +142,47 @@ const UserInsert = ({ onInsert, users }) => {
         내 위치 등록하기
       </Button>
       <Dialog
+        className="info-dialog"
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         maxWidth="false"
         open={dialogOpen}
       >
         <Grid onSubmit={handleSubmit}>
-          <Typography variant="outlined">이름</Typography>
-          <TextField
-            id="outlined-dense"
-            label="나의 이름"
-            value={name}
-            onChange={handleNameChange}
-            margin="dense"
-            variant="outlined"
-          />
-          <IconButton aria-label="Directions" onClick={handleMyPosition}>
-            <Typography variant="body2" color="primary">
-              내 위치 받아오기
-            </Typography>
-          </IconButton>
-          <Grid className="address-inputBtn">
-            <TextField
-              id="input-address"
-              // placeholder="어디서 출발할거야?"
-              onKeyPress={(event) => {
-                if (event.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-              margin="dense"
-              variant="outlined"
-              label="어디서 출발할거야?"
-            />
-            <Button variant="outlined" color="primary" onClick={handleSubmit}>
-              장소검색
-            </Button>
+          <Grid className="user-info">
+            {/* <Typography variant="outlined">이름</Typography> */}
+            <Grid className="name-myspot">
+              <TextField
+                id="outlined-dense"
+                label="나의 이름"
+                value={name}
+                onChange={handleNameChange}
+                margin="dense"
+                variant="outlined"
+              />
+              <IconButton aria-label="Directions" onClick={handleMyPosition}>
+                <Typography variant="body2" color="primary">
+                  내 위치<br></br>받아오기
+                </Typography>
+              </IconButton>
+            </Grid>
+            <Grid className="address-inputBtn">
+              <TextField
+                id="input-address"
+                // placeholder="어디서 출발할거야?"
+                onKeyPress={(event) => {
+                  if (event.key === "Enter") {
+                    handleSubmit();
+                  }
+                }}
+                margin="dense"
+                variant="outlined"
+                label="어디서 출발할거야?"
+              />
+              <Button variant="outlined" color="primary" onClick={handleSubmit}>
+                장소검색
+              </Button>
+            </Grid>
           </Grid>
           {/* kakao api 주소 나타내는 영역 */}
           <List component="nav" aria-label="contacts">
