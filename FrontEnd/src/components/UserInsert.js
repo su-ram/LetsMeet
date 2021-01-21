@@ -65,7 +65,12 @@ const UserInsert = ({ onInsert, users }) => {
 
   //----------------------검색하기 위한 함수----------------------
 
+  // const jibunInfo = document.getElementsByClassName("doro-jibun-info");
+  // const hidden = "hidden";
+
   const handleSubmit = (e) => {
+    // jibunInfo.classList.add(hidden);
+
     // 장소 검색 객체를 생성합니다
     var ps = new kakao.maps.services.Places();
 
@@ -184,6 +189,7 @@ const UserInsert = ({ onInsert, users }) => {
               </Button>
             </Grid>
           </Grid>
+          <Grid className="doro-jibun-info">도로명주소</Grid>
           {/* kakao api 주소 나타내는 영역 */}
           <List component="nav" aria-label="contacts">
             {results.map((address, i) => (
