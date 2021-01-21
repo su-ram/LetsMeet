@@ -33,7 +33,7 @@ const ManagePlan = ({ match }) => {
 		if(!match.url)
 			return;
 		getData(match.url.substr(1));
-	}, [match.url])
+	}, [match.url]);
 
 	const getData = (url) => {
 		console.log(url);
@@ -137,7 +137,12 @@ const ManagePlan = ({ match }) => {
 	return (
 		<Grid container direction="column" className="Manage-page-con">
 			<Header />
-			{isloggedin && <Grid className="Manage-plan-title"><AccessAlarmIcon fontSize="large" /><h2>{data.title}</h2></Grid>}
+			{isloggedin && 
+				<Grid className="Manage-plan-title">
+					<img className="img" src="/img/alarm.png" />
+					<h2>{data.title}</h2>
+				</Grid>
+			}
 			{data &&
 				<Grid container direction="row" className="Manage-contents-con">
 					{isloggedin ? <TimeTable
@@ -169,12 +174,10 @@ const ManagePlan = ({ match }) => {
 						data={data}
 						type="team"
 					/>
-					<Grid container direction="column" justify="flex-start" alignItems="stretch">
+					<Grid container className="yook-ha-con" direction="column" justify="flex-start" alignItems="stretch">
 						<Top3></Top3>
 						<Yookha></Yookha>
-						<br></br>
 						<Findmidplace></Findmidplace>
-						<br></br>
 						<Comment></Comment>
 						<Grid className="btn-con">
 							<Button variant="contained" color="primary" onClick={copyDOM}>카카오톡 공유하기</Button>

@@ -7,10 +7,9 @@
 		h2{
 			font-size: 20px;
 		}
-		svg{
-			font-size: 2rem;
-			color: $main-color;
-			margin-right: 8px;
+		img{
+			height: 50px;
+			margin-right: 20px;
 		}
 		@media screen and (min-width: 768px){
 			margin: 60px 0 20px;
@@ -25,7 +24,8 @@
 	}
 	.Manage-contents-con{
 		display: flex;
-		margin-bottom: 3rem;
+		margin: 3rem 0;
+		justify-content: space-between;
 		.login-con{
 			padding-right: 3rem;
 			.login-flex-container{
@@ -68,11 +68,16 @@
 				width: 30%;
 			}
 		}
-		.btn-con{
-			margin-top: 22px;
-			display: flex;
-			width: 100%;
-			justify-content: space-around;
+		.yook-ha-con{
+			&>div{
+				margin-bottom: 1.5rem;
+			}
+			.btn-con{
+				margin-top: 22px;
+				display: flex;
+				width: 100%;
+				justify-content: space-around;
+			}
 		}
 	}
 }
