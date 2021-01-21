@@ -2,10 +2,7 @@ import React, { useEffect } from "react";
 import queryString from "query-string";
 import { Grid } from "@material-ui/core";
 import "../scss/pages/_SearchPlace.scss";
-<<<<<<< HEAD
-=======
 import { Header } from "../components";
->>>>>>> d501b80aed495100410fd291e633748ad89bb315
 
 const { kakao } = window;
 
@@ -333,12 +330,8 @@ const SearchPlace = ({ location, match }) => {
 
   return (
     <>
-<<<<<<< HEAD
-      <Grid>우리 어디서 만날까? 바로 여기!</Grid>
-=======
       <Header/>
       <Grid className="map-title">우리 어디서 만날까? 바로 여기!📍</Grid>
->>>>>>> d501b80aed495100410fd291e633748ad89bb315
       {/* <Grid>
         위도는 {match.params.latCenter}, 경도는 {match.params.longCenter}
       </Grid> */}
