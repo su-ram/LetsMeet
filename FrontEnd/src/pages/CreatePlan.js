@@ -80,6 +80,8 @@ export default class CreatePlan extends React.PureComponent {
       .post(`https://letsmeeet.azurewebsites.net/api/meet`, datas, headers, { withCredentials: true })
       .then(function (response) {
         console.log(response);
+        let url = response.data;
+        window.location.href = url;
       })
       .catch(function (error) {
         console.log(error);
