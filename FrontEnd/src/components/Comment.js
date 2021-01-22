@@ -79,7 +79,7 @@ const Comment = ({match}) => {
 				<br />
 				<table className="table">
 					<tbody>
-						{comments.map(comment => {
+						{comments && comments.map(comment => {
 							return <Commentitem key={comment.userId} id={comment.userId} name={comment.userId} description={comment.content} />
 						})}
 					</tbody>
