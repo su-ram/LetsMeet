@@ -59,39 +59,39 @@ const Yookha=({match, senddata})=> {
     <div className="flex-container">
     <div className="inputbox">
     <text className="subtitle">누구랑?</text>
-    <input className="input" name="who" placeholder="?누구랑" dir="rtl" onChange={onChange} defaultValue={senddata.who==='' ?  who: senddata.who}  />
+    <input className="input" name="who" placeholder="누구랑?" onChange={onChange} defaultValue={senddata.who==='' ?  who: senddata.who}  />
     <hr color="lightblue" size="3px" align="left"></hr>
     </div>
     
 
     <div className="inputbox">
     <text className="subtitle">언제?</text>
-    <input className="input" type="text" name="when" placeholder="?언제" dir="rtl" onChange={onChange} defaultValue={senddata.when==='' ?  when: senddata.when} />
+    <input className="input" type="text" name="when" placeholder="언제?" onChange={onChange} defaultValue={senddata.when==='' ?  when: senddata.when} />
     <hr color="lightblue" size="3px" align="left"></hr>
     </div>
     
 
     <div className="inputbox">
     <text className="subtitle">어디서?</text>
-    <input className="input" name="where" placeholder="?어디서" dir="rtl" onChange={onChange} defaultValue={senddata.where==='' ?  where: senddata.where} />
+    <input className="input" name="where" placeholder="어디서?" onChange={onChange} defaultValue={senddata.where==='' ?  where: senddata.where} />
     <hr color="lightblue" size="3px" align="left"></hr>
     </div>
 
     <div className="inputbox">
     <text className="subtitle">무엇을?</text>
-    <input className="input" name="what" placeholder="?무엇을" dir="rtl" onChange={onChange} defaultValue={senddata.what==='' ?  what: senddata.what} />
+    <input className="input" name="what" placeholder="무엇을?" onChange={onChange} defaultValue={senddata.what==='' ?  what: senddata.what} />
     <hr color="lightblue" size="3px" align="left"></hr>
     </div>
 
     <div className="inputbox">
     <text className="subtitle">어떻게?</text>
-    <input className="input" name="how" placeholder="?어떻게" dir="rtl" onChange={onChange} defaultValue={senddata.how==='' ?  how: senddata.how} />
+    <input className="input" name="how" placeholder="어떻게?" onChange={onChange} defaultValue={senddata.how==='' ?  how: senddata.how} />
     <hr color="lightblue" size="3px" align="left"></hr>
     </div>
 
     <div className="inputbox">
     <text className="subtitle">왜?</text>
-    <input className="input" name="why" placeholder="?왜" dir="rtl" onChange={onChange} defaultValue={senddata.why==='' ?  why: senddata.why} />
+    <input className="input" name="why" placeholder="왜?" onChange={onChange} defaultValue={senddata.why==='' ?  why: senddata.why} />
     <hr color="lightblue" size="3px" align="left"></hr>
     </div>
     </div>
@@ -101,5 +101,3 @@ const Yookha=({match, senddata})=> {
 }
 
 export default Yookha;
-
-//input --> float:right
