@@ -164,7 +164,11 @@ const UserInsert = ({ onInsert, users }) => {
                 variant="outlined"
               />
               <IconButton aria-label="Directions" onClick={handleMyPosition}>
-                <Typography variant="body2" color="primary">
+                <Typography
+                  className="getMySpot"
+                  variant="body2"
+                  color="primary"
+                >
                   내 위치<br></br>받아오기
                 </Typography>
               </IconButton>
@@ -182,7 +186,12 @@ const UserInsert = ({ onInsert, users }) => {
                 variant="outlined"
                 label="어디서 출발할거야?"
               />
-              <Button variant="outlined" color="primary" onClick={handleSubmit}>
+              <Button
+                className="searchPlace"
+                variant="outlined"
+                color="primary"
+                onClick={handleSubmit}
+              >
                 장소검색
               </Button>
             </Grid>

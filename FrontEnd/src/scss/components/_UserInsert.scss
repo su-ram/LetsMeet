@@ -16,10 +16,21 @@
   .name-myspot {
     display: flex;
     justify-content: space-between;
+    .getMySpot {
+      color: #2699fb;
+      font-weight: 600;
+    }
   }
   .address-inputBtn {
     display: flex;
     justify-content: space-between;
+    align-items: baseline;
+    .searchPlace {
+      color: white;
+      background-color: #2699fb;
+      border: 0;
+      height: 40px;
+    }
   }
   @media screen and (min-width: 768px) {
     display: flex;
