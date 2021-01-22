@@ -237,7 +237,11 @@ const UserInsert = ({ onInsert, users }) => {
               >
                 <ListItemText
                   primary={address.place_name}
-                  secondary={address.address_name}
+                  secondary={
+                    address.road_address_name
+                      ? address.road_address_name
+                      : address.address_name
+                  }
                 />
               </ListItem>
             ))}
