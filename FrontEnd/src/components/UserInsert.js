@@ -163,7 +163,7 @@ const UserInsert = ({ onInsert, users }) => {
                 margin="dense"
                 variant="outlined"
               />
-              <IconButton aria-label="Directions" onClick={handleMyPosition}>
+              {/*<IconButton aria-label="Directions" onClick={handleMyPosition}>
                 <Typography
                   className="getMySpot"
                   variant="body2"
@@ -171,7 +171,14 @@ const UserInsert = ({ onInsert, users }) => {
                 >
                   내 위치<br></br>받아오기
                 </Typography>
-              </IconButton>
+              </IconButton>*/}
+              <Button
+                className="myPlace"
+                variant="outlined"
+                onClick={handleMyPosition}
+              >
+                내 위치<br/>받아오기
+              </Button>
             </Grid>
             <Grid className="address-inputBtn">
               <TextField
@@ -198,6 +205,7 @@ const UserInsert = ({ onInsert, users }) => {
           </Grid>
           <Grid className={`doro-jibun-info ${hidden ? "hidden" : ""}`}>
             <Grid className="address-tip-info">
+              <hr className="address-hr"/>
               <Grid className="address-tip">tip</Grid>
               <Grid className="address-info">
                 아래와 같은 조합으로 겁색을 하시면 더욱 정확한 결과가
