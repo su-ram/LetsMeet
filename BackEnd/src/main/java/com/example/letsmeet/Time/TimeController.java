@@ -1,6 +1,7 @@
 package com.example.letsmeet.Time;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
@@ -22,6 +23,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -47,7 +49,7 @@ public class TimeController {
 	
 	
 	@GetMapping("/topN")
-	public Map<Integer, ArrayList<String>> topN() {
+	public String[] topN() {
 		//top3 시간대 리턴하는 메소드. meet의 checkArray를 가져와서 연산. 
 		
 		
@@ -66,10 +68,6 @@ public class TimeController {
 		
 		for(int i = 0; i< col; i++) {
 			table[i] = transferToN(total[i], notation, row);
-			for(int val : table[i]) {
-				System.out.print(val);
-			}
-			System.out.println();
 			
 		}
 		
@@ -90,7 +88,7 @@ public class TimeController {
 						map.get(count).add(positions);
 						
 					}
-//					
+				
 				}
 				
 			}
@@ -107,7 +105,7 @@ public class TimeController {
 		}
 		TreeMap<Integer, ArrayList<String>> treeMap = new TreeMap<>(map);
         it = treeMap.descendingKeySet().iterator();
-        it = treeMap.keySet().iterator();
+        //it = treeMap.keySet().iterator();
         int index = 0;
         
         while (index < 3 && it.hasNext()) {
@@ -115,7 +113,8 @@ public class TimeController {
         	ArrayList<String> positions = map.get(it.next());
         	
         	for(String str : positions) {
-        		top3[index++] = str;System.out.println(str);
+        		top3[index++] = str;
+
         		if(index == 3) {
         			break;
         		}
@@ -124,20 +123,53 @@ public class TimeController {
         	
         }
         
+        index = 0;
+        
         for(String top : top3) {
         	
         	String[] times = top.split("\\|");
-        	String[] start= times[0].split(",");
+        	String[] startTop= times[0].split(",");
+        	String[] endTop;
+        	if(times.length > 1) {
+        		endTop = times[1].split(",");
+        	}else {
+        		endTop = startTop;
+        	}
         	
-        	LocalDate day = meet.getDates().get(Integer.parseInt(start[1]));
-        	String result = day.format(DateTimeFormatter.ofPattern("MM / dd (E)"));
+        	
+        	LocalDate day = meet.getDates().get(Integer.parseInt(startTop[1]));
+        	String result = day.format(DateTimeFormatter.ofPattern("MM/dd (E)"))+"\n";
+        	
         	int gap = meet.getGap();
-        	String end = times[1].split(",")[0];
         	
-        	int startT = Integer.parseInt(meet.getStart().split(":")[0]) + (gap*Integer.parseInt(start[0]));
-        	int endT = Integer.parseInt(meet.getEnd().split(":")[0]) + (gap*Integer.parseInt(end));
+        	String[] originStart = meet.getStart().split(":");
+        	
+        	int originHH = Integer.parseInt(originStart[0]);
+        	int originMM = Integer.parseInt(originStart[1]);
+        	
+        	LocalTime origin = LocalTime.of(originHH, originMM);
         	
         	
+        	int from = Integer.parseInt(startTop[0]);
+        	int rear = Integer.parseInt(endTop[0]);
+        	
+        	
+        	int offset = gap * from;
+        	
+        	LocalTime start = origin.plusMinutes(gap*from);
+        	LocalTime end = start.plusMinutes((rear-from)*gap);
+        	
+        	
+        	
+        	DateTimeFormatter df = DateTimeFormatter.ofPattern("hh:mm a");
+        	result += start.format(df);
+        	
+        	if(times.length > 1) {
+        		result += " ~ " + end.format(df);
+        	}
+        	
+        	top3[index++] = result;
+        	System.out.println(result);
         	
         }
         
@@ -145,7 +177,7 @@ public class TimeController {
         
         
         
-		return map;
+		return top3;
 	}
 	class AscendingString implements Comparator<String> { 
 		@Override public int compare(String a, String b) { 
