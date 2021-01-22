@@ -169,7 +169,7 @@ public class TimeController {
         	}
         	
         	top3[index++] = result;
-        	System.out.println(result);
+        	
         	
         }
         
