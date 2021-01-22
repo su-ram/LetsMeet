@@ -54,6 +54,11 @@ public class TimeController {
 		
 		
 		User user = userInfo.getUser();
+		
+		if(user == null) {
+			return null;
+		}
+		
 		Meet meet = User.getMeet(mongoTemplate, user.getMeetId());
 		int[] total = meet.getCheckArray();
 		int notation = meet.getNum() + 1;
@@ -127,6 +132,10 @@ public class TimeController {
         
         for(String top : top3) {
         	
+        	if(top == null) {
+        		continue;
+        	}
+        	
         	String[] times = top.split("\\|");
         	String[] startTop= times[0].split(",");
         	String[] endTop;
@@ -138,7 +147,8 @@ public class TimeController {
         	
         	
         	LocalDate day = meet.getDates().get(Integer.parseInt(startTop[1]));
-        	String result = day.format(DateTimeFormatter.ofPattern("MM/dd (E)"))+"\n";
+       
+        	String result = day.format(DateTimeFormatter.ofPattern("MM/dd (E)", Locale.KOREA)).toString()+"\n";
         	
         	int gap = meet.getGap();
         	
@@ -162,10 +172,10 @@ public class TimeController {
         	
         	
         	DateTimeFormatter df = DateTimeFormatter.ofPattern("hh:mm a");
-        	result += start.format(df);
+        	result += start.format(df).toString();
         	
         	if(times.length > 1) {
-        		result += " ~ " + end.format(df);
+        		result += " ~ " + end.format(df).toString();
         	}
         	
         	top3[index++] = result;
