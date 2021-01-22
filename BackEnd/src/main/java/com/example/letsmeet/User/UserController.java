@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.letsmeet.Meet.Meet;
-import com.example.letsmeet.Meet.MeetSub;
+
 import com.example.letsmeet.Time.UserInfo;
 
 @RestController
@@ -56,7 +56,7 @@ public class UserController {
 			case 1 :
 				
 				//새로운 유저. 
-				int col = Integer.parseInt(queryMeet.getEnd().substring(0, 2)) - Integer.parseInt(queryMeet.getStart().substring(0,2));				
+				int col = Integer.parseInt(queryMeet.getEnd().split(":")[0]) - Integer.parseInt(queryMeet.getStart().split(":")[0]);				
 				col = (int)(60 / queryMeet.getGap()) * col;
 				int row = queryMeet.getDates().size();
 				
@@ -78,7 +78,7 @@ public class UserController {
 				option.returnNew(true);
 
 				Meet result = (Meet)mongoTemplate.findAndModify(query, update, option, Meet.class, "meet");
-				
+				result.setUserTime(queryUser.getUserTimes());
 				
 				
 				userInfo.setUser(newbie);
@@ -91,9 +91,9 @@ public class UserController {
 				
 			case 3 :
 				
-				Meet meet = newbie.getMeet(mongoTemplate, newbie.getMeetId());
+				Meet meet = User.getMeet(mongoTemplate, newbie.getMeetId());
 				message = "로그인 완료";
-				
+				meet.setUserTime(queryUser.getUserTimes());
 				status = HttpStatus.OK;
 				userInfo.setUser(queryUser);
 				
