@@ -78,7 +78,7 @@ public class UserController {
 				option.returnNew(true);
 
 				Meet result = (Meet)mongoTemplate.findAndModify(query, update, option, Meet.class, "meet");
-				result.setUserTime(queryUser.getUserTimes());
+				result.setUserTime(newbie.getUserTimes());
 				
 				
 				userInfo.setUser(newbie);
