@@ -67,14 +67,16 @@
       .place-my-title {
         font-weight: bold;
         font-size: 1.3rem;
-        margin-top: -110px;
-        margin-left: 20px;
+        position: absolute; // absolute
+        bottom: 5%;
+        left: 5%;
       }
     }
     .place-our-mid {
       margin-top: 30px;
       height: 200px;
       box-shadow: 5px 5px 5px #747474;
+      position: relative;
       @media screen and (min-width: 768px) {
         margin-top: 0px;
       }
@@ -98,8 +100,11 @@
       .place-our-title {
         font-weight: bold;
         font-size: 1.3rem;
-        margin-top: -110px;
-        margin-left: 20px;
+        position: absolute; // absolute
+        bottom: 5%;
+        left: 5%;
+        // margin-top: -110px;
+        // margin-left: 20px;
       }
     }
   }
