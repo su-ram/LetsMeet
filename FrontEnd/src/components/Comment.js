@@ -1,3 +1,4 @@
+  
 import React, { useState, useEffect } from 'react';
 import Commentitem from './Commentitem';
 import axios from 'axios';
@@ -79,14 +80,9 @@ const Comment = ({match}) => {
 				<br />
 				<table className="table">
 					<tbody>
-						{comments===null 
-						?<Commentitem name={comments.userId} description={comments.content} />
-						:
-						comments.map(comment => {
+						{comments && comments.map(comment => {
 							return <Commentitem key={comment.userId} id={comment.userId} name={comment.userId} description={comment.content} />
-						})
-					
-					}
+						})}
 					</tbody>
 				</table>
 				<br />
