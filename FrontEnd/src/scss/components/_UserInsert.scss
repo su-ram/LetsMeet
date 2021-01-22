@@ -11,7 +11,6 @@
     }
   }
 }
-
 .user-info {
   .name-myspot {
     display: flex;
@@ -19,6 +18,20 @@
     .getMySpot {
       color: #2699fb;
       font-weight: 600;
+    }
+    .myPlace {
+      color: white;
+      background-color: #2699fb;
+      border: 0;
+      height: 40px;
+      margin-top: 8px;
+      font-size: 0.8rem;
+      width: 85px;
+      margin-right: -1px;
+      @media screen and (min-width: 768px) {
+        margin-right: 6px;
+        margin-left: 10px;
+      }
     }
   }
   .address-inputBtn {
@@ -45,6 +58,15 @@
   justify-content: space-between;
   @media screen and (min-width: 768px) {
     height: 90%;
+  }
+
+  .address-hr {
+    color: gray;
+    margin-bottom: 10px;
+    margin-top: 20px;
+    @media screen and (min-width: 768px) {
+      margin-top: 10px;
+    }
   }
 
   .address-tip-info {
