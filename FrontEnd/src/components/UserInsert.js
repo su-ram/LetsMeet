@@ -184,7 +184,7 @@ const UserInsert = ({ onInsert, users }) => {
                 }}
                 margin="dense"
                 variant="outlined"
-                label="어디서 출발할거야?"
+                label="어디서 출발하나요?"
               />
               <Button
                 className="searchPlace"
