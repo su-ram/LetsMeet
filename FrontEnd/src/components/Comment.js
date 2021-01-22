@@ -65,6 +65,7 @@ const Comment = ({match}) => {
 			  console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
 			}
 		  });
+		  fetchComments();
 	  };
 	
 	return (
