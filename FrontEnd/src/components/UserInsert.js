@@ -20,10 +20,12 @@ const UserInsert = ({ onInsert, users }) => {
   const [name, setName] = useState("");
   const [results, setResults] = useState([]);
   const [address, setAddress] = useState([]);
+  const [hidden, setHidden] = useState(false);
 
   // 장소 추가 버튼 누르면 Dialog open
   const handleClickOpen = () => {
     setdialogOpen(true);
+    setHidden(false);
   };
 
   // Dialog close
@@ -65,12 +67,7 @@ const UserInsert = ({ onInsert, users }) => {
 
   //----------------------검색하기 위한 함수----------------------
 
-  // const jibunInfo = document.getElementsByClassName("doro-jibun-info");
-  // const hidden = "hidden";
-
   const handleSubmit = (e) => {
-    // jibunInfo.classList.add(hidden);
-
     // 장소 검색 객체를 생성합니다
     var ps = new kakao.maps.services.Places();
 
@@ -95,6 +92,7 @@ const UserInsert = ({ onInsert, users }) => {
       if (status === kakao.maps.services.Status.OK) {
         // 정상적으로 검색 완료
         getListItem(data); // List로 나타내기
+        setHidden(true);
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         alert("검색 결과가 존재하지 않습니다.");
         return;
@@ -189,7 +187,46 @@ const UserInsert = ({ onInsert, users }) => {
               </Button>
             </Grid>
           </Grid>
-          <Grid className="doro-jibun-info">도로명주소</Grid>
+          <Grid className={`doro-jibun-info ${hidden ? "hidden" : ""}`}>
+            <Grid className="address-tip-info">
+              <Grid className="address-tip">tip</Grid>
+              <Grid className="address-info">
+                아래와 같은 조합으로 겁색을 하시면 더욱 정확한 결과가
+                검색됩니다.
+              </Grid>
+            </Grid>
+            <Grid className="address-group-ex">
+              <Grid className="address-ex">
+                <Grid className="address-ex-title">도로명+건물번호</Grid>
+                <Grid className="real-address">
+                  (예) 판교역로 235, 제주 첨단로 242
+                </Grid>
+              </Grid>
+              <Grid className="address-ex">
+                <Grid className="address-ex-title">지역명(동/리) + 번지</Grid>
+                <Grid className="real-address">
+                  (예) 삼평동 681, 제주 영평동 2181
+                </Grid>
+              </Grid>
+              <Grid className="address-ex">
+                <Grid className="address-ex-title">
+                  지역명(동/리) + 건물명(아파트명)
+                </Grid>
+                <Grid className="real-address">
+                  (예) 문당 주공, 연수동 주공3차
+                </Grid>
+              </Grid>
+              <Grid className="address-ex">
+                <Grid className="address-ex-title">사서함명 + 번호</Grid>
+                <Grid className="real-address">
+                  (예) 분당우체국사서함 1~100
+                </Grid>
+              </Grid>
+              <Grid className="address-dialog-img">
+                <img src="/img/letsmeet.png" alt="logo" />
+              </Grid>
+            </Grid>
+          </Grid>
           {/* kakao api 주소 나타내는 영역 */}
           <List component="nav" aria-label="contacts">
             {results.map((address, i) => (

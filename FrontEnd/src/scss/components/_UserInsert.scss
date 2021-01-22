@@ -1,24 +1,72 @@
 .MuiDialog-paper {
-  width: 500x;
-  height: 500px;
-  padding: 10px;
+  height: 630px;
+  padding: 20px;
+  @media screen and (min-width: 768px) {
+    height: 600px;
+  }
+  .MuiFormControl-marginDense {
+    width: 70%;
+    @media screen and (min-width: 768px) {
+      width: 70%;
+    }
+  }
 }
 
-.MuiFormControl-marginDense {
-  width: 70%;
+.user-info {
+  .name-myspot {
+    display: flex;
+    justify-content: space-between;
+  }
+  .address-inputBtn {
+    display: flex;
+    justify-content: space-between;
+  }
+  @media screen and (min-width: 768px) {
+    display: flex;
+    justify-content: space-between;
+  }
 }
 
-.address-inputBtn {
+.doro-jibun-info {
+  height: 80%;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
+  @media screen and (min-width: 768px) {
+    height: 90%;
+  }
+
+  .address-tip-info {
+    .address-tip {
+      font-size: 30px;
+      font-weight: 1000;
+      color: #2699fb;
+    }
+  }
+  .address-group-ex {
+    .address-ex {
+      line-height: 200%;
+      margin: 10px 0;
+      .address-ex-title {
+        font-weight: 800;
+      }
+      .real-address {
+        color: #2699fb;
+      }
+    }
+    .address-dialog-img {
+      display: flex;
+      justify-content: flex-end;
+      img {
+        width: 150px;
+      }
+    }
+  }
+}
+
+.hidden {
+  display: none;
 }
 
 @media screen and (min-width: 768px) {
-  .MuiFormControl-marginDense {
-    width: 60%;
-  }
-  .user-info {
-    display: flex;
-    // flex-direction: ;
-  }
 }
