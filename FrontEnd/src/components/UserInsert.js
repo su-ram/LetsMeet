@@ -20,15 +20,18 @@ const UserInsert = ({ onInsert, users }) => {
   const [name, setName] = useState("");
   const [results, setResults] = useState([]);
   const [address, setAddress] = useState([]);
+  const [hidden, setHidden] = useState(false);
 
   // 장소 추가 버튼 누르면 Dialog open
   const handleClickOpen = () => {
     setdialogOpen(true);
+    setHidden(false);
   };
 
   // Dialog close
   const handleClose = () => {
     setdialogOpen(false);
+    setResults([]);
   };
 
   // textfield 이름 변경
@@ -89,6 +92,7 @@ const UserInsert = ({ onInsert, users }) => {
       if (status === kakao.maps.services.Status.OK) {
         // 정상적으로 검색 완료
         getListItem(data); // List로 나타내기
+        setHidden(true);
       } else if (status === kakao.maps.services.Status.ZERO_RESULT) {
         alert("검색 결과가 존재하지 않습니다.");
         return;
@@ -141,42 +145,96 @@ const UserInsert = ({ onInsert, users }) => {
         내 위치 등록하기
       </Button>
       <Dialog
+        className="info-dialog"
         onClose={handleClose}
         aria-labelledby="customized-dialog-title"
         maxWidth="false"
         open={dialogOpen}
       >
         <Grid onSubmit={handleSubmit}>
-          <Typography variant="outlined">이름</Typography>
-          <TextField
-            id="outlined-dense"
-            label="나의 이름"
-            value={name}
-            onChange={handleNameChange}
-            margin="dense"
-            variant="outlined"
-          />
-          <IconButton aria-label="Directions" onClick={handleMyPosition}>
-            <Typography variant="body2" color="primary">
-              내 위치 받아오기
-            </Typography>
-          </IconButton>
-          <Grid className="address-inputBtn">
-            <TextField
-              id="input-address"
-              // placeholder="어디서 출발할거야?"
-              onKeyPress={(event) => {
-                if (event.key === "Enter") {
-                  handleSubmit();
-                }
-              }}
-              margin="dense"
-              variant="outlined"
-              label="어디서 출발할거야?"
-            />
-            <Button variant="outlined" color="primary" onClick={handleSubmit}>
-              장소검색
-            </Button>
+          <Grid className="user-info">
+            {/* <Typography variant="outlined">이름</Typography> */}
+            <Grid className="name-myspot">
+              <TextField
+                id="outlined-dense"
+                label="나의 이름"
+                value={name}
+                onChange={handleNameChange}
+                margin="dense"
+                variant="outlined"
+              />
+              <IconButton aria-label="Directions" onClick={handleMyPosition}>
+                <Typography
+                  className="getMySpot"
+                  variant="body2"
+                  color="primary"
+                >
+                  내 위치<br></br>받아오기
+                </Typography>
+              </IconButton>
+            </Grid>
+            <Grid className="address-inputBtn">
+              <TextField
+                id="input-address"
+                // placeholder="어디서 출발할거야?"
+                onKeyPress={(event) => {
+                  if (event.key === "Enter") {
+                    handleSubmit();
+                  }
+                }}
+                margin="dense"
+                variant="outlined"
+                label="어디서 출발하나요?"
+              />
+              <Button
+                className="searchPlace"
+                variant="outlined"
+                color="primary"
+                onClick={handleSubmit}
+              >
+                장소검색
+              </Button>
+            </Grid>
+          </Grid>
+          <Grid className={`doro-jibun-info ${hidden ? "hidden" : ""}`}>
+            <Grid className="address-tip-info">
+              <Grid className="address-tip">tip</Grid>
+              <Grid className="address-info">
+                아래와 같은 조합으로 겁색을 하시면 더욱 정확한 결과가
+                검색됩니다.
+              </Grid>
+            </Grid>
+            <Grid className="address-group-ex">
+              <Grid className="address-ex">
+                <Grid className="address-ex-title">도로명+건물번호</Grid>
+                <Grid className="real-address">
+                  (예) 판교역로 235, 제주 첨단로 242
+                </Grid>
+              </Grid>
+              <Grid className="address-ex">
+                <Grid className="address-ex-title">지역명(동/리) + 번지</Grid>
+                <Grid className="real-address">
+                  (예) 삼평동 681, 제주 영평동 2181
+                </Grid>
+              </Grid>
+              <Grid className="address-ex">
+                <Grid className="address-ex-title">
+                  지역명(동/리) + 건물명(아파트명)
+                </Grid>
+                <Grid className="real-address">
+                  (예) 문당 주공, 연수동 주공3차
+                </Grid>
+              </Grid>
+              <Grid className="address-ex">
+                <Grid className="address-ex-title">사서함명 + 번호</Grid>
+                <Grid className="real-address">
+                  (예) 분당우체국사서함 1~100
+                </Grid>
+              </Grid>
+              <Grid className="address-dialog-img">
+                <img src="/img/letsmeet.png" alt="logo" />
+              </Grid>
+            </Grid>
           </Grid>
           {/* kakao api 주소 나타내는 영역 */}
           <List component="nav" aria-label="contacts">
@@ -188,7 +246,11 @@ const UserInsert = ({ onInsert, users }) => {
               >
                 <ListItemText
                   primary={address.place_name}
-                  secondary={address.address_name}
+                  secondary={
+                    address.road_address_name
+                      ? address.road_address_name
+                      : address.address_name
+                  }
                 />
               </ListItem>
             ))}
