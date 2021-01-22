@@ -18,7 +18,6 @@ const Comment = ({match}) => {
 	useEffect(()=>{
 			axios.get(`https://letsmeeet.azurewebsites.net/api/comment`)
 			.then((res)=>{
-				//console.log(res.data);
 				setcomments(res.data);
 			})
 			.catch((err)=>{
@@ -40,7 +39,6 @@ const Comment = ({match}) => {
 	
 	const handlesubmit = (e) => {
 		e.preventDefault();
-		//console.log(text);
 	
 		const data = {
 		  "content": text,
