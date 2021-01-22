@@ -9,6 +9,7 @@ const Top3 = () => {
         ]*/
     const [timedata, settimedata] = useState('');
     	useEffect(()=>{
+			/*
 			axios.get(`https://letsmeeet.azurewebsites.net/api/time/topN`)
 			.then((res)=>{
 				settimedata(res.data);
@@ -27,7 +28,7 @@ const Top3 = () => {
 			else if (status === 500) {
 				console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
 			}
-			});
+			});*/
 	}, []);
 	
 return (

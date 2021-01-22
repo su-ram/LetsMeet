@@ -17,6 +17,7 @@ const ManagePlan = ({ match }) => {
 	const [checkUser, setCheckUser] = useState();
 	const [checkGroup, setCheckGroup] = useState();
 	const [user, setUser] = useState();
+	const [update, forceUpdate] = useState(true);
 	
 	const [isloggedin, setloggedin] = useState(false);
 	const [logininput, setlogininput] = useState({
@@ -43,8 +44,6 @@ const ManagePlan = ({ match }) => {
 		.then((res) => {
 			console.log(res.data);
 			setData(res.data);
-			setCheckUser(res.data.userTime);
-			setCheckGroup(res.data.checkArray);
 			setUser(res.data.users);
 			setsenddata(res.data.meetSubInfo);
 		})
@@ -155,10 +154,9 @@ const ManagePlan = ({ match }) => {
 					<TimeTable
 						data={data}
 						type="mine"
-						checkUser={checkUser}
-						checkGroup={checkGroup}
-						setCheckGroup={setCheckGroup}
 						user={user}
+						update={update}
+						forceUpdate={forceUpdate}
 					/> : <Grid container direction="row" justify="center" alignItems="center" className="login-con">
 							<div className="login-flex-container">
 								<div className="title">
@@ -182,14 +180,13 @@ const ManagePlan = ({ match }) => {
 							</div>
 						</Grid>}
 					{ 
-						user && checkGroup &&
+						user && 
 						<TimeTable
 							data={data}
 							type="team"
-							checkUser={checkUser}
-							checkGroup={checkGroup}
-							setCG={setCheckGroup}
 							user={user}
+							update={update}
+							forceUpdate={forceUpdate}
 						/>
 					}
 					<Grid container className="yook-ha-con" direction="column" justify="flex-start" alignItems="stretch">
