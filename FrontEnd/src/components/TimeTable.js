@@ -135,7 +135,7 @@ const TimeTable = (props) => {
 	}
 
 	const deleteAll = () => {
-		axios.delete(`https://letsmeeet.azurewebsites.net/api/myTime`)
+		axios.delete(`https://letsmeeet.azurewebsites.net/api/time`)
 		.then(res => {
 			console.log(res);
 		})
@@ -235,7 +235,6 @@ const TimeTable = (props) => {
 									{timeString.length!==0 &&
 										timeString.map((t, index) =>{
 											// 첫시작과 분단위가 같거나 마지막 시간인지 확인
-											console.log(t);
 											const last = index===timeString.length-1;
 											const bool = t.split(":")[1]===props.data.start.split(":")[1] || last;
 											return(
