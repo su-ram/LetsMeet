@@ -1,22 +1,24 @@
 .flex-container {
-	display: flex;
-	flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 .input {
-	border: none;
-	float: right;
+  text-align: right;
+  border: none;
+  float: right;
+  width: 80%;
 }
 .title {
-	font-size: 30px;
-	font-weight: bold;
+  font-size: 30px;
+  font-weight: bold;
 }
 .subtitle {
-	font-size: 18px;
-	color: #2699fb;
-	font-weight: bold;
+  font-size: 18px;
+  color: #2699fb;
+  font-weight: bold;
 }
-.yook-ha{
-	.flex-container{
-		margin-top: 1rem;
-	}
+.yook-ha {
+  .flex-container {
+    margin-top: 1rem;
+  }
 }
