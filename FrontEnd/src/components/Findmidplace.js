@@ -1,10 +1,9 @@
 import React from 'react';
-import { Link } from "react-router-dom";
 import Button from '@material-ui/core/Button';
 const Findmidplace = () => {
 
 const goToPlace = () => {
-    window.open('/Place');
+    window.open('/place');
 };
 
 return (

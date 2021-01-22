@@ -30,5 +30,5 @@ public class Meet {
 	
 	private int[] checkArray;
 	private int[][] checkUser;
-
+	private int[][] userTime;
 }

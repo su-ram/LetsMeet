@@ -1,0 +1,14 @@
+.img-userName {
+  display: flex;
+  align-items: center;
+  .user-img {
+    width: 35px;
+  }
+  .user-name {
+    margin-left: 10px;
+  }
+}
+
+.user-address {
+  margin-top: 8px;
+}
