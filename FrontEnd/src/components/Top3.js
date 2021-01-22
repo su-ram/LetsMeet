@@ -32,7 +32,7 @@ const Top3 = () => {
 	
 return (
     <div>
-         <div className="title">TOP 3 <img className="img" alt='top3' src="/img/Top3.png"></img></div>
+         <div className="title">TOP 3 <img className="img" alt='top3' src="/img/top3.png"></img></div>
         <Grid container >
         <Grid item xs={2} >
         <div className="first">1위 </div>
