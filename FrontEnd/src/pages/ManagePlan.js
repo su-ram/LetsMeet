@@ -37,7 +37,7 @@ const ManagePlan = ({ match }) => {
 			return;
 		getData(match.url.substr(1));
 	}, [match.url]);
-
+	const [senddata, setsenddata] = useState([]);
 	const getData = async (url) => {
 		await axios.get(`https://letsmeeet.azurewebsites.net/api/meet/info?id=${url}`)
 		.then((res) => {
@@ -46,6 +46,7 @@ const ManagePlan = ({ match }) => {
 			setCheckUser(res.data.userTime);
 			setCheckGroup(res.data.checkArray);
 			setUser(res.data.users);
+			setsenddata(res.data.meetSubInfo);
 		})
 		.catch((err) => {
 			const status = err?.response?.status;
@@ -193,7 +194,7 @@ const ManagePlan = ({ match }) => {
 					}
 					<Grid container className="yook-ha-con" direction="column" justify="flex-start" alignItems="stretch">
 						<Top3></Top3>
-						<Yookha></Yookha>
+						<Yookha senddata={senddata}></Yookha>
 						<Findmidplace></Findmidplace>
 						<Comment></Comment>
 						<Grid className="btn-con">

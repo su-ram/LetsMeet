@@ -5,21 +5,19 @@ import { Button } from '@material-ui/core';
 import ArrowUpwardIcon from '@material-ui/icons/ArrowUpward';
 
 const Comment = ({match}) => {
-	//const [comments, setcomments] = useState(null);
-	//const [comments, setcomments] = useState(null);
+	const [comments, setcomments] = useState(null);
 	const [text, settext] = useState('');
+
+	/*const comments
+	=[{"userId":"user222","userKey":2098202681,"content":"ㅎㅎㅎㅎㅎㅎㅎ","created":"2021-01-20T01:50:25.915"},
+	{"userId":"user111","userKey":1894261334,"content":"ㅋㅋㅋㅋㅋ","created":"2021-01-20T01:51:10.426"},
+	{"userId":"user11","userKey":2076160027,"content":"This is your comment.","created":"2021-01-21T01:50:41.112"}]*/
 	const onChange = (e) => {
 		settext(e.target.value);
 	  };
-	/*useEffect(()=>{
-		const headers = {
-			'Access-Control-Allow-Origin': '*',        
-			'Accept': 'application/json',
-			'Content-Type': 'application/x-www-form-urlencoded',
-			}
-			axios.get(`https://letsmeeet.azurewebsites.net/5b1ea1384b0963e/api/meet`, headers)
+	useEffect(()=>{
+			axios.get(`https://letsmeeet.azurewebsites.net/api/comment`)
 			.then((res)=>{
-				//console.log(res.data);
 				setcomments(res.data);
 			})
 			.catch((err)=>{
@@ -38,23 +36,16 @@ const Comment = ({match}) => {
 			}
 			});
 	}, []);
-	*/
 	
 	const handlesubmit = (e) => {
 		e.preventDefault();
-		//console.log(text);
-		const headers = {
-		  'Access-Control-Allow-Origin': '*',        
-		  'Accept': 'application/json',
-		  'Content-Type': 'application/x-www-form-urlencoded'
-		}
 	
 		const data = {
 		  "content": text,
 		}
 	
 		axios
-		  .post('https://letsmeeet.azurewebsites.net/api/comment', data, headers, { withCredentials: true })
+		  .post('https://letsmeeet.azurewebsites.net/api/comment', data)
 		  .then(function (response) {
 			console.log(response);
 		  })
@@ -74,18 +65,6 @@ const Comment = ({match}) => {
 		  });
 	  };
 	
-
-	const comments = [
-		{
-			"user": {
-			"userId": "첫번째유저",
-			"userPass": "lovesk2",
-			"meetId": "5b1ea1384b0963e"
-			},
-			"created": "2021-01-19",
-			"content": "string"
-		}
-	]
 	return (
 		<div>
 			<text className="title">
@@ -101,7 +80,7 @@ const Comment = ({match}) => {
 				<table className="table">
 					<tbody>
 						{comments.map(comment => {
-							return <Commentitem key={comment.user.userId} id={comment.user.userId} name={comment.user.userId} description={comment.content} />
+							return <Commentitem key={comment.userId} id={comment.userId} name={comment.userId} description={comment.content} />
 						})}
 					</tbody>
 				</table>

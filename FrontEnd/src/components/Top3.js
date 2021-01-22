@@ -1,33 +1,17 @@
-import React from 'react';
+import React, {useState, useEffect} from 'react';
 import { Grid } from '@material-ui/core'
 import axios from 'axios';
 const Top3 = () => {
-    //나중에 timedata 맵으로 바꿔야함,,안바꿔도될듯??
-    const timedata = [
-        {
-        'date': '12/15(수)',
-        'time': '2:30PM~4:30PM',
-        },
-        {
-        'date': '12/18(금)',
-        'time': '4PM~6PM',
-        },
-        {
-        'date': '12/18(금)',
-        'time': '3PM~4PM',
-        },
-        ]
-
-    	/*useEffect(()=>{
-		const headers = {
-			'Access-Control-Allow-Origin': '*',        
-			'Accept': 'application/json',
-			'Content-Type': 'application/x-www-form-urlencoded',
-			}
-			axios.get(`https://letsmeeet.azurewebsites.net/5b1ea1384b0963e/api/topN`, headers)
+    /*const timedata = [
+        "12/31 (목)\n03:30 오후",
+        "01/02 (토)\n07:30 오후",
+        "12/31 (목)\n07:30 오후"
+        ]*/
+    const [timedata, settimedata] = useState('');
+    	useEffect(()=>{
+			axios.get(`https://letsmeeet.azurewebsites.net/api/time/topN`)
 			.then((res)=>{
-				//console.log(res.data);
-				setcomments(res.data);
+				settimedata(res.data);
 			})
 			.catch((err)=>{
 			const status = err?.response?.status;
@@ -45,38 +29,28 @@ const Top3 = () => {
 			}
 			});
 	}, []);
-	*/
+	
 return (
     <div>
          <div className="title">TOP 3 <img className="img" alt='top3' src="/img/Top3.png"></img></div>
-        <Grid
-        container
-        direction="row"
-        justify="space-evenly"
-        alignItems="center">
-        <Grid>
-        <text className="first">1위 </text>
+        <Grid container >
+        <Grid item xs={2} >
+        <div className="first">1위 </div>
         </Grid>
-        <Grid>
-        <text className="desc">{timedata[0].date} </text>
-        <br/>
-        <text className="desc">{timedata[0].time} </text>
+        <Grid item xs={2}>
+        <div className="desc">{timedata[0]} </div>
         </Grid>
-        <Grid>
-        <text className="second">2위 </text>
+        <Grid item xs={2}>
+        <div className="second">2위 </div>
         </Grid>
-        <Grid>
-        <text className="desc">{timedata[1].date} </text>
-        <br/>
-        <text className="desc">{timedata[1].time} </text>
+        <Grid item xs={2}>
+        <div className="desc">{timedata[1]} </div>
         </Grid>
-        <Grid>
-        <text className="third">3위 </text>
+        <Grid item xs={2}>
+        <div className="third">3위 </div>
         </Grid>
-        <Grid>
-        <text className="desc">{timedata[1].date} </text>
-        <br/>
-        <text className="desc">{timedata[1].time} </text>
+        <Grid item xs={2}>
+        <div className="desc">{timedata[2]} </div>
         </Grid>
         </Grid>
         <br />
