@@ -1,3 +1,4 @@
+  
 import React, { useState, useEffect } from 'react';
 import Commentitem from './Commentitem';
 import axios from 'axios';
@@ -15,8 +16,8 @@ const Comment = ({match}) => {
 	const onChange = (e) => {
 		settext(e.target.value);
 	  };
-	useEffect(()=>{
-			axios.get(`https://letsmeeet.azurewebsites.net/api/comment`)
+		const fetchComments = async () => {
+			await axios.get(`https://letsmeeet.azurewebsites.net/api/comment`)
 			.then((res)=>{
 				setcomments(res.data);
 			})
@@ -35,15 +36,16 @@ const Comment = ({match}) => {
 				console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
 			}
 			});
-	}, []);
+	};
+	useEffect(() => {
+		fetchComments();
+	  }, []);
 	
 	const handlesubmit = (e) => {
 		e.preventDefault();
-	
 		const data = {
 		  "content": text,
 		}
-	
 		axios
 		  .post('https://letsmeeet.azurewebsites.net/api/comment', data)
 		  .then(function (response) {
