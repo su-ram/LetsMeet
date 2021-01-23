@@ -110,9 +110,6 @@ const TimeTable = (props) => {
 	const updateToDB = async () => {
 		const CA = getCheckArray(checkArray);
 		await axios.put(`https://letsmeeet.azurewebsites.net/api/time`, {
-			"userId": "user03",
-			"userPass": "1234",
-			"meetId": "bf6325ae6eecf99",
 			"checkArray" : CA
 		}, {
 			headers: {
@@ -135,9 +132,6 @@ const TimeTable = (props) => {
 			CA[i]=0;
 		}
 		await axios.put(`https://letsmeeet.azurewebsites.net/api/time`, {
-			"userId": "user03",
-			"userPass": "1234",
-			"meetId": "bf6325ae6eecf99",
 			"checkArray" : CA
 		}, {
 			headers: {
