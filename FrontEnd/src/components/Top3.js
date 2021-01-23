@@ -1,29 +1,34 @@
 import React, {useState, useEffect} from 'react';
 import { Grid } from '@material-ui/core'
 import axios from 'axios';
-const Top3 = () => {
+const Top3 = ({isloggedin}) => {
     const [timedata, settimedata] = useState('');
-    	useEffect(()=>{
-			axios.get(`https://letsmeeet.azurewebsites.net/api/time/topN`)
-			.then((res)=>{
-				settimedata(res.data);
-			})
-			.catch((err)=>{
-			const status = err?.response?.status;
-			if (status === undefined) {
-				console.dir("데이터를 불러오던 중 예기치 못한 예외가 발생하였습니다.\n" + JSON.stringify(err));
-			}
-			else if (status === 400) {
-				console.dir("400에러");
-			}
-			else if (status === 401) {
-				console.dir("401에러");
-			}
-			else if (status === 500) {
-				console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
-			}
-			});
-	}, []);
+
+
+    const fetchtop3 = async () => {
+        await axios.get(`https://letsmeeet.azurewebsites.net/api/time/topN`)
+        .then((res)=>{
+            settimedata(res.data);
+        })
+        .catch((err)=>{
+        const status = err?.response?.status;
+        if (status === undefined) {
+            console.dir("데이터를 불러오던 중 예기치 못한 예외가 발생하였습니다.\n" + JSON.stringify(err));
+        }
+        else if (status === 400) {
+            console.dir("400에러");
+        }
+        else if (status === 401) {
+            console.dir("401에러");
+        }
+        else if (status === 500) {
+            console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
+        }
+        });
+};
+useEffect(() => {
+    fetchtop3();
+  }, [isloggedin]);
 	
 return (
     <div>
