@@ -24,7 +24,6 @@ export default class CreatePlan extends React.PureComponent {
       dates: [],
       key: "selection",
     };
-    
   }
 
   onRangeChange = (ranges) => {
@@ -33,17 +32,18 @@ export default class CreatePlan extends React.PureComponent {
       startDate: ranges["selection"].startDate,
       endDate: ranges["selection"].endDate,
       key: ranges["selection"].key,
-    })
+    });
     //getMonth
     let startGetMonth = ranges["selection"].startDate.getMonth();
-    startGetMonth = startGetMonth<9?'0'+(startGetMonth+1):startGetMonth+1;
+    startGetMonth =
+      startGetMonth < 9 ? "0" + (startGetMonth + 1) : startGetMonth + 1;
     let endGetMonth = ranges["selection"].endDate.getMonth();
-    endGetMonth = endGetMonth<9?'0'+(endGetMonth+1):endGetMonth+1;
+    endGetMonth = endGetMonth < 9 ? "0" + (endGetMonth + 1) : endGetMonth + 1;
     //getDate
     let startGetDate = ranges["selection"].startDate.getDate();
-    startGetDate = startGetDate<10?'0'+startGetDate:startGetDate;
+    startGetDate = startGetDate < 10 ? "0" + startGetDate : startGetDate;
     let endGetDate = ranges["selection"].endDate.getDate();
-    endGetDate = endGetDate<10?'0'+endGetDate:endGetDate;
+    endGetDate = endGetDate < 10 ? "0" + endGetDate : endGetDate;
     //getYear
     let startGetYear = ranges["selection"].startDate.getFullYear();
     let s_startGetYear = startGetYear.toString();
@@ -52,8 +52,11 @@ export default class CreatePlan extends React.PureComponent {
     let s_endGetYear = endGetYear.toString();
     let n_endGetYear = parseInt(s_endGetYear);
     this.setState({
-      dates: [n_startGetYear+"-"+startGetMonth+"-"+startGetDate, n_endGetYear+"-"+startGetMonth+"-"+endGetDate]
-    })
+      dates: [
+        n_startGetYear + "-" + startGetMonth + "-" + startGetDate,
+        n_endGetYear + "-" + startGetMonth + "-" + endGetDate,
+      ],
+    });
   };
 
   changeHandler = (e) => {
@@ -63,22 +66,24 @@ export default class CreatePlan extends React.PureComponent {
   submitHandler = (e) => {
     e.preventDefault();
     console.log(this.state);
-    
+
     const headers = {
-      'Access-Control-Allow-Origin': '*', 
-      'Content-Type': 'application/json'
-    }
+      "Access-Control-Allow-Origin": "*",
+      "Content-Type": "application/json",
+    };
 
     const datas = {
       title: this.state.title,
       start: this.state.start,
       end: this.state.end,
       gap: this.state.gap,
-      dates: this.state.dates
-    }
-    
+      dates: this.state.dates,
+    };
+
     axios
-      .post(`https://letsmeeet.azurewebsites.net/api/meet`, datas, headers, { withCredentials: true })
+      .post(`https://letsmeeet.azurewebsites.net/api/meet`, datas, headers, {
+        withCredentials: true,
+      })
       .then(function (response) {
         console.log(response);
         let url = response.data;
@@ -118,94 +123,96 @@ export default class CreatePlan extends React.PureComponent {
 
     return (
       <Grid className="create-cont">
-          <Header />
-          <Grid className="create-cont-title">
-            <h2>언제가 좋을까요?🤔</h2>
-          </Grid>
-          <Grid className="setting">
-            {/* 캘린더 */}
-            <DateRange
-              className="create-calendar"
-              editableDateInputs={true}
-              onChange={this.onRangeChange}
-              moveRangeOnFirstSelection={false}
-              ranges={[this.state]}
+        <Header />
+        <Grid className="create-cont-title">
+          <h2>언제가 좋을까요?🤔</h2>
+        </Grid>
+        <Grid className="setting">
+          {/* 캘린더 */}
+          <DateRange
+            className="create-calendar"
+            editableDateInputs={true}
+            onChange={this.onRangeChange}
+            moveRangeOnFirstSelection={false}
+            ranges={[this.state]}
+          />
+          <Grid className="create-cont-setting2">
+            {/* 일정이름 */}
+            <input
+              className="create-name"
+              type="text"
+              name="title"
+              value={title}
+              onChange={this.changeHandler}
+              placeholder="일정 이름을 작성해주세요."
             />
-            <Grid className="create-cont-setting2">
-              {/* 일정이름 */}
-              <input
-                className="create-name"
-                type="text"
-                name="title"
-                value={title}
-                onChange={this.changeHandler}
-                placeholder="일정 이름을 작성해주세요."
-              />
-              {/* 시간 정하기 */}
-              <Grid className="create-time">
-                <FormControl className="create-time-start">
-                  {/* <InputLabel className="timeText">Start Time</InputLabel> */}
-                  <NativeSelect
-                    id="start"
-                    name="start"
-                    value={start}
-                    onChange={this.changeHandler}
-                  >
-                    <option aria-label="None" value="">
-                      시작시간
-                    </option>
-                    {/*수정 전 -> value='"00:00"'*/}
-                    <option value='00:00'>오전0시</option>
-                    {amTimeList}
-                    {pmTimeList}
-                  </NativeSelect>
-                </FormControl>
-                <Grid>~</Grid>
-                <FormControl className="create-time-finish">
-                  {/* <InputLabel className="timeText">Finish Time</InputLabel> */}
-                  <NativeSelect
-                    id="end"
-                    name="end"
-                    value={end}
-                    onChange={this.changeHandler}
-                  >
-                    <option aria-label="None" value="">
-                      끝시간
-                    </option>
-                    {amTimeList}
-                    {/*수정 전 -> value='"12:00"'*/}
-                    <option value='12:00'>오후12시</option>
-                    {pmTimeList}
-                  </NativeSelect>
-                </FormControl>
-              </Grid>
-              <Grid className="create-gap">
-                <FormControl>
-                  {/* <InputLabel className="timeText">Interval</InputLabel> */}
-                  <NativeSelect
-                    id="gap"
-                    name="gap"
-                    value={gap}
-                    onChange={this.changeHandler}
-                  >
-                    <option aria-label="None" value="">
-                      단위
-                    </option>
-                    <option value={15}>15분</option>
-                    <option value={30}>30분</option>
-                    <option value={60}>1시간</option>
-                  </NativeSelect>
-                </FormControl>
-                <Grid>&nbsp;&nbsp;단위</Grid>
-              </Grid>
-              {/* 일정생성 버튼 */}
-              <Grid className="create-plan">
-				<Button className="create-plan-btn" onClick={this.submitHandler}>
-					일정 생성하기
-				</Button>
-              </Grid>
+            {/* 시간 정하기 */}
+            <Grid className="create-time">
+              <FormControl className="create-time-start">
+                {/* <InputLabel className="timeText">Start Time</InputLabel> */}
+                <NativeSelect
+                  id="start"
+                  name="start"
+                  value={start}
+                  onChange={this.changeHandler}
+                >
+                  <option aria-label="None" value="">
+                    시작시간
+                  </option>
+                  {/*수정 전 -> value='"00:00"'*/}
+                  <option value="00:00">오전0시</option>
+                  {amTimeList}
+                  <option value="12:00">오후12시</option>
+                  {pmTimeList}
+                </NativeSelect>
+              </FormControl>
+              <Grid>~</Grid>
+              <FormControl className="create-time-finish">
+                {/* <InputLabel className="timeText">Finish Time</InputLabel> */}
+                <NativeSelect
+                  id="end"
+                  name="end"
+                  value={end}
+                  onChange={this.changeHandler}
+                >
+                  <option aria-label="None" value="">
+                    끝시간
+                  </option>
+                  <option value="00:00">오전0시</option>
+                  {amTimeList}
+                  {/*수정 전 -> value='"12:00"'*/}
+                  <option value="12:00">오후12시</option>
+                  {pmTimeList}
+                </NativeSelect>
+              </FormControl>
+            </Grid>
+            <Grid className="create-gap">
+              <FormControl>
+                {/* <InputLabel className="timeText">Interval</InputLabel> */}
+                <NativeSelect
+                  id="gap"
+                  name="gap"
+                  value={gap}
+                  onChange={this.changeHandler}
+                >
+                  <option aria-label="None" value="">
+                    단위
+                  </option>
+                  <option value={15}>15분</option>
+                  <option value={30}>30분</option>
+                  <option value={60}>1시간</option>
+                </NativeSelect>
+              </FormControl>
+              <Grid>&nbsp;&nbsp;단위</Grid>
+            </Grid>
+            {/* 일정생성 버튼 */}
+            <Grid className="create-plan">
+              <Button className="create-plan-btn" onClick={this.submitHandler}>
+                일정 생성하기
+              </Button>
             </Grid>
           </Grid>
+        </Grid>
       </Grid>
     );
   }
