@@ -34,19 +34,7 @@ const TimeTable = (props) => {
 		setCG(props.checkGroup);
 		setUser(props.user);
 		setUL(props.data.num);
-	}, [props])
-
-	useEffect(()=>{
-		let arr = [];
-		for(let i=0; i<timeString.length-1; i++){
-			let tmp = [];
-			for(let j=0; j<cellWidth.length; j++){
-				tmp.push(0);
-			}
-			arr.push(tmp);
-		}
-		setCA(arr);
-	}, [timeString])
+	}, [props, props.data, props.user, props.checkUser, props.checkGroup])
 
 	useEffect(()=>{
 		let tmp = [];
@@ -121,7 +109,6 @@ const TimeTable = (props) => {
 
 	const updateToDB = async () => {
 		const CA = getCheckArray(checkArray);
-		console.log(CA);
 		await axios.put(`https://letsmeeet.azurewebsites.net/api/time`, {
 			"checkArray" : CA
 		}, {
