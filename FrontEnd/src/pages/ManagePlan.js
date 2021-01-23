@@ -166,7 +166,7 @@ const ManagePlan = ({ match }) => {
 						setCheckGroup={setCheckGroup}
 						update={update}
 						forceUpdate={forceUpdate}
-						/> : <Grid container direction="row" justify="center" alignItems="center" className="login-con">
+					/> : <Grid container direction="row" justify="center" className="login-con">
 							<div className="login-flex-container">
 								<div className="title">
 									<img className="img" src="/img/alarm.png" />
