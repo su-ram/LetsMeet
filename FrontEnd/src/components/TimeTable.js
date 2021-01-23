@@ -363,9 +363,9 @@ const TimeTable = (props) => {
 																bgColor = " bg1";
 															}else if(arrNum === userLength){
 																bgColor = " bg4";
-															}else if(arrNum <= defaultNum*2){
+															}else if(arrNum <= userLength/2){
 																bgColor = " bg2";
-															}else if(arrNum <= defaultNum*3){
+															}else if(arrNum <= userLength-1){
 																bgColor = " bg3";
 															} 
 															clsName += bgColor;
