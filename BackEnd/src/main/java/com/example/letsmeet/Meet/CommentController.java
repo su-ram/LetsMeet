@@ -1,6 +1,7 @@
 package com.example.letsmeet.Meet;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -70,14 +71,17 @@ public class CommentController {
 	public List<Comment> getMeets(){
 		//해당하는 약속에 있는 모든 댓글들을 불러옴. 
 		
+		user = userInfo.getUser();
+		List<Comment> results = new ArrayList<Comment>(); 
 		
+		if(user != null) {
 		Query query = new Query();
-		query.addCriteria(Criteria.where("meetId").is(userInfo.getUser().getMeetId()));
+		query.addCriteria(Criteria.where("meetId").is(user.getMeetId()));
 		
 		Map comments = new HashMap<String, String>();
-		List<Comment> results = mongoTemplate.find(query, Comment.class, "comment");
+		results = mongoTemplate.find(query, Comment.class, "comment");
 		
-		
+		}
 		
 		return results;
 		
