@@ -143,7 +143,7 @@ const TimeTable = (props) => {
 			props.setCheckGroup(res.data.checkArray);
 			setCA(res.data.userTime);
 			forceUpdate(!update);
-
+			props.forceUpdate(!props.update);
 		})
 		.catch(err => {
 			console.log(err);
