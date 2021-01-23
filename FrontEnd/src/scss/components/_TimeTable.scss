@@ -66,14 +66,14 @@
 			.timetable-time-string{
 				position: sticky;
 				left: 0;
-				z-index: 1;
+				z-index: 3;
 				background-color: white;
 				&>div{
 					position: absolute;
 					top:-12px;
 					left: 0;
 					font-size: 0.6rem;
-					background-color: white;
+					background-color:  white;
 					@media screen and (min-width: 768px){
 						padding-right: 12px;
 						font-size: 1rem;
