@@ -29,7 +29,6 @@ const Yookha=({match, senddata})=> {
           "how": how,
           "what": what,
         }
-		/*
         axios
           .post('https://letsmeeet.azurewebsites.net/api/meet/sub', data)
           .then(function (response) {
@@ -49,7 +48,6 @@ const Yookha=({match, senddata})=> {
             console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
           }
           });
-			*/
         };
 
   return (
