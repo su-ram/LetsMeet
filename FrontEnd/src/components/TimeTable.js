@@ -339,19 +339,33 @@ const TimeTable = (props) => {
 															}
 
 															// 선택한 유저 수 별 색상 표현
+
 															const defaultNum = userLength/5;
 															let bgColor = "";
-															if(arrNum <=0 ){
+															// if(arrNum <=0 ){
+															// 	bgColor = "";
+															// }else if(arrNum <=1){
+															// 	bgColor = " bg1";
+															// }else if(defaultNum*2>arrNum){
+															// 	bgColor = " bg2";
+															// }else if(defaultNum*3>arrNum){
+															// 	bgColor = " bg3";
+															// }else if(userLength>arrNum){
+															// 	bgColor = " bg4";
+															// }
+															// clsName += bgColor;
+
+															if(arrNum <= 0){
 																bgColor = "";
 															}else if(arrNum <=1){
 																bgColor = " bg1";
-															}else if(defaultNum*2>arrNum){
-																bgColor = " bg2";
-															}else if(defaultNum*3>arrNum){
-																bgColor = " bg3";
-															}else if(userLength>arrNum){
+															}else if(arrNum === userLength){
 																bgColor = " bg4";
-															}
+															}else if(arrNum <= defaultNum*2){
+																bgColor = " bg2";
+															}else if(arrNum <= defaultNum*3){
+																bgColor = " bg3";
+															} 
 															clsName += bgColor;
 
 															// tooltip content
