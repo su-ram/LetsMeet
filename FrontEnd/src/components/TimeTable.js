@@ -330,9 +330,9 @@ const TimeTable = (props) => {
 															// 선택한 유저 수 별 색상 표현
 															const defaultNum = userLength/5;
 															let bgColor = "";
-															if(arrNum===0){
+															if(arrNum <=0 ){
 																bgColor = "";
-															}else if(defaultNum>arrNum){
+															}else if(arrNum <=1){
 																bgColor = " bg1";
 															}else if(defaultNum*2>arrNum){
 																bgColor = " bg2";
