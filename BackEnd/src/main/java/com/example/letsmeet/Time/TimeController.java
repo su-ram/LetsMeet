@@ -73,7 +73,10 @@ public class TimeController {
 		
 		for(int i = 0; i< col; i++) {
 			table[i] = transferToN(total[i], notation, row);
-			
+			for(int val : table[i]) {
+				System.out.print(val);
+			}
+			System.out.println();
 		}
 		
 		for(int i = 0; i < row; i++) {
@@ -135,7 +138,7 @@ public class TimeController {
         	if(top == null) {
         		continue;
         	}
-        	
+        	System.out.println(top);
         	String[] times = top.split("\\|");
         	String[] startTop= times[0].split(",");
         	String[] endTop;
@@ -148,7 +151,7 @@ public class TimeController {
         	
         	LocalDate day = meet.getDates().get(Integer.parseInt(startTop[1]));
        
-        	String result = day.format(DateTimeFormatter.ofPattern("MM/dd (E)", Locale.KOREA)).toString()+"\n";
+        	String result = day.format(DateTimeFormatter.ofPattern("MM/dd (E)")).toString()+"\n";
         	
         	int gap = meet.getGap();
         	
@@ -167,7 +170,7 @@ public class TimeController {
         	int offset = gap * from;
         	
         	LocalTime start = origin.plusMinutes(gap*from);
-        	LocalTime end = start.plusMinutes((rear-from)*gap);
+        	LocalTime end = start.plusMinutes((rear-from+1)*gap);
         	
         	
         	
@@ -516,12 +519,24 @@ public class TimeController {
 			
 		for(int i=0; i<row; i++) {
 			
-			if(!stack.empty()) {
-				
-				result[i] = stack.pop();
+			
+			
+			if(row-i > stack.size()) {
+				result[i] = 0;
 			}else {
-				result[i]= 0;
+				result[i] = stack.pop();
 			}
+			
+			
+			
+			
+//			//
+//			if(!stack.empty()) {
+//				
+//				result[i] = stack.pop();
+//			}else {
+//				result[i]= 0;
+//			}
 			
 		}
 		
