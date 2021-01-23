@@ -30,7 +30,7 @@ const TimeTable = (props) => {
 
 	useEffect(()=>{
 		setTS(getTimeString(props.data.start, props.data.end, props.data.gap));
-		setCA(props.data.userTime);
+		setCA(props.checkUser);
 		setCG(props.checkGroup);
 		setUser(props.user);
 		setUL(props.data.num);
@@ -132,20 +132,18 @@ const TimeTable = (props) => {
 		.then(res => {
 			props.setCheckGroup(res.data.checkArray);
 			setCA(res.data.userTime);
-			console.log(res.data.checkArray);
-			console.log(res.data.userTime);
+			forceUpdate(!update);
 		})
 		.catch(err => {
 			console.log(err);
 		})
 
-		forceUpdate(!update);
 	}
 
 	const deleteAll = () => {
 		axios.delete(`https://letsmeeet.azurewebsites.net/api/time`)
 		.then(res => {
-			console.log(res);
+			forceUpdate(!update);
 		})
 		.catch(err => {
 			console.log(err);
@@ -197,8 +195,7 @@ const TimeTable = (props) => {
 														<Grid>{ bool? t:undefined }</Grid>
 													</TableCell>
 												{
-													last && checkArray ? // 마지막 셀은 출력 x
-													undefined:
+													!last && checkArray && // 마지막 셀은 출력 x
 													cellWidth.map((_, index2) => {
 														let clsName = "table-body-mine";
 														clsName += index2<cellNum?" visible":" unvisible";
@@ -331,13 +328,13 @@ const TimeTable = (props) => {
 														<Grid>{ bool && t }</Grid>
 													</TableCell>
 													{
-														!last && 
+														!last && cellWidth &&
 														cellWidth.map((_, index2) => {
 															let clsName = "table-body-team";
 															clsName += bool?" fullterm":" midterm";
 
 															let arrNum = 0;
-															let numStr = checkGroup[index].toString(userLength+1);
+															let numStr = userLength === 0 ? checkGroup[index] : checkGroup[index].toString(userLength+1);
 															const diff = cellWidth.length-numStr.length;
 															if(index2>=diff){
 																arrNum = Number(numStr[index2-diff]);
