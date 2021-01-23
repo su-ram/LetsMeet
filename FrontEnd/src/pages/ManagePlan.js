@@ -14,6 +14,7 @@ const ManagePlan = ({ match }) => {
 	const [data, setData] = useState();
 	const [shareImg, setShareImg] = useState("");
 	const [open, setOpen] = useState(false);
+	const [checkUser, setCheckUser] = useState();
 	const [checkGroup, setCheckGroup] = useState();
 	const [user, setUser] = useState();
 	const [update, forceUpdate] = useState(true);
@@ -76,12 +77,12 @@ const ManagePlan = ({ match }) => {
 				"meetId": match.url.substr(1)
 			}
 			axios.post(`https://letsmeeet.azurewebsites.net/api/user/signin`, data)
-				.then((res) => {
+				.then( async (res) => {
 					console.log(res.data);
 					setloggedin(true);
 					setData(res.data);
+					setCheckUser(res.data.userTime);
 					setCheckGroup(res.data.checkArray);
-					forceUpdate(!update);
 				})
 				.catch((err) => {
 					const status = err?.response?.status;
@@ -146,7 +147,7 @@ const ManagePlan = ({ match }) => {
 	return (
 		<Grid container direction="column" className="Manage-page-con">
 			<Header />
-			{isloggedin && 
+			{isloggedin && data &&
 				<Grid className="Manage-plan-title">
 					<img className="img" src="/img/alarm.png" />
 					<h2>{data.title}</h2>
@@ -159,9 +160,9 @@ const ManagePlan = ({ match }) => {
 						data={data}
 						type="mine"
 						user={user}
+						checkUser = {checkUser}
 						setCheckGroup={setCheckGroup}
 						update={update}
-						forceUpdate={forceUpdate}
 					/> : <Grid container direction="row" justify="center" alignItems="center" className="login-con">
 							<div className="login-flex-container">
 								<div className="title">
@@ -192,7 +193,6 @@ const ManagePlan = ({ match }) => {
 							user={user}
 							checkGroup={checkGroup}
 							update={update}
-							forceUpdate={forceUpdate}
 						/>
 					}
 					<Grid container className="yook-ha-con" direction="column" justify="flex-start" alignItems="stretch">
