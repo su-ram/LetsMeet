@@ -226,7 +226,7 @@ public class TimeController {
 		if(user == null) {
 		user = User.getUser(mongoTemplate, myTime.getUserId(), myTime.getMeetId());
 		}
-		Meet meet = User.getMeet(mongoTemplate, myTime.getMeetId());
+		Meet meet = User.getMeet(mongoTemplate, user.getMeetId());
 		
 		
 		
@@ -234,6 +234,8 @@ public class TimeController {
 		
 		
 		if(meet.getCheckArray().length != col) {
+			System.out.println(meet.getCheckArray().length);
+			System.out.println(col);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 		int row = meet.getDates().size();
@@ -269,7 +271,7 @@ public class TimeController {
 		}
 		
 		meet = updateTotalTable(meet, user);
-		meet.setUserTime(user.getUserTimes());
+		meet.setUserTime(times);
 		
 		return new ResponseEntity<Meet>(meet, status);
 
