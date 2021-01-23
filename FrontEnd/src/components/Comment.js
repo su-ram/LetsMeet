@@ -39,7 +39,7 @@ const Comment = ({match}) => {
 	};
 	useEffect(() => {
 		fetchComments();
-	  }, [comments]);
+	  }, []);
 	
 	const handlesubmit = (e) => {
 		e.preventDefault();
