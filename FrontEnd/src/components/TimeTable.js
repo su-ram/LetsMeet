@@ -124,12 +124,23 @@ const TimeTable = (props) => {
 		.catch(err => {
 			console.log(err);
 		})
-
 	}
 
-	const deleteAll = () => {
-		axios.delete(`https://letsmeeet.azurewebsites.net/api/time`)
+	const deleteAll = async () => {
+		const CA = getCheckArray(checkArray);
+		for(let i=0; i<CA.length; i++){
+			CA[i]=0;
+		}
+		await axios.put(`https://letsmeeet.azurewebsites.net/api/time`, {
+			"checkArray" : CA
+		}, {
+			headers: {
+				'Access-Control-Allow-Origin': '*'
+			}
+		})
 		.then(res => {
+			props.setCheckGroup(res.data.checkArray);
+			setCA(res.data.userTime);
 			forceUpdate(!update);
 		})
 		.catch(err => {

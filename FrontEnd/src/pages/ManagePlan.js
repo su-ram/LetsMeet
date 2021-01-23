@@ -42,7 +42,6 @@ const ManagePlan = ({ match }) => {
 	const getData = async (url) => {
 		await axios.get(`https://letsmeeet.azurewebsites.net/api/meet/info?id=${url}`)
 		.then((res) => {
-			console.log(res.data);
 			setData(res.data);
 			setUser(res.data.users);
 			setCheckGroup(res.data.checkArray);
