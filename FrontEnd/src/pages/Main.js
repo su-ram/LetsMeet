@@ -6,6 +6,7 @@ const Main = () => {
   return (
     <>
       <Switch>
+        <Route exact path="/" component={ CreatePlan } />
         <Route exact path="/Create" component={ CreatePlan } />
         <Route exact path="/Place" component={ PlaceMain } />
 		<Route exact path="/Guide" component={ Guide }/>
