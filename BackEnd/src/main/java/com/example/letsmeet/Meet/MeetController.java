@@ -93,8 +93,15 @@ public class MeetController {
 		
 		Query query = new Query();
 		query.addCriteria(Criteria.where("meetId").is(id));
+		User user = userInfo.getUser();
 		
-		return mongoTemplate.findOne(query, Meet.class, "meet"); 
+		Meet result = mongoTemplate.findOne(query, Meet.class, "meet"); 
+		if(user != null) {
+			result.setUserTime(user.getUserTimes());
+		}
+		
+		
+		return result;
 	}
 	
 	@GetMapping

@@ -1,7 +1,9 @@
 package com.example.letsmeet.Meet;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
+import java.util.Locale;
 
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,10 +25,12 @@ public class MeetSub {
 		
 		LocalDate date = dates.get(0);
 		int index = dates.size() - 1;
-		String startDate = String.valueOf(date.getMonthValue())+"/"+String.valueOf(date.getDayOfMonth());
-		date = dates.get(index);
-		String endDate = String.valueOf(date.getMonthValue())+"/"+String.valueOf(date.getDayOfMonth());
 		
+//		String startDate = String.valueOf(date.getMonthValue())+"/"+String.valueOf(date.getDayOfMonth());
+		String startDate = date.format(DateTimeFormatter.ofPattern("MM/dd", Locale.KOREA));
+		date = dates.get(index);
+//		String endDate = String.valueOf(date.getMonthValue())+"/"+String.valueOf(date.getDayOfMonth());
+		String endDate = date.format(DateTimeFormatter.ofPattern("MM/dd", Locale.KOREA));
 		
 		this.when = startDate + " ~ " + endDate;
 		this.who = new ArrayList<String>();
