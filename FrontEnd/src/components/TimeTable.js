@@ -116,11 +116,11 @@ const TimeTable = (props) => {
 				'Access-Control-Allow-Origin': '*'
 			}
 		})
-		.then(res => {
-			props.setCheckGroup(res.data.checkArray);
-			setCA(res.data.userTime);
-			forceUpdate(!update);
-			props.forceUpdate(!props.update);
+		.then(async res => {
+			await props.setCheckGroup(res.data.checkArray);
+			await setCA(res.data.userTime);
+			await forceUpdate(!update);
+			await props.forceUpdate(!props.update);
 		})
 		.catch(err => {
 			console.log(err);
@@ -139,11 +139,11 @@ const TimeTable = (props) => {
 				'Access-Control-Allow-Origin': '*'
 			}
 		})
-		.then(res => {
-			props.setCheckGroup(res.data.checkArray);
-			setCA(res.data.userTime);
-			forceUpdate(!update);
-			props.forceUpdate(!props.update);
+		.then(async res => {
+			await props.setCheckGroup(res.data.checkArray);
+			await setCA(res.data.userTime);
+			await forceUpdate(!update);
+			await props.forceUpdate(!props.update);
 		})
 		.catch(err => {
 			console.log(err);
