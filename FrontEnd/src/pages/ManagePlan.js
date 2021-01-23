@@ -93,6 +93,9 @@ const ManagePlan = ({ match }) => {
 						alert("");
 						console.dir("400에러");
 					}
+					else if (status === 401) {
+						alert("아이디, 비밀번호를 확인해주세요.");
+					}
 					else if (status === 404) {
 						alert("404");
 						console.dir("404에러");
@@ -162,6 +165,7 @@ const ManagePlan = ({ match }) => {
 						checkUser = {checkUser}
 						setCheckGroup={setCheckGroup}
 						update={update}
+						forceUpdate={forceUpdate}
 					/> : <Grid container direction="row" justify="center" alignItems="center" className="login-con">
 							<div className="login-flex-container">
 								<div className="title">

@@ -50,6 +50,7 @@ const Comment = ({match}) => {
 		  .post('https://letsmeeet.azurewebsites.net/api/comment', data)
 		  .then(function (response) {
 			console.log(response);
+			fetchComments();
 		  })
 		  .catch(function (error) {
 			console.log(error);

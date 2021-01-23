@@ -2,14 +2,8 @@ import React, {useState, useEffect} from 'react';
 import { Grid } from '@material-ui/core'
 import axios from 'axios';
 const Top3 = () => {
-    /*const timedata = [
-        "12/31 (목)\n03:30 오후",
-        "01/02 (토)\n07:30 오후",
-        "12/31 (목)\n07:30 오후"
-        ]*/
     const [timedata, settimedata] = useState('');
     	useEffect(()=>{
-			/*
 			axios.get(`https://letsmeeet.azurewebsites.net/api/time/topN`)
 			.then((res)=>{
 				settimedata(res.data);
@@ -28,7 +22,7 @@ const Top3 = () => {
 			else if (status === 500) {
 				console.dir("내부 서버 오류입니다. 잠시만 기다려주세요.");
 			}
-			});*/
+			});
 	}, []);
 	
 return (
