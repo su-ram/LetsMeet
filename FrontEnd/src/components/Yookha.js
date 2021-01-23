@@ -22,8 +22,6 @@ const Yookha=({match, senddata})=> {
       const handlesubmit = (e) => {
         e.preventDefault();
         const data = {
-          "who": who,
-          "when": when,
           "where": where,
           "why": why,
           "how": how,
