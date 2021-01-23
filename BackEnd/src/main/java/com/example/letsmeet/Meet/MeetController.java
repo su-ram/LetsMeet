@@ -58,24 +58,10 @@ public class MeetController {
 		}
 		meet.setDates(dates);
 		
-<<<<<<< HEAD
-<<<<<<< HEAD
-		
-		
-		
-		int col = Integer.parseInt(meet.getEnd().substring(0, 2)) - Integer.parseInt(meet.getStart().substring(0,2));		
-=======
 		String start = meet.getStart().split(":")[0];
 		String end = meet.getEnd().split(":")[0];
 		
 		int col = Integer.parseInt(end) - Integer.parseInt(start);		
->>>>>>> d501b80aed495100410fd291e633748ad89bb315
-=======
-		String start = meet.getStart().split(":")[0];
-		String end = meet.getEnd().split(":")[0];
-		
-		int col = Integer.parseInt(end) - Integer.parseInt(start);		
->>>>>>> 0801df24e99a11d9fca4ef6c92633169fbc1fe45
 		col = (int)(60 / meet.getGap()) * col;
 		int[] checkArray = new int[col];
 		
@@ -100,6 +86,22 @@ public class MeetController {
 		
 		
 		return new ResponseEntity<>(newUrl,HttpStatus.OK);
+	}
+	
+	@GetMapping(value="/info")
+	public Meet MeetInfo(@RequestParam String id) {
+		
+		Query query = new Query();
+		query.addCriteria(Criteria.where("meetId").is(id));
+		User user = userInfo.getUser();
+		
+		Meet result = mongoTemplate.findOne(query, Meet.class, "meet"); 
+		if(user != null) {
+			result.setUserTime(user.getUserTimes());
+		}
+		
+		
+		return result;
 	}
 	
 	@GetMapping

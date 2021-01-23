@@ -1,13 +1,19 @@
 package com.example.letsmeet.Time;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
 import java.time.format.TextStyle;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
 import java.util.Stack;
+import java.util.TreeMap;
 
 import javax.annotation.Resource;
 
@@ -17,7 +23,7 @@ import org.springframework.data.mongodb.core.MongoTemplate;
 import org.springframework.data.mongodb.core.query.Criteria;
 import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.data.mongodb.core.query.Update;
-
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -41,16 +47,186 @@ public class TimeController {
 	@Autowired
 	private MongoTemplate mongoTemplate;
 	
+	
+	@GetMapping("/topN")
+	public String[] topN() {
+		//top3 시간대 리턴하는 메소드. meet의 checkArray를 가져와서 연산. 
+		
+		
+		User user = userInfo.getUser();
+		
+		if(user == null) {
+			return null;
+		}
+		
+		Meet meet = User.getMeet(mongoTemplate, user.getMeetId());
+		int[] total = meet.getCheckArray();
+		int notation = meet.getNum() + 1;
+		int row = meet.getDates().size();
+		int col = total.length;
+		int[][] table = new int[col][];
+		int[][] visited = new int[col][row];
+		
+		Map<Integer, ArrayList<String>> map = new HashMap<Integer, ArrayList<String>>();
+		
+		String[] top3 = new String[3];
+		
+		for(int i = 0; i< col; i++) {
+			table[i] = transferToN(total[i], notation, row);
+			
+		}
+		
+		for(int i = 0; i < row; i++) {
+			
+			for(int j = 0; j < col; j++) {
+				
+				if(visited[j][i] == 0 && table[j][i] > 0 ) {
+					
+					int count = table[j][i];
+					String positions = BFS(j, i, table, visited);
+					
+					if(!map.containsKey(count)) {
+						map.put(count, new ArrayList<String>());
+						map.get(count).add(positions);
+						
+					}else {
+						map.get(count).add(positions);
+						
+					}
+				
+				}
+				
+			}
+		}
+//		Object[] mapkey = map.keySet().toArray();
+//		Arrays.sort(mapkey);
+		
+		Iterator it = map.keySet().iterator();
+		
+		while( it.hasNext()) {
+			ArrayList<String> origin = map.get(it.next());
+			Collections.sort(origin, new AscendingString());
+		
+		}
+		TreeMap<Integer, ArrayList<String>> treeMap = new TreeMap<>(map);
+        it = treeMap.descendingKeySet().iterator();
+        //it = treeMap.keySet().iterator();
+        int index = 0;
+        
+        while (index < 3 && it.hasNext()) {
+        	
+        	ArrayList<String> positions = map.get(it.next());
+        	
+        	for(String str : positions) {
+        		top3[index++] = str;
+
+        		if(index == 3) {
+        			break;
+        		}
+        		
+        	}
+        	
+        }
+        
+        index = 0;
+        
+        for(String top : top3) {
+        	
+        	if(top == null) {
+        		continue;
+        	}
+        	
+        	String[] times = top.split("\\|");
+        	String[] startTop= times[0].split(",");
+        	String[] endTop;
+        	if(times.length > 1) {
+        		endTop = times[1].split(",");
+        	}else {
+        		endTop = startTop;
+        	}
+        	
+        	
+        	LocalDate day = meet.getDates().get(Integer.parseInt(startTop[1]));
+       
+        	String result = day.format(DateTimeFormatter.ofPattern("MM/dd (E)", Locale.KOREA)).toString()+"\n";
+        	
+        	int gap = meet.getGap();
+        	
+        	String[] originStart = meet.getStart().split(":");
+        	
+        	int originHH = Integer.parseInt(originStart[0]);
+        	int originMM = Integer.parseInt(originStart[1]);
+        	
+        	LocalTime origin = LocalTime.of(originHH, originMM);
+        	
+        	
+        	int from = Integer.parseInt(startTop[0]);
+        	int rear = Integer.parseInt(endTop[0]);
+        	
+        	
+        	int offset = gap * from;
+        	
+        	LocalTime start = origin.plusMinutes(gap*from);
+        	LocalTime end = start.plusMinutes((rear-from)*gap);
+        	
+        	
+        	
+        	DateTimeFormatter df = DateTimeFormatter.ofPattern("hh:mm a");
+        	result += start.format(df).toString();
+        	
+        	if(times.length > 1) {
+        		result += " ~ " + end.format(df).toString();
+        	}
+        	
+        	top3[index++] = result;
+        	
+        	
+        }
+        
+        
+        
+        
+        
+		return top3;
+	}
+	class AscendingString implements Comparator<String> { 
+		@Override public int compare(String a, String b) { 
+			return b.split("|").length - a.split("|").length;
+			
+			 } 
+		}
+
+	public String BFS(int x, int y, int[][] table, int[][] visited) {
+		
+		int xx = x;
+		int yy = y;
+		
+		
+		int value = table[x][y];
+		
+		String result = Position.pos2str(xx++, yy);
+		
+		while ( xx < table.length && table[xx][yy] == value ) {
+			
+			result +="|"+Position.pos2str(xx, yy);
+			visited[xx++][yy] = 1;
+			
+		}
+		
+		return result;
+		
+		
+	}
+	
 	@PutMapping
 	public ResponseEntity<?> myTime(@RequestBody MyTime myTime) {
 		
-		System.out.println(myTime.toString());
+		User user = userInfo.getUser();
 		
-		User user = User.getUser(mongoTemplate, myTime.getUserId(), myTime.getMeetId());
-		System.out.println(user);
-		Meet meet = User.getMeet(mongoTemplate, myTime.getMeetId());
-		
-		
+		if(user == null) {
+		user = User.getUser(mongoTemplate, myTime.getUserId(), myTime.getMeetId());
+		}
+		Meet meet = User.getMeet(mongoTemplate, user.getMeetId());
 		
 		
 		
@@ -58,6 +234,8 @@ public class TimeController {
 		
 		
 		if(meet.getCheckArray().length != col) {
+			System.out.println(meet.getCheckArray().length);
+			System.out.println(col);
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
 		int row = meet.getDates().size();
@@ -92,7 +270,10 @@ public class TimeController {
 			status = HttpStatus.OK;
 		}
 		
-		return new ResponseEntity<Meet>(updateTotalTable(meet), status);
+		meet = updateTotalTable(meet, user);
+		meet.setUserTime(times);
+		
+		return new ResponseEntity<Meet>(meet, status);
 
 		
 	}
@@ -104,14 +285,10 @@ public class TimeController {
 		Map possibleTimeInfo = new HashMap<String, Object>();
 		Meet meet = userInfo.getUser().getMeet(mongoTemplate, userInfo.getUser().getMeetId());
 		
-
-		
-
 		String start = meet.getStart().split(":")[0];
 		String end = meet.getEnd().split(":")[0];
 		int startTime = Integer.parseInt(start);
 		int endTime = Integer.parseInt(end);
-
 
 		possibleTimeInfo.put("startTime", startTime);
 		possibleTimeInfo.put("endTime", endTime);
@@ -137,7 +314,7 @@ public class TimeController {
 	}
 	
 	@DeleteMapping
-	public ResponseEntity<?> deleteMyTime() {
+	public ResponseEntity<?> deleteMyTime(MyTime time) {
 		
 		User user = userInfo.getUser();
 		
@@ -158,7 +335,7 @@ public class TimeController {
 		query.addCriteria(Criteria.where("_id").is(user.getUserKey()));
 		mongoTemplate.findAndReplace(query, user);
 		
-		updateTotalTable(myMeet);
+		updateTotalTable(myMeet, user);
 		
 		return ResponseEntity.ok().build();
 		
@@ -187,22 +364,20 @@ public class TimeController {
 		
 		return false;
 	}
-	public Meet updateTotalTable(Meet meet) {
+	public Meet updateTotalTable(Meet meet, User client) {
 		//한 약속에 참여한 사용자들의 공동 시간표를 업데이트 하는 메소드. 
 		
 		ArrayList<User> users = new ArrayList<User>();
-
-		
-
 		int col = Integer.parseInt(meet.getEnd().split(":")[0]) - Integer.parseInt(meet.getStart().split(":")[0]);		
-
 		col = (int)(60 / meet.getGap()) * col;
 		int row = meet.getDates().size();
 		int[] totalTable = new int[col];
 		int num = meet.getNum();
 		int notation = num+1;
 		int[][] checkUsers = new int[col][row];
-
+		
+		
+		
 		
 		
 		//checkArray : 단순히 해당 시간대에 몇 명이 가능한지 표현함. 1차원 배열
@@ -264,7 +439,8 @@ public class TimeController {
 			for(int j=0; j<row; j++) {
 				
 				updated += Math.pow(notation, row-j-1)*(value[j]);
-
+				
+				
 				
 				
 			}
@@ -282,14 +458,10 @@ public class TimeController {
 		update.set("checkUser", checkUsers);
 		FindAndModifyOptions option = new FindAndModifyOptions();
 		option.returnNew(true);
-		//System.out.println(mongoTemplate.updateFirst(query, update, "meet").toString());
+		
 		return (Meet)mongoTemplate.findAndModify(query, update, option, Meet.class, "meet");
 		
-		//3. N진법으로 표현한다. 여기서 N은 멤버수. 
 		
-		
-		
-		//checUser : 어떤 시간대에 어떤 유저들이 가능한지 표현함. 2차원 배열. 
 		
 		
 		

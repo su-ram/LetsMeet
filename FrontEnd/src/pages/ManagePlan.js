@@ -14,9 +14,9 @@ const ManagePlan = ({ match }) => {
 	const [data, setData] = useState();
 	const [shareImg, setShareImg] = useState("");
 	const [open, setOpen] = useState(false);
-	const [checkUser, setCheckUser] = useState();
 	const [checkGroup, setCheckGroup] = useState();
 	const [user, setUser] = useState();
+	const [update, forceUpdate] = useState(true);
 	
 	const [isloggedin, setloggedin] = useState(false);
 	const [logininput, setlogininput] = useState({
@@ -37,15 +37,15 @@ const ManagePlan = ({ match }) => {
 			return;
 		getData(match.url.substr(1));
 	}, [match.url]);
-
+	const [senddata, setsenddata] = useState([]);
 	const getData = async (url) => {
 		await axios.get(`https://letsmeeet.azurewebsites.net/api/meet/info?id=${url}`)
 		.then((res) => {
 			console.log(res.data);
 			setData(res.data);
-			setCheckUser(res.data.userTime);
-			setCheckGroup(res.data.checkArray);
 			setUser(res.data.users);
+			setCheckGroup(res.data.checkArray);
+			setsenddata(res.data.meetSubInfo);
 		})
 		.catch((err) => {
 			const status = err?.response?.status;
@@ -77,7 +77,11 @@ const ManagePlan = ({ match }) => {
 			}
 			axios.post(`https://letsmeeet.azurewebsites.net/api/user/signin`, data)
 				.then((res) => {
+					console.log(res.data);
 					setloggedin(true);
+					setData(res.data);
+					setCheckGroup(res.data.checkArray);
+					forceUpdate(!update);
 				})
 				.catch((err) => {
 					const status = err?.response?.status;
@@ -154,10 +158,10 @@ const ManagePlan = ({ match }) => {
 					<TimeTable
 						data={data}
 						type="mine"
-						checkUser={checkUser}
-						checkGroup={checkGroup}
-						setCheckGroup={setCheckGroup}
 						user={user}
+						setCheckGroup={setCheckGroup}
+						update={update}
+						forceUpdate={forceUpdate}
 					/> : <Grid container direction="row" justify="center" alignItems="center" className="login-con">
 							<div className="login-flex-container">
 								<div className="title">
@@ -181,19 +185,19 @@ const ManagePlan = ({ match }) => {
 							</div>
 						</Grid>}
 					{ 
-						user && checkGroup &&
+						user && 
 						<TimeTable
 							data={data}
 							type="team"
-							checkUser={checkUser}
-							checkGroup={checkGroup}
-							setCG={setCheckGroup}
 							user={user}
+							checkGroup={checkGroup}
+							update={update}
+							forceUpdate={forceUpdate}
 						/>
 					}
 					<Grid container className="yook-ha-con" direction="column" justify="flex-start" alignItems="stretch">
 						<Top3></Top3>
-						<Yookha></Yookha>
+						<Yookha senddata={senddata}></Yookha>
 						<Findmidplace></Findmidplace>
 						<Comment></Comment>
 						<Grid className="btn-con">

@@ -3,7 +3,7 @@ import clsx from 'clsx';
 import axios from 'axios';
 
 import { getMonthDate, getDay, getTimeString } from '../function/getString';
-import { getBool, showDragResult, initializeStill, stillDragging, calCheckArray } from '../function/timeTableFunc';
+import { getBool, showDragResult, initializeStill, stillDragging, calCheckArray, getCheckArray } from '../function/timeTableFunc';
 
 import { Grid } from '@material-ui/core';
 import { Table, TableBody, TableContainer, TableHead, TableRow, TableCell, Tooltip, Button } from '@material-ui/core';
@@ -30,16 +30,21 @@ const TimeTable = (props) => {
 
 	useEffect(()=>{
 		setTS(getTimeString(props.data.start, props.data.end, props.data.gap));
-		setCA(props.checkUser);
+		setCA(props.data.userTime);
 		setCG(props.checkGroup);
 		setUser(props.user);
-		setUL(props.user.length);
+		setUL(props.data.num);
 	}, [props])
 
 	useEffect(()=>{
 		let arr = [];
-		for(let i=0; i<timeString.length; i++)
-			arr.push(0);
+		for(let i=0; i<timeString.length-1; i++){
+			let tmp = [];
+			for(let j=0; j<cellWidth.length; j++){
+				tmp.push(0);
+			}
+			arr.push(tmp);
+		}
 		setCA(arr);
 	}, [timeString])
 
@@ -103,7 +108,7 @@ const TimeTable = (props) => {
 		const rw = e.target.id.split("/");
 		await setDragging(false);
 		await showDragResult(dragState, true, dragPos.start, [rw[1], rw[2]]);
-		calCheckArray(dragState, dragPos.start, [rw[1], rw[2]], checkArray, props.data.dates.length)
+		calCheckArray(dragState, dragPos.start, [rw[1], rw[2]], checkArray)
 		.then(res => {
 			setCA(res);
 		})
@@ -115,27 +120,30 @@ const TimeTable = (props) => {
 	}
 
 	const updateToDB = async () => {
-		await checkArray.pop(); // 마지막 열은 빼야함 => 프론트엔드 출력 때문에 넣어둠
+		const CA = getCheckArray(checkArray);
+		console.log(CA);
 		await axios.put(`https://letsmeeet.azurewebsites.net/api/time`, {
-			"userId": "user11",
-			"userPass": "lovesk2",
-			"meetId": "177eadfb377e863",
-			"checkArray" : checkArray
+			"checkArray" : CA
 		}, {
 			headers: {
 				'Access-Control-Allow-Origin': '*'
 			}
 		})
 		.then(res => {
-			props && props.setCheckGroup(res.data.checkArray);
+			props.setCheckGroup(res.data.checkArray);
+			setCA(res.data.userTime);
+			console.log(res.data.checkArray);
+			console.log(res.data.userTime);
 		})
 		.catch(err => {
 			console.log(err);
 		})
+
+		forceUpdate(!update);
 	}
 
 	const deleteAll = () => {
-		axios.delete(`https://letsmeeet.azurewebsites.net/api/myTime`)
+		axios.delete(`https://letsmeeet.azurewebsites.net/api/time`)
 		.then(res => {
 			console.log(res);
 		})
@@ -189,14 +197,19 @@ const TimeTable = (props) => {
 														<Grid>{ bool? t:undefined }</Grid>
 													</TableCell>
 												{
-													last? // 마지막 셀은 출력 x
+													last && checkArray ? // 마지막 셀은 출력 x
 													undefined:
 													cellWidth.map((_, index2) => {
 														let clsName = "table-body-mine";
 														clsName += index2<cellNum?" visible":" unvisible";
 														clsName += bool?" fullterm":" midterm";
+														if(checkArray === null || checkArray.length === 0)
+															clsName += " not-selected";
+														else{
+															clsName += checkArray[index][index2]===1? " selected" : " not-selected";
+														};
 														return (
-															<TableCell key={""+index+index2} id={"rc/"+index+"/"+index2} className={clsx("not-selected","cell"+index2, clsName)}></TableCell>
+															<TableCell key={""+index+index2} id={"rc/"+index+"/"+index2} className={clsx("cell"+index2, clsName)}></TableCell>
 														);
 													})
 												}
@@ -235,7 +248,6 @@ const TimeTable = (props) => {
 									{timeString.length!==0 &&
 										timeString.map((t, index) =>{
 											// 첫시작과 분단위가 같거나 마지막 시간인지 확인
-											console.log(t);
 											const last = index===timeString.length-1;
 											const bool = t.split(":")[1]===props.data.start.split(":")[1] || last;
 											return(
@@ -325,8 +337,8 @@ const TimeTable = (props) => {
 															clsName += bool?" fullterm":" midterm";
 
 															let arrNum = 0;
-															let numStr = checkGroup[index].toString();
-															const diff = timeString.length-numStr.length;
+															let numStr = checkGroup[index].toString(userLength+1);
+															const diff = cellWidth.length-numStr.length;
 															if(index2>=diff){
 																arrNum = Number(numStr[index2-diff]);
 															}

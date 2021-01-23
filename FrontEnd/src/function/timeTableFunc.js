@@ -130,16 +130,29 @@ export const stillDragging = async (bool, start, prev, now) => {
 	}
 }
 
-export const calCheckArray = async (dragState, start, end, checkArray, len) => {
+export const calCheckArray = async (dragState, start, end, checkArray) => {
 	let CA = checkArray;
 	const [startPos, endPos] = await setStartAhead(start, end);
 	for(let i=startPos[0]; i<=endPos[0]; i++){
 		for(let j=startPos[1]; j<=endPos[1]; j++){
 			if(dragState)
-				CA[i] &= ~Math.pow(2, len-j-1);
+				CA[i][j] = 0;
 			else
-				CA[i] |= Math.pow(2, len-j-1);
+				CA[i][j] = 1;
 		}
 	}
 	return CA;
+}
+
+export const getCheckArray = (checkArray) => {
+	let arr = [];
+	for(let i=0; i<checkArray.length; i++){
+		let str = "";
+		for(let j=0; j<checkArray[0].length; j++){
+			str += checkArray[i][j];
+		}
+		arr.push(parseInt(str, 2));
+	}
+
+	return arr;
 }
