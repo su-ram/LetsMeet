@@ -14,7 +14,6 @@ const ManagePlan = ({ match }) => {
 	const [data, setData] = useState();
 	const [shareImg, setShareImg] = useState("");
 	const [open, setOpen] = useState(false);
-	const [checkUser, setCheckUser] = useState();
 	const [checkGroup, setCheckGroup] = useState();
 	const [user, setUser] = useState();
 	const [update, forceUpdate] = useState(true);
@@ -45,6 +44,7 @@ const ManagePlan = ({ match }) => {
 			console.log(res.data);
 			setData(res.data);
 			setUser(res.data.users);
+			setCheckGroup(res.data.checkArray);
 			setsenddata(res.data.meetSubInfo);
 		})
 		.catch((err) => {
@@ -77,7 +77,11 @@ const ManagePlan = ({ match }) => {
 			}
 			axios.post(`https://letsmeeet.azurewebsites.net/api/user/signin`, data)
 				.then((res) => {
+					console.log(res.data);
 					setloggedin(true);
+					setData(res.data);
+					setCheckGroup(res.data.checkArray);
+					forceUpdate(!update);
 				})
 				.catch((err) => {
 					const status = err?.response?.status;
@@ -155,6 +159,7 @@ const ManagePlan = ({ match }) => {
 						data={data}
 						type="mine"
 						user={user}
+						setCheckGroup={setCheckGroup}
 						update={update}
 						forceUpdate={forceUpdate}
 					/> : <Grid container direction="row" justify="center" alignItems="center" className="login-con">
@@ -185,6 +190,7 @@ const ManagePlan = ({ match }) => {
 							data={data}
 							type="team"
 							user={user}
+							checkGroup={checkGroup}
 							update={update}
 							forceUpdate={forceUpdate}
 						/>
