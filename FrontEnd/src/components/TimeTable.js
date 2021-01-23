@@ -31,10 +31,9 @@ const TimeTable = (props) => {
 	useEffect(()=>{
 		setTS(getTimeString(props.data.start, props.data.end, props.data.gap));
 		setCA(props.data.userTime);
-		setCG(props.data.checkArray);
+		setCG(props.checkGroup);
 		setUser(props.user);
 		setUL(props.data.num);
-		forceUpdate(!props.update);
 	}, [props])
 
 	useEffect(()=>{
@@ -124,9 +123,6 @@ const TimeTable = (props) => {
 		const CA = getCheckArray(checkArray);
 		console.log(CA);
 		await axios.put(`https://letsmeeet.azurewebsites.net/api/time`, {
-			"userId": "user11",
-			"userPass": "lovesk2",
-			"meetId": "177eadfb377e863",
 			"checkArray" : CA
 		}, {
 			headers: {
@@ -134,7 +130,7 @@ const TimeTable = (props) => {
 			}
 		})
 		.then(res => {
-			setCG(res.data.checkArray);
+			props.setCheckGroup(res.data.checkArray);
 			setCA(res.data.userTime);
 			console.log(res.data.checkArray);
 			console.log(res.data.userTime);
@@ -143,7 +139,7 @@ const TimeTable = (props) => {
 			console.log(err);
 		})
 
-		await props.forceUpdate(!update);
+		forceUpdate(!update);
 	}
 
 	const deleteAll = () => {
@@ -341,7 +337,7 @@ const TimeTable = (props) => {
 															clsName += bool?" fullterm":" midterm";
 
 															let arrNum = 0;
-															let numStr = checkGroup[index].toString(userLength);
+															let numStr = checkGroup[index].toString(userLength+1);
 															const diff = cellWidth.length-numStr.length;
 															if(index2>=diff){
 																arrNum = Number(numStr[index2-diff]);
