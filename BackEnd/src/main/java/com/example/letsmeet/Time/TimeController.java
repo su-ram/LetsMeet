@@ -138,12 +138,12 @@ public class TimeController {
         	if(top == null) {
         		continue;
         	}
-        	System.out.println(top);
+        	//System.out.println(top);
         	String[] times = top.split("\\|");
         	String[] startTop= times[0].split(",");
         	String[] endTop;
         	if(times.length > 1) {
-        		endTop = times[1].split(",");
+        		endTop = times[times.length-1].split(",");
         	}else {
         		endTop = startTop;
         	}
