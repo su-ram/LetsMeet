@@ -2,7 +2,10 @@ import React, { useEffect } from 'react';
 
 import { Grid, Button, Modal, Fade } from '@material-ui/core';
 
+import { KAKAO_KEY } from '../config';
+
 const ShareModal = (props) => {
+
 	const kakaoShare = () => {
 		props &&
 		window.Kakao.Link.sendDefault({
@@ -26,6 +29,12 @@ const ShareModal = (props) => {
 		});
 	}
 
+	useEffect(() => {
+		console.log(window.Kakao);
+		window.Kakao.init(KAKAO_KEY);
+		window.Kakao.isInitialized();
+	}, []);
+
 	return(
 		<Modal 
 			className="share-modal"
@@ -38,13 +47,10 @@ const ShareModal = (props) => {
 						<h2>이미지 공유</h2>
 						<Button onClick={props.handleClose}>X</Button>
 					</Grid>
-					{props.shareImg?
 						<Grid className="share-img-con">
 							<img src={props.shareImg} alt="share img"/>
 							<Button variant="contained" color="primary" onClick={kakaoShare}>Share</Button>
 						</Grid>
-						:<Grid className="share-des">이미지를 불러오는 중입니다. 잠시만 기다려주세요!</Grid>
-					}
 				</Grid>
 			</Fade>
 		</Modal>

@@ -121,6 +121,7 @@ const ManagePlan = ({ match }) => {
 	}
 
 	const copyURL = () => {
+		
 	}
 
 	const uploadImgur = (url) => {
