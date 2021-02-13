@@ -23,11 +23,11 @@
 # 기여자 
 - 홍영주 : 기획
 - 박미현 : 디자인
-- 김서현 : 프론트엔드
-- 김소정 : 프론트엔드
-- 우희은 : 프론트엔드
-- 조은학 : 프론트엔드
-- 김수람 : 백엔드 
+- [김서현](https://github.com/ksh0722k) : 프론트엔드
+- [이소정](https://github.com/SJLEE316) : 프론트엔드
+- [우희은](https://github.com/gmldms784) : 프론트엔드
+- [조은학](https://github.com/Cho-Eunhak) : 프론트엔드
+- [김수람](https://github.com/su-ram) : 백엔드 
 
 # 개발기간
 2020.11 ~ 2021.01
