@@ -21,7 +21,7 @@ jobs:
         java-version: '8'
     
     - name: Build with Maven
-      working-directory: ./Backend
+      working-directory: ./BackEnd
       run: mvn clean install
 
     - name: Deploy to Azure Web App
