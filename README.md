@@ -5,7 +5,7 @@
 
 # 서비스 도메인
 
-> [여기](http://letsmeeet.azurewebsites.net)에서 확인
+> [여기](https://letsmeeet.azurewebsites.net)에서 확인
 
 # Architecture
 
