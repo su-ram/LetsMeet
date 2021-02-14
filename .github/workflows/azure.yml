@@ -24,7 +24,7 @@ jobs:
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'whenandwhere'
+        app-name: 'letsmeeet'
         slot-name: 'production'
         publish-profile: ${{ secrets.AzureAppService_PublishProfile_7380f06a259749b7b4c482e09a063036 }}
         package: '${{ github.workspace }}/BackEnd/target/*.jar'
