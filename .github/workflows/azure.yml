@@ -1,0 +1,30 @@
+name: Build and deploy JAR app to Azure Web App - letsmeeet
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@master
+
+    - name: Set up Java version
+      uses: actions/setup-java@v1
+      with:
+        java-version: '8'
+
+    - name: Build with Maven
+      working-directory: ./BackEnd
+      run: mvn clean install -Pprod
+
+    - name: Deploy to Azure Web App
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'whenandwhere'
+        slot-name: 'production'
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_7380f06a259749b7b4c482e09a063036 }}
+        package: '${{ github.workspace }}/BackEnd/target/*.jar'
