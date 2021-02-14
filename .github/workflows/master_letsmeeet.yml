@@ -3,7 +3,7 @@ name: Build and deploy JAR app to Azure Web App - letsmeeet
 on:
   push:
     branches:
-      - deploy
+      - master
 
 jobs:
   build-and-deploy:
