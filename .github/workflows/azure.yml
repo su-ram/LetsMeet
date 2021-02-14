@@ -26,5 +26,5 @@ jobs:
       with:
         app-name: 'letsmeeet'
         slot-name: 'production'
-        publish-profile: ${{ secrets.AzureAppService_PublishProfile_7380f06a259749b7b4c482e09a063036 }}
+        publish-profile: ${{ secrets.AzureAppService_PublishProfile_F31BD02825904E5AA22E51C7C317896 }}
         package: '${{ github.workspace }}/BackEnd/target/*.jar'
