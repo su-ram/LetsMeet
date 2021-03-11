@@ -64,7 +64,6 @@ public class CommentController {
 		
 		return ResponseEntity.ok().build();
 		
-		
 	}
 	
 	@GetMapping
@@ -84,7 +83,6 @@ public class CommentController {
 		}
 		
 		return results;
-		
 		
 	}
 }

@@ -41,11 +41,11 @@ public class UserController {
 		//유저 검증. 
 		
 		switch(checkUser(newbie)) {
+		
 			case 0 :
 				
 				message = "해당 링크가 존재하지 않습니다.";
 				status = HttpStatus.UNAUTHORIZED;
-				//return new ResponseEntity<>("해당 링크가 존재하지 않습니다.", HttpStatus.BAD_REQUEST);
 		
 			case 2 :
 				
@@ -59,7 +59,6 @@ public class UserController {
 				int col = Integer.parseInt(queryMeet.getEnd().split(":")[0]) - Integer.parseInt(queryMeet.getStart().split(":")[0]);				
 				col = (int)(60 / queryMeet.getGap()) * col;
 				int row = queryMeet.getDates().size();
-				
 				
 				int[][] userTime = new int[col][row];
 				newbie.setUserTimes(userTime);
@@ -80,14 +79,11 @@ public class UserController {
 				Meet result = (Meet)mongoTemplate.findAndModify(query, update, option, Meet.class, "meet");
 				result.setUserTime(newbie.getUserTimes());
 				
-				
 				userInfo.setUser(newbie);
 				message = "아이디 생성 완료.";
 				status = HttpStatus.CREATED;
 				
 				return new ResponseEntity<Meet>(result, status);
-			
-			
 				
 			case 3 :
 				
@@ -100,20 +96,15 @@ public class UserController {
 				return new ResponseEntity<Meet>(meet, status);
 		}
 		
-		
-		
 		userInfo.setMeetId(queryMeet.getMeetId());
 		userInfo.setGap(queryMeet.getGap());
 		userInfo.setDates(queryMeet.getDates());
-		
-		
-				
+						
 		return new ResponseEntity<String>(message, status);
 		
 	}
 	
 	public int checkUser(User user) {
-		
 		
 		Query query = new Query();
 		query.addCriteria(Criteria.where("meetId").is(user.getMeetId()));
@@ -134,20 +125,7 @@ public class UserController {
 		
 		if(queryUser == null) return 2;
 		
-		
 		return 3;
 		
 	}
-	
-	public void newUser() {
-		
-		
-	}
-	
-	@GetMapping("session")
-	public String get() {
-		return userInfo.toString();
-	}
-	
-	
 }

@@ -17,6 +17,7 @@ import com.fasterxml.jackson.databind.module.SimpleModule;
 
 @Configuration
 public class JacksonConfig {
+	
     @Bean
     public Module jsonMapperJava8DateTimeModule() {
         SimpleModule module = new SimpleModule();

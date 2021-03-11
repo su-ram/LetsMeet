@@ -22,9 +22,6 @@ import lombok.Data;
 @Scope(value = WebApplicationContext.SCOPE_SESSION, proxyMode = ScopedProxyMode.TARGET_CLASS)
 public class UserInfo implements Serializable{
 	
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private User user;
 	private String meetId;
@@ -32,8 +29,4 @@ public class UserInfo implements Serializable{
 	private ArrayList<LocalDate> dates;
 	private ArrayList<Integer> timetables;
 	
-	
-	
-	
-
 }

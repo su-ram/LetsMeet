@@ -52,7 +52,6 @@ public class TimeController {
 	public String[] topN() {
 		//top3 시간대 리턴하는 메소드. meet의 checkArray를 가져와서 연산. 
 		
-		
 		User user = userInfo.getUser();
 		
 		if(user == null) {
@@ -72,11 +71,9 @@ public class TimeController {
 		String[] top3 = new String[3];
 		
 		for(int i = 0; i< col; i++) {
+			
 			table[i] = transferToN(total[i], notation, row);
-			for(int val : table[i]) {
-				System.out.print(val);
-			}
-			System.out.println();
+			
 		}
 		
 		for(int i = 0; i < row; i++) {
@@ -86,34 +83,32 @@ public class TimeController {
 				if(visited[j][i] == 0 && table[j][i] > 0 ) {
 					
 					int count = table[j][i];
+					
 					String positions = BFS(j, i, table, visited);
 					
 					if(!map.containsKey(count)) {
+						
 						map.put(count, new ArrayList<String>());
 						map.get(count).add(positions);
 						
 					}else {
 						map.get(count).add(positions);
-						
 					}
-				
 				}
-				
 			}
 		}
-//		Object[] mapkey = map.keySet().toArray();
-//		Arrays.sort(mapkey);
-		
+
 		Iterator it = map.keySet().iterator();
 		
 		while( it.hasNext()) {
+			
 			ArrayList<String> origin = map.get(it.next());
 			Collections.sort(origin, new AscendingString());
 		
 		}
+		
 		TreeMap<Integer, ArrayList<String>> treeMap = new TreeMap<>(map);
         it = treeMap.descendingKeySet().iterator();
-        //it = treeMap.keySet().iterator();
         int index = 0;
         
         while (index < 3 && it.hasNext()) {
@@ -121,12 +116,13 @@ public class TimeController {
         	ArrayList<String> positions = map.get(it.next());
         	
         	for(String str : positions) {
+        		
         		top3[index++] = str;
 
         		if(index == 3) {
         			break;
         		}
-        		
+  
         	}
         	
         }
@@ -138,19 +134,20 @@ public class TimeController {
         	if(top == null) {
         		continue;
         	}
-        	//System.out.println(top);
+        	
         	String[] times = top.split("\\|");
         	String[] startTop= times[0].split(",");
         	String[] endTop;
+        	
         	if(times.length > 1) {
+        		
         		endTop = times[times.length-1].split(",");
+        		
         	}else {
         		endTop = startTop;
         	}
         	
-        	
         	LocalDate day = meet.getDates().get(Integer.parseInt(startTop[1]));
-       
         	String result = day.format(DateTimeFormatter.ofPattern("MM/dd (E)")).toString()+"\n";
         	
         	int gap = meet.getGap();
@@ -162,17 +159,13 @@ public class TimeController {
         	
         	LocalTime origin = LocalTime.of(originHH, originMM);
         	
-        	
         	int from = Integer.parseInt(startTop[0]);
         	int rear = Integer.parseInt(endTop[0]);
-        	
         	
         	int offset = gap * from;
         	
         	LocalTime start = origin.plusMinutes(gap*from);
         	LocalTime end = start.plusMinutes((rear-from+1)*gap);
-        	
-        	
         	
         	DateTimeFormatter df = DateTimeFormatter.ofPattern("hh:mm a");
         	result += start.format(df).toString();
@@ -183,19 +176,17 @@ public class TimeController {
         	
         	top3[index++] = result;
         	
-        	
         }
-        
-        
-        
-        
         
 		return top3;
 	}
+	
 	class AscendingString implements Comparator<String> { 
+		
 		@Override public int compare(String a, String b) { 
-			return b.split("|").length - a.split("|").length;
 			
+			return b.split("|").length - a.split("|").length;
+		
 			 } 
 		}
 
@@ -203,7 +194,6 @@ public class TimeController {
 		
 		int xx = x;
 		int yy = y;
-		
 		
 		int value = table[x][y];
 		
@@ -218,7 +208,6 @@ public class TimeController {
 		
 		return result;
 		
-		
 	}
 	
 	@PutMapping
@@ -229,33 +218,32 @@ public class TimeController {
 		if(user == null) {
 		user = User.getUser(mongoTemplate, myTime.getUserId(), myTime.getMeetId());
 		}
+		
 		Meet meet = User.getMeet(mongoTemplate, user.getMeetId());
-		
-		
 		
 		int col = myTime.getCheckArray().length;
 		
-		
 		if(meet.getCheckArray().length != col) {
-			System.out.println(meet.getCheckArray().length);
-			System.out.println(col);
+			
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).build();
 		}
+		
 		int row = meet.getDates().size();
 		int[] checkArray = myTime.getCheckArray();
 		int[][] times = new int[col][row];
 		
-		
 		for(int i=0; i<col; i++) {
+			
 			int value = checkArray[i];
 			String stringBinary = String.format("%0" + row + "d", Integer.parseInt(Integer.toBinaryString(value).toString()));
+			
 			for(int j=0; j<row; j++) {
+				
 				times[i][j] = stringBinary.charAt(j) - '0';
 				
 			}
 			
 		}
-		
 		
 		Query query = new Query();
 		query.addCriteria(Criteria.where("_id").is(user.getUserKey()));
@@ -267,8 +255,10 @@ public class TimeController {
 		HttpStatus status;
 		
 		if(userTimeChanged(queryUser.getUserTimes(),times)) {
+			
 			mongoTemplate.updateFirst(query, update, "user");
 			status = HttpStatus.CREATED;
+			
 		}else {
 			status = HttpStatus.OK;
 		}
@@ -278,7 +268,6 @@ public class TimeController {
 		
 		return new ResponseEntity<Meet>(meet, status);
 
-		
 	}
 
 	@GetMapping
@@ -312,7 +301,6 @@ public class TimeController {
 		
 		possibleTimeInfo.put("days", days);
 		
-		
 		return possibleTimeInfo;
 	}
 	
@@ -331,7 +319,6 @@ public class TimeController {
 		
 		int[][] reset = new int[col][row];
 		
-		
 		user.setUserTimes(reset);
 		
 		Query query = new Query();
@@ -347,26 +334,22 @@ public class TimeController {
 	
 	public boolean userTimeChanged(int[][] before, int[][] after) {
 		
-		
-		
 		int col = before.length;
 		int row = before[0].length;
 		
 		for(int i =0; i< col; i++) {
 			
 			for(int j = 0; j < row; j++) {
-				
 	
 				if (before[i][j] != after[i][j]) {
 					return true;
 				}
 			}
-			
-			
 		}
 		
 		return false;
 	}
+	
 	public Meet updateTotalTable(Meet meet, User client) {
 		//한 약속에 참여한 사용자들의 공동 시간표를 업데이트 하는 메소드. 
 		
@@ -379,10 +362,6 @@ public class TimeController {
 		int notation = num+1;
 		int[][] checkUsers = new int[col][row];
 		
-		
-		
-		
-		
 		//checkArray : 단순히 해당 시간대에 몇 명이 가능한지 표현함. 1차원 배열
 		//1. 사용자들의 timetable 정보를 불러온다. 
 		Query query = new Query();
@@ -391,13 +370,10 @@ public class TimeController {
 		
 		
 		//2. 2차원 배열을 돌면서 계산한다. 
-		
 			
 		for(int i=0; i<col; i++) {
 			
 			int[] value = transferToN(totalTable[i], notation, row);
-			
-			
 			
 			for(int j=0; j<row; j++) {
 				
@@ -411,48 +387,32 @@ public class TimeController {
 					if (timeValue != 0) {
 						
 						value[j] += 1;
-						
 						check += '1';
+						
 					}else{
 						
 						check += '0';
+						
 					}
-					
-					
-				}
 				
+				}
 				
 				int checkUser = Integer.parseInt(check, 2);
 				checkUsers[i][j] = checkUser;
 				
-				
-				
-				
 			}
-			
-			
-			
-			
-			
+						
 			//한줄 계산 다 끝남. 
 		
 			int updated = 0;
-			
 			
 			for(int j=0; j<row; j++) {
 				
 				updated += Math.pow(notation, row-j-1)*(value[j]);
 				
-				
-				
-				
 			}
 			
-			
 			totalTable[i] = updated;
-			
-			
-			
 			
 		}
 		
@@ -463,10 +423,6 @@ public class TimeController {
 		option.returnNew(true);
 		
 		return (Meet)mongoTemplate.findAndModify(query, update, option, Meet.class, "meet");
-		
-		
-		
-		
 		
 	}
 	
@@ -486,9 +442,6 @@ public class TimeController {
 		
 		result = new StringBuffer(result).reverse().toString();
 		
-		
-		
-		
 		return result;
 	}
 	
@@ -497,7 +450,6 @@ public class TimeController {
 		
 		int quota = value;
 		int rem = 0; 
-		
 		if (n == 1 ) {
 			n = 2;
 		}
@@ -509,40 +461,23 @@ public class TimeController {
 			
 			rem = quota % n;
 			quota = (int)quota / n;
-			
 			stack.add(rem);
 			
 		}
 		
-		
-			
-			
 		for(int i=0; i<row; i++) {
 			
-			
-			
 			if(row-i > stack.size()) {
+				
 				result[i] = 0;
+				
 			}else {
+				
 				result[i] = stack.pop();
+				
 			}
 			
-			
-			
-			
-//			//
-//			if(!stack.empty()) {
-//				
-//				result[i] = stack.pop();
-//			}else {
-//				result[i]= 0;
-//			}
-			
 		}
-		
-		
-		
-		
 		
 		return result;
 	}
