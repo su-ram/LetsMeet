@@ -1,11 +1,6 @@
-# LetsMeet
+![1F987DCF-571C-4853-97C5-045140FB784A](https://user-images.githubusercontent.com/20367043/111183735-94819700-85f3-11eb-8422-53d5fecb9b7c.jpeg)
 
-<img src = "https://user-images.githubusercontent.com/20367043/106303344-5f1c2680-629d-11eb-891e-8b667a4c86c5.png"> 
-일정 조율 시각화 서비스
-
-# 서비스 도메인
-
-> [여기](https://letsmeeet.azurewebsites.net)에서 확인
+> [여기에서 확인](https://letsmeeet.azurewebsites.net)
 
 # Architecture
 
